@@ -5,11 +5,11 @@
 # Note: This script modifies formatting only; it does not perform linting or validation.
 # Context: Compact element settings are added to support KiCAD-specific handling for readability, e.g., PCB_PLUGIN::formatPolyPts.
 
-import os
 import argparse
 from pathlib import Path
+from os import path
 
-def prettify_sexpr(sexpr_str, compact_element_settings):
+def prettify_sexpr(sexpr_str, compact_element_settings=[]):
     """
     Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting.
 
@@ -169,16 +169,14 @@ with open(src_file, "r") as file:
 
 # Compact element settings for special handling
 compact_element_settings = []
-src_basename = os.path.basename(src_file)
-
-if src_basename.endswith(".kicad_sym"):
-    compact_element_settings.append({"prefix":"pts", "elements per line": 6})
-elif src_basename.endswith(".kicad_mod"):
-    pass
-elif src_basename.endswith(".kicad_sch"):
-    compact_element_settings.append({"prefix":"pts", "elements per line": 6})
-elif src_basename.endswith(".kicad_pcb"):
-    compact_element_settings.append({"prefix":"pts", "elements per line": 4})
+_, file_extension = path.splitext(src_file)
+match file_extension:
+    case ".kicad_sym":
+        compact_element_settings.append({"prefix":"pts", "elements per line": 6})
+    case ".kicad_sch":
+        compact_element_settings.append({"prefix":"pts", "elements per line": 6})
+    case ".kicad_pcb":
+        compact_element_settings.append({"prefix":"pts", "elements per line": 4})
 
 # Format the S-expression
 pretty_sexpr = prettify_sexpr(sexp_data, compact_element_settings)
