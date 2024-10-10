@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
-# KiCADv8 Style Prettify S-Expression Formatter (sexp formatter)
+# KiCADv8 Style Prettify S-Expression Formatter (sexp formatter) (minimal logic version)
 # By Brian Khuu, 2024
 # This script reformats KiCad-like S-expressions to match a specific formatting style.
 # Note: This script modifies formatting only; it does not perform linting or validation.
-# Context: Compact element settings are added to support KiCAD-specific handling for readability, e.g., PCB_PLUGIN::formatPolyPts.
 
-import os
 import argparse
 from pathlib import Path
 
 def prettify_sexpr_minimal(sexpr_str):
     """
-    Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting
-    (minimal logic version)
+    Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting (minimal logic version)
 
     Args:
         sexpr_str (str): The input S-expression string to be formatted.
