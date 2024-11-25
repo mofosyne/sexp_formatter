@@ -18,123 +18,132 @@
 #include <unistd.h>
 #include <ctype.h>
 
-// Function to prettify KiCad-like S-expressions
-void prettify_sexpr_minimal(const char *sexpr_str, size_t length, FILE *output)
+struct PrettifySExprState 
 {
-    int indent = 0;
-    bool in_quote = false;
-    bool escape_next_char = false;
-    bool singular_element = false;
-    bool space_pending = false;
-    char c_out_prev = '\0';
+    int indent;
+    bool in_quote;
+    bool escape_next_char;
+    bool singular_element;
+    bool space_pending;
+    char c_out_prev;
+};
 
-    for (size_t i = 0; i < length; ++i)
+// Function to prettify KiCad-like S-expressions
+void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *output)
+{
+    if (state->in_quote || c == '"')
     {
-        char c = sexpr_str[i];
-
-        if (in_quote || c == '"')
+        // Handle quoted strings
+        if (state->space_pending)
         {
-            // Handle quoted strings
-            if (space_pending)
-            {
-                fputc(' ', output);
-                space_pending = false;
-            }
-
-            if (escape_next_char)
-            {
-                escape_next_char = false;
-            }
-            else if (c == '\\')
-            {
-                escape_next_char = true;
-            }
-            else if (c == '"')
-            {
-                in_quote = !in_quote;
-            }
-
-            fputc(c, output);
-            c_out_prev = c;
+            fputc(' ', output);
+            state->space_pending = false;
         }
-        else if (c == '(')
+
+        if (state->escape_next_char)
         {
-            // Handle opening parentheses
-            space_pending = false;
-            if (indent > 0)
-            {
-                fputc('\n', output);
-                for (int j = 0; j < indent; ++j)
-                {
-                    fputc('\t', output);
-                }
-            }
-
-            singular_element = true;
-            indent++;
-
-            fputc('(', output);
-            c_out_prev = '(';
+            state->escape_next_char = false;
         }
-        else if (c == ')')
+        else if (c == '\\')
         {
-            // Handle closing parentheses
-            space_pending = false;
-            indent--;
-            if (singular_element)
-            {
-                fputc(')', output);
-                singular_element = false;
-            }
-            else
-            {
-                fputc('\n', output);
-                for (int j = 0; j < indent; ++j)
-                {
-                    fputc('\t', output);
-                }
-                fputc(')', output);
-            }
-
-            // Add a newline if it's the end of the document
-            if (indent <= 0)
-            {
-                fputc('\n', output);
-            }
-
-            c_out_prev = ')';
+            state->escape_next_char = true;
         }
-        else if (isspace(c))
+        else if (c == '"')
         {
-            // Handle spaces and newlines
-            bool prev_is_space = isspace(c_out_prev);
-            bool prev_is_open_brace = c_out_prev == '(';
-            if (!prev_is_space && !prev_is_open_brace)
+            state->in_quote = !state->in_quote;
+        }
+
+        fputc(c, output);
+        state->c_out_prev = c;
+    }
+    else if (c == '(')
+    {
+        // Handle opening parentheses
+        state->space_pending = false;
+        if (state->indent > 0)
+        {
+            fputc('\n', output);
+            for (int j = 0; j < state->indent; ++j)
             {
-                space_pending = true;
+                fputc('\t', output);
             }
+        }
+
+        state->singular_element = true;
+        state->indent++;
+
+        fputc('(', output);
+        state->c_out_prev = '(';
+    }
+    else if (c == ')')
+    {
+        // Handle closing parentheses
+        state->space_pending = false;
+        state->indent--;
+        if (state->singular_element)
+        {
+            fputc(')', output);
+            state->singular_element = false;
         }
         else
         {
-            // Handle other characters
-            if (c_out_prev == ')')
+            fputc('\n', output);
+            for (int j = 0; j < state->indent; ++j)
             {
-                fputc('\n', output);
-                for (int j = 0; j < indent; ++j)
-                {
-                    fputc('\t', output);
-                }
-                space_pending = false;
+                fputc('\t', output);
             }
-            else if (space_pending)
-            {
-                fputc(' ', output);
-                space_pending = false;
-            }
-
-            fputc(c, output);
-            c_out_prev = c;
+            fputc(')', output);
         }
+
+        // Add a newline if it's the end of the document
+        if (state->indent <= 0)
+        {
+            fputc('\n', output);
+        }
+
+        state->c_out_prev = ')';
+    }
+    else if (isspace(c))
+    {
+        // Handle spaces and newlines
+        bool prev_is_space = isspace(state->c_out_prev);
+        bool prev_is_open_brace = state->c_out_prev == '(';
+        if (!prev_is_space && !prev_is_open_brace)
+        {
+            state->space_pending = true;
+        }
+    }
+    else
+    {
+        // Handle other characters
+        if (state->c_out_prev == ')')
+        {
+            fputc('\n', output);
+            for (int j = 0; j < state->indent; ++j)
+            {
+                fputc('\t', output);
+            }
+            state->space_pending = false;
+        }
+        else if (state->space_pending)
+        {
+            fputc(' ', output);
+            state->space_pending = false;
+        }
+
+        fputc(c, output);
+        state->c_out_prev = c;
+    }
+}
+
+// Function to prettify KiCad-like S-expressions
+void prettify_sexpr_minimal(const char *sexpr_str, size_t length, FILE *output)
+{
+    struct PrettifySExprState state = {0};
+
+    for (size_t i = 0; i < length; ++i)
+    {
+        prettify_sexpr_minimal_r(&state, sexpr_str[i], output);
     }
 }
 
