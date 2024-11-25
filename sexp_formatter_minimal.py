@@ -3,6 +3,8 @@
 # By Brian Khuu, 2024
 # This script reformats KiCad-like S-expressions to match a specific formatting style.
 # Note: This script modifies formatting only; it does not perform linting or validation.
+#       Also in addition this is a minimal version which does not support compact element handling 
+#       (e.g. pts element will compact xy sub elements into one line)
 
 import argparse
 from pathlib import Path
