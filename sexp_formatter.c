@@ -1,13 +1,9 @@
 /// usr/bin/env ccache gcc -Wall -Wextra -Werror -O3 -std=gnu17 "$0" -o /tmp/sexp_formatter -lm && /tmp/sexp_formatter "$@"; exit
 
-// TODO: Transfer the main compacting logic across
-
-// KiCADv8 Style Prettify S-Expression Formatter (sexp formatter) (minimal logic version)
+// KiCADv8 Style Prettify S-Expression Formatter (sexp formatter)
 // By Brian Khuu, 2024
 // This script reformats KiCad-like S-expressions to match a specific formatting style.
 // Note: This script modifies formatting only; it does not perform linting or validation.
-//       Also in addition this is a minimal version which does not support compact element handling
-//       (e.g. pts element will compact xy sub elements into one line)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +14,16 @@
 #include <unistd.h>
 #include <ctype.h>
 
+
 /*****************************************************************************/
+
+#define PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE 256
+#define PRETTIFY_SEXPRESSION_FIXED_INDENT_CHILD_ELEMENT_COUNT_PER_LINE 4
+
+const char *fixed_indent_prefixes[] = {
+    "pts",
+};
+const int fixed_indent_prefixes_entries_count = sizeof(fixed_indent_prefixes) / sizeof(fixed_indent_prefixes[0]);
 
 struct PrettifySExprState
 {
@@ -28,9 +33,19 @@ struct PrettifySExprState
     bool singular_element;
     bool space_pending;
     char c_out_prev;
+
+    // Prefix scanner to check if we should be in fixed indent mode
+    bool scanning_for_prefix;
+    int prefix_count_in_buffer;
+    char prefix_buffer[PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE];
+
+    // Fixed indent feature to place multiple elements in the same line for compactness
+    bool fixed_indent_mode;
+    unsigned int fixed_indent;
+    unsigned int fixed_indent_child_element_count;
 };
 
-void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
+void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
 {
     if (state->in_quote || c == '"')
     {
@@ -64,15 +79,50 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
     else if (c == '(')
     {
         // Handle opening parentheses
-        state->space_pending = false;
-
-        // Indented newline for this new parentheses unless at root
-        if (state->indent > 0)
+        if (state->fixed_indent_mode)
         {
-            output_func('\n', context_putc);
-            for (unsigned int j = 0; j < state->indent; ++j)
+            // Indented newline for this new parentheses unless at root
+            if (state->indent >= state->fixed_indent)
             {
-                output_func('\t', context_putc);
+                if (state->fixed_indent_child_element_count == 0 || state->fixed_indent_child_element_count % PRETTIFY_SEXPRESSION_FIXED_INDENT_CHILD_ELEMENT_COUNT_PER_LINE == 0)
+                {
+                    // Indented newline for this new parentheses unless at root
+                    state->space_pending = false;
+                    if (state->fixed_indent > 0)
+                    {
+                        output_func('\n', context_putc);
+                        for (unsigned int j = 0; j < state->fixed_indent; ++j)
+                        {
+                            output_func('\t', context_putc);
+                        }
+                    }
+                }
+                else
+                {
+                    if (state->space_pending)
+                    {
+                        // Add space before this quoted string
+                        output_func(' ', context_putc);
+                        state->space_pending = false;
+                    }
+                }
+                state->fixed_indent_child_element_count++;
+            }
+        }
+        else
+        {
+            state->space_pending = false;
+            state->scanning_for_prefix = true;
+            state->prefix_count_in_buffer = 0;
+
+            // Indented newline for this new parentheses unless at root
+            if (state->indent > 0)
+            {
+                output_func('\n', context_putc);
+                for (unsigned int j = 0; j < state->indent; ++j)
+                {
+                    output_func('\t', context_putc);
+                }
             }
         }
 
@@ -90,6 +140,14 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
         if (state->indent > 0)
         {
             state->indent--;
+        }
+
+        if (state->fixed_indent_mode)
+        {
+            if (!state->singular_element && state->indent <= state->fixed_indent)
+            {
+                state->fixed_indent_mode = false;
+            }
         }
 
         if (state->singular_element)
@@ -121,8 +179,44 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
     {
         // Handle spaces and newlines
         state->space_pending = true;
+
+        if (state->scanning_for_prefix)
+        {
+
+            bool matched = false;
+            for (int key_lookup_index = 0 ; key_lookup_index < fixed_indent_prefixes_entries_count ; key_lookup_index++)
+            {
+                // Check if we got a match against an expected prefix
+                const char *expected_key_entry = fixed_indent_prefixes[key_lookup_index];
+                bool entry_matched = true;
+
+                for (int i = 0; i < state->prefix_count_in_buffer ; i++)
+                {
+                    if (state->prefix_buffer[i] != expected_key_entry[i])
+                    {
+                        entry_matched = false;
+                        break;
+                    }
+                }
+
+                if (entry_matched)
+                {
+                    matched = true;
+                    break;
+                }
+            }
+
+            if (matched)
+            {
+                state->fixed_indent_mode = true;
+                state->fixed_indent = state->indent;
+                state->fixed_indent_child_element_count = 0;
+            }
+
+            state->scanning_for_prefix = false;
+        }
     }
-    else
+    else if (c != '\0')
     {
         // Handle other characters
         if (state->c_out_prev == ')')
@@ -135,11 +229,20 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
             }
             state->space_pending = false;
         }
-        else if (state->space_pending)
+        else if (state->space_pending && state->c_out_prev != '(')
         {
             // Add space before this character
             output_func(' ', context_putc);
             state->space_pending = false;
+        }
+
+        if (state->scanning_for_prefix)
+        {
+            if (state->prefix_count_in_buffer < (PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE - 1))
+            {
+                state->prefix_buffer[state->prefix_count_in_buffer] = c;
+                state->prefix_count_in_buffer++;
+            }
         }
 
         output_func(c, context_putc);
@@ -193,7 +296,7 @@ int main(int argc, char **argv)
     struct PrettifySExprState state = {0};
     while ((src_char = fgetc(src_file)) != EOF)
     {
-        prettify_sexpr_minimal(&state, src_char, &putc_handler, dst_file);
+        prettify_sexpr(&state, src_char, &putc_handler, dst_file);
     }
 
     // Wrapup and Cleanup
