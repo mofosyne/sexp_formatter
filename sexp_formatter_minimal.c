@@ -1,4 +1,7 @@
 /// usr/bin/env ccache gcc -Wall -Wextra -Werror -O3 -std=gnu17 "$0" -o /tmp/sexp_formatter -lm && /tmp/sexp_formatter "$@"; exit
+
+// TODO: Transfer the main compacting logic across
+
 // KiCADv8 Style Prettify S-Expression Formatter (sexp formatter) (minimal logic version)
 // By Brian Khuu, 2024
 // This script reformats KiCad-like S-expressions to match a specific formatting style.
@@ -15,7 +18,9 @@
 #include <unistd.h>
 #include <ctype.h>
 
-struct PrettifySExprState 
+/*****************************************************************************/
+
+struct PrettifySExprState
 {
     int indent;
     bool in_quote;
@@ -25,15 +30,14 @@ struct PrettifySExprState
     char c_out_prev;
 };
 
-// Function to prettify KiCad-like S-expressions
-void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *output)
+void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
 {
     if (state->in_quote || c == '"')
     {
         // Handle quoted strings
         if (state->space_pending)
         {
-            fputc(' ', output);
+            output_func(' ', context_putc);
             state->space_pending = false;
         }
 
@@ -50,7 +54,7 @@ void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *ou
             state->in_quote = !state->in_quote;
         }
 
-        fputc(c, output);
+        output_func(c, context_putc);
         state->c_out_prev = c;
     }
     else if (c == '(')
@@ -59,17 +63,17 @@ void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *ou
         state->space_pending = false;
         if (state->indent > 0)
         {
-            fputc('\n', output);
+            output_func('\n', context_putc);
             for (int j = 0; j < state->indent; ++j)
             {
-                fputc('\t', output);
+                output_func('\t', context_putc);
             }
         }
 
         state->singular_element = true;
         state->indent++;
 
-        fputc('(', output);
+        output_func('(', context_putc);
         state->c_out_prev = '(';
     }
     else if (c == ')')
@@ -79,23 +83,23 @@ void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *ou
         state->indent--;
         if (state->singular_element)
         {
-            fputc(')', output);
+            output_func(')', context_putc);
             state->singular_element = false;
         }
         else
         {
-            fputc('\n', output);
+            output_func('\n', context_putc);
             for (int j = 0; j < state->indent; ++j)
             {
-                fputc('\t', output);
+                output_func('\t', context_putc);
             }
-            fputc(')', output);
+            output_func(')', context_putc);
         }
 
         // Add a newline if it's the end of the document
         if (state->indent <= 0)
         {
-            fputc('\n', output);
+            output_func('\n', context_putc);
         }
 
         state->c_out_prev = ')';
@@ -115,71 +119,29 @@ void prettify_sexpr_minimal_r(struct PrettifySExprState *state, char c, FILE *ou
         // Handle other characters
         if (state->c_out_prev == ')')
         {
-            fputc('\n', output);
+            output_func('\n', context_putc);
             for (int j = 0; j < state->indent; ++j)
             {
-                fputc('\t', output);
+                output_func('\t', context_putc);
             }
             state->space_pending = false;
         }
         else if (state->space_pending)
         {
-            fputc(' ', output);
+            output_func(' ', context_putc);
             state->space_pending = false;
         }
 
-        fputc(c, output);
+        output_func(c, context_putc);
         state->c_out_prev = c;
     }
 }
 
-// Function to prettify KiCad-like S-expressions
-void prettify_sexpr_minimal(const char *sexpr_str, size_t length, FILE *output)
+/*****************************************************************************/
+
+void putc_handler(char c, void *context_putc)
 {
-    struct PrettifySExprState state = {0};
-
-    for (size_t i = 0; i < length; ++i)
-    {
-        prettify_sexpr_minimal_r(&state, sexpr_str[i], output);
-    }
-}
-
-// Function to memory-map a file
-char *map_file(const char *filepath, size_t *size_out)
-{
-    int fd = open(filepath, O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Error opening file");
-        return NULL;
-    }
-
-    struct stat st;
-    if (fstat(fd, &st) < 0)
-    {
-        perror("Error retrieving file information");
-        close(fd);
-        return NULL;
-    }
-
-    if (st.st_size == 0)
-    {
-        fprintf(stderr, "File is empty: %s\n", filepath);
-        close(fd);
-        return NULL;
-    }
-
-    char *data = mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
-    if (data == MAP_FAILED)
-    {
-        perror("Error mapping file");
-        close(fd);
-        return NULL;
-    }
-
-    *size_out = st.st_size;
-    close(fd);
-    return data;
+    fputc(c, (FILE *) context_putc);
 }
 
 // Main function
@@ -194,13 +156,51 @@ int main(int argc, char **argv)
     const char *src_path = argv[1];
     const char *dst_path = argc == 3 ? argv[2] : NULL;
 
-    // Map the source file
-    size_t src_size;
-    char *src_data = map_file(src_path, &src_size);
-    if (!src_data)
+    /*
+     * Map the source file
+     */
+
+    // Get File Descriptor
+    int fd = open(src_path, O_RDONLY);
+    if (fd < 0)
     {
+        perror("Error opening file");
         return EXIT_FAILURE;
     }
+
+    // Check File Statistics
+    struct stat st;
+    if (fstat(fd, &st) < 0)
+    {
+        perror("Error retrieving file information");
+        close(fd);
+        return EXIT_FAILURE;
+    }
+
+    // Check if File is empty
+    size_t source_file_size = st.st_size;
+    if (source_file_size == 0)
+    {
+        fprintf(stderr, "File is empty: %s\n", src_path);
+        close(fd);
+        return EXIT_FAILURE;
+    }
+
+    char *src_data = mmap(NULL, source_file_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (src_data == MAP_FAILED)
+    {
+        perror("Error mapping file");
+        close(fd);
+        return EXIT_FAILURE;
+    }
+
+    // File successfully memory mapped,
+    // can now safely close file descriptor
+    close(fd);
+
+    /*
+     * Open File Destination
+     */
 
     // Open the destination file
     FILE *dst_file = stdout;
@@ -210,16 +210,24 @@ int main(int argc, char **argv)
         if (!dst_file)
         {
             perror("Error opening destination file");
-            munmap(src_data, src_size);
+            munmap(src_data, source_file_size);
             return EXIT_FAILURE;
         }
     }
 
-    // Prettify the content
-    prettify_sexpr_minimal(src_data, src_size, dst_file);
+    /*
+     * Prettify the content
+     */
+    struct PrettifySExprState state = {0};
+    for (size_t i = 0; i < source_file_size; ++i)
+    {
+        prettify_sexpr_minimal(&state, src_data[i], &putc_handler, dst_file);
+    }
 
-    // Cleanup
-    munmap(src_data, src_size);
+    /*
+     * Wrapup and Cleanup
+     */
+    munmap(src_data, source_file_size);
     if (dst_file != stdout)
     {
         fclose(dst_file);
