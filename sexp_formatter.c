@@ -261,21 +261,25 @@ void putc_handler(char c, void *context_putc)
 int main(int argc, char **argv)
 {
     const char *prog_name = argv[0];
-    if (argc < 2 || argc > 3)
+    if (argc < 1 || argc > 3)
     {
-        fprintf(stderr, "Usage: %s <src> [dst]\n", prog_name);
+        fprintf(stderr, "Usage: %s [src] [dst]\n", prog_name);
         return EXIT_FAILURE;
     }
 
-    const char *src_path = argv[1];
-    const char *dst_path = argc == 3 ? argv[2] : NULL;
+    const char *src_path = argc >= 2 ? argv[1] : NULL;
+    const char *dst_path = argc >= 3 ? argv[2] : NULL;
 
     // Get File Descriptor
-    FILE *src_file = fopen(src_path, "r");
-    if (!src_file)
+    FILE *src_file = stdin;
+    if (src_path)
     {
-        perror("Error opening file");
-        return EXIT_FAILURE;
+        src_file = fopen(src_path, "r");
+        if (!src_file)
+        {
+            perror("Error opening file");
+            return EXIT_FAILURE;
+        }
     }
 
     // Open the destination file else default to standard output
