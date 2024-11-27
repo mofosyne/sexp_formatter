@@ -5,15 +5,15 @@
 // This script reformats KiCad-like S-expressions to match a specific formatting style.
 // Note: This script modifies formatting only; it does not perform linting or validation.
 
+#include <ctype.h>
+#include <fcntl.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <string.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <ctype.h>
-
 
 /*****************************************************************************/
 
@@ -152,7 +152,7 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
 
         if (state->singular_element)
         {
-            // End of singular element 
+            // End of singular element
             output_func(')', context_putc);
             state->singular_element = false;
         }
@@ -184,13 +184,13 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         {
 
             bool matched = false;
-            for (int key_lookup_index = 0 ; key_lookup_index < fixed_indent_prefixes_entries_count ; key_lookup_index++)
+            for (int key_lookup_index = 0; key_lookup_index < fixed_indent_prefixes_entries_count; key_lookup_index++)
             {
                 // Check if we got a match against an expected prefix
                 const char *expected_key_entry = fixed_indent_prefixes[key_lookup_index];
                 bool entry_matched = true;
 
-                for (int i = 0; i < state->prefix_count_in_buffer ; i++)
+                for (int i = 0; i < state->prefix_count_in_buffer; i++)
                 {
                     if (state->prefix_buffer[i] != expected_key_entry[i])
                     {
@@ -252,19 +252,27 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
 
 /*****************************************************************************/
 
-void putc_handler(char c, void *context_putc)
-{
-    fputc(c, (FILE *) context_putc);
-}
+void putc_handler(char c, void *context_putc) { fputc(c, (FILE *)context_putc); }
 
 // Main function
 int main(int argc, char **argv)
 {
     const char *prog_name = argv[0];
-    if (argc < 1 || argc > 3)
+
+    if (argc == 1 || (argc == 2 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)))
     {
-        fprintf(stderr, "Usage: %s [src] [dst]\n", prog_name);
-        return EXIT_FAILURE;
+        printf("S-Expression Formatter (Brian Khuu 2024)\n");
+        printf("\n");
+        printf("Usage:\n");
+        printf("  %s -     -      Standard Input To Standard Output\n", prog_name);
+        printf("  %s -     [dst]  Standard Input To File Output\n", prog_name);
+        printf("  %s [src] -      File Input To Standard Output\n", prog_name);
+        printf("  %s [src]        File Input To Standard Output\n", prog_name);
+        printf("  %s [src] [dst]  File Input To File Output\n", prog_name);
+        printf("\n");
+        printf("Options:\n");
+        printf("  -h --help       Show Help Message\n");
+        return EXIT_SUCCESS;
     }
 
     const char *src_path = argc >= 2 ? argv[1] : NULL;
@@ -272,19 +280,19 @@ int main(int argc, char **argv)
 
     // Get File Descriptor
     FILE *src_file = stdin;
-    if (src_path)
+    if (src_path && strcmp(src_path, "-") != 0)
     {
         src_file = fopen(src_path, "r");
         if (!src_file)
         {
-            perror("Error opening file");
+            perror("Error opening source file");
             return EXIT_FAILURE;
         }
     }
 
     // Open the destination file else default to standard output
     FILE *dst_file = stdout;
-    if (dst_path)
+    if (dst_path && strcmp(dst_path, "-") != 0)
     {
         dst_file = fopen(dst_path, "wb");
         if (!dst_file)
