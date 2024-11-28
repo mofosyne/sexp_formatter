@@ -31,6 +31,7 @@ struct PrettifySExprState
 
 void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
 {
+    // Parse quoted string
     if (state->in_quote || c == '"')
     {
         // Handle quoted strings
@@ -59,8 +60,18 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
 
         output_func(c, context_putc);
         state->c_out_prev = c;
+        return;
     }
-    else if (c == '(')
+
+    // Parse space
+    if (isspace(c))
+    {
+        // Handle spaces and newlines
+        state->space_pending = true;
+    }
+
+    // Parse Opening parentheses
+    if (c == '(')
     {
         // Handle opening parentheses
         state->space_pending = false;
@@ -80,8 +91,11 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
 
         output_func('(', context_putc);
         state->c_out_prev = '(';
+        return;
     }
-    else if (c == ')')
+
+    // Parse Closing Brace
+    if (c == ')')
     {
         // Handle closing parentheses
         state->space_pending = false;
@@ -115,13 +129,11 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
         }
 
         state->c_out_prev = ')';
+        return;
     }
-    else if (isspace(c))
-    {
-        // Handle spaces and newlines
-        state->space_pending = true;
-    }
-    else
+
+    // Parse Characters
+    if (c != '\0')
     {
         // Handle other characters
         if (state->c_out_prev == ')')
@@ -143,6 +155,7 @@ void prettify_sexpr_minimal(struct PrettifySExprState *state, char c, void (*out
 
         output_func(c, context_putc);
         state->c_out_prev = c;
+        return;
     }
 }
 

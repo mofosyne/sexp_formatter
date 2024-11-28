@@ -17,36 +17,79 @@
 
 /*****************************************************************************/
 
-#define PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE 256
-#define PRETTIFY_SEXPRESSION_FIXED_INDENT_CHILD_ELEMENT_COUNT_PER_LINE 4
+// The size of this should be larger than the largest prefixes in fixed_indent_prefixes
+#define PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE 256
 
-const char *fixed_indent_prefixes[] = {
-    "pts",
-};
+// This is to account for files where a list may contain long list of sub lists that we would prefer
+// to be presented as a single line until we reach a column limit
+// (e.g. In kicad there is xy lists that takes up lots and lots of lines within pts list if not condensed)
+#define PRETTIFY_SEXPR_FIXED_INDENT_COLUMN_LIMIT 99
+
+// If a list has tokens inside that exceeds this wrap threshold then we would prefer to shift it to the next line
+#define PRETTIFY_SEXPR_CONSECUTIVE_TOKEN_WRAP_THRESHOLD 72
+
+// Indentation character used
+#define PRETTIFY_SEXPR_INDENT_CHAR '\t'
+#define PRETTIFY_SEXPR_INDENT_SIZE 1
+
+// Lookup table of lists that require special handling as fixed indent lists
+const char *fixed_indent_prefixes[] = {"pts"};
 const int fixed_indent_prefixes_entries_count = sizeof(fixed_indent_prefixes) / sizeof(fixed_indent_prefixes[0]);
 
+// Prettify S-Expr State
 struct PrettifySExprState
 {
     unsigned int indent;
+    unsigned int column;
+    char c_out_prev;
+
+    // Parsing state
     bool in_quote;
     bool escape_next_char;
     bool singular_element;
     bool space_pending;
-    char c_out_prev;
 
     // Prefix scanner to check if we should be in fixed indent mode
     bool scanning_for_prefix;
     int prefix_count_in_buffer;
-    char prefix_buffer[PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE];
+    char prefix_buffer[PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE];
 
     // Fixed indent feature to place multiple elements in the same line for compactness
     bool fixed_indent_mode;
     unsigned int fixed_indent;
-    unsigned int fixed_indent_child_element_count;
 };
 
+/*
+ * Formatting rules (Based on KiCAD S-Expression Style Guide):
+ * - All extra (non-indentation) whitespace is trimmed.
+ * - Indentation is one tab.
+ * - Starting a new list (open paren) starts a new line with one deeper indentation.
+ * - Lists with no inner lists go on a single line.
+ * - End of multi-line lists (close paren) goes on a single line at the same indentation as its start.
+ * - If fixed-indent mode is active and within column limits, parentheses will stay on the same line.
+ * - Closing parentheses align with the indentation of the corresponding opening parenthesis.
+ * - Quoted strings are treated as a single token.
+ * - Tokens exceeding the column threshold are moved to the next line.
+ * - Singular elements are inlined (e.g., `()`).
+ * - Output ends with a newline to ensure POSIX compliance.
+ *
+ * For example:
+ * (first
+ *     (second
+ *         (third list)
+ *         (another list)
+ *     )
+ *     (fifth)
+ *     (sixth thing with lots of tokens
+ *         (first sub list)
+ *         (second sub list)
+ *         and another series of tokens
+ *     )
+ * )
+ */
 void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
 {
+    // Parse quoted string
     if (state->in_quote || c == '"')
     {
         // Handle quoted strings
@@ -54,6 +97,7 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         {
             // Add space before this quoted string
             output_func(' ', context_putc);
+            state->column += 1;
             state->space_pending = false;
         }
 
@@ -74,115 +118,19 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         }
 
         output_func(c, context_putc);
+        state->column += 1;
         state->c_out_prev = c;
+        return;
     }
-    else if (c == '(')
-    {
-        // Handle opening parentheses
-        if (state->fixed_indent_mode)
-        {
-            // Indented newline for this new parentheses unless at root
-            if (state->indent >= state->fixed_indent)
-            {
-                if (state->fixed_indent_child_element_count == 0 || state->fixed_indent_child_element_count % PRETTIFY_SEXPRESSION_FIXED_INDENT_CHILD_ELEMENT_COUNT_PER_LINE == 0)
-                {
-                    // Indented newline for this new parentheses unless at root
-                    state->space_pending = false;
-                    if (state->fixed_indent > 0)
-                    {
-                        output_func('\n', context_putc);
-                        for (unsigned int j = 0; j < state->fixed_indent; ++j)
-                        {
-                            output_func('\t', context_putc);
-                        }
-                    }
-                }
-                else
-                {
-                    if (state->space_pending)
-                    {
-                        // Add space before this quoted string
-                        output_func(' ', context_putc);
-                        state->space_pending = false;
-                    }
-                }
-                state->fixed_indent_child_element_count++;
-            }
-        }
-        else
-        {
-            state->space_pending = false;
-            state->scanning_for_prefix = true;
-            state->prefix_count_in_buffer = 0;
 
-            // Indented newline for this new parentheses unless at root
-            if (state->indent > 0)
-            {
-                output_func('\n', context_putc);
-                for (unsigned int j = 0; j < state->indent; ++j)
-                {
-                    output_func('\t', context_putc);
-                }
-            }
-        }
-
-        state->singular_element = true;
-        state->indent++;
-
-        output_func('(', context_putc);
-        state->c_out_prev = '(';
-    }
-    else if (c == ')')
-    {
-        // Handle closing parentheses
-        state->space_pending = false;
-
-        if (state->indent > 0)
-        {
-            state->indent--;
-        }
-
-        if (state->fixed_indent_mode)
-        {
-            if (!state->singular_element && state->indent <= state->fixed_indent)
-            {
-                state->fixed_indent_mode = false;
-            }
-        }
-
-        if (state->singular_element)
-        {
-            // End of singular element
-            output_func(')', context_putc);
-            state->singular_element = false;
-        }
-        else
-        {
-            // End of a parent element
-            output_func('\n', context_putc);
-            for (unsigned int j = 0; j < state->indent; ++j)
-            {
-                output_func('\t', context_putc);
-            }
-            output_func(')', context_putc);
-        }
-
-        // Add a newline if it's the end of the document
-        if (state->indent <= 0)
-        {
-            output_func('\n', context_putc);
-        }
-
-        state->c_out_prev = ')';
-    }
-    else if (isspace(c))
+    // Parse space
+    if (isspace(c))
     {
         // Handle spaces and newlines
         state->space_pending = true;
 
         if (state->scanning_for_prefix)
         {
-
             bool matched = false;
             for (int key_lookup_index = 0; key_lookup_index < fixed_indent_prefixes_entries_count; key_lookup_index++)
             {
@@ -210,43 +158,189 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
             {
                 state->fixed_indent_mode = true;
                 state->fixed_indent = state->indent;
-                state->fixed_indent_child_element_count = 0;
             }
 
             state->scanning_for_prefix = false;
         }
+        return;
     }
-    else if (c != '\0')
+
+    // Parse Opening parentheses
+    if (c == '(')
+    {
+        // Handle opening parentheses
+        state->space_pending = false;
+
+        // Pre Opening parentheses Actions
+        if (state->fixed_indent_mode)
+        {
+            // In fixed indent, visually compact mode
+            if (state->column < PRETTIFY_SEXPR_FIXED_INDENT_COLUMN_LIMIT && state->c_out_prev == ')')
+            {
+                // Is a consecutive list and still within column limit
+                output_func(' ', context_putc);
+                state->column += 1;
+                state->space_pending = false;
+            }
+            else
+            {
+                // List is either beyond column limit or not after another list
+                // Move this list to the next line
+
+                output_func('\n', context_putc);
+                state->column = 0;
+
+                for (unsigned int j = 0; j < state->fixed_indent; ++j)
+                {
+                    output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                }
+                state->column += state->fixed_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+            }
+        }
+        else
+        {
+            // Start scanning for prefix for special list handling
+            state->scanning_for_prefix = true;
+            state->prefix_count_in_buffer = 0;
+
+            if (state->indent > 0)
+            {
+                output_func('\n', context_putc);
+                state->column = 0;
+
+                for (unsigned int j = 0; j < state->indent; ++j)
+                {
+                    output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                }
+                state->column += state->fixed_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+            }
+        }
+
+        state->singular_element = true;
+        state->indent++;
+
+        output_func('(', context_putc);
+        state->column += 1;
+
+        state->c_out_prev = '(';
+        return;
+    }
+
+    // Parse Closing Brace
+    if (c == ')')
+    {
+        // Handle closing parentheses
+        state->space_pending = false;
+        state->scanning_for_prefix = false;
+
+        if (state->indent > 0)
+        {
+            state->indent--;
+        }
+
+        // Check if in fixed indent mode and if it's already finished
+        if (state->fixed_indent_mode)
+        {
+            if (!state->singular_element && state->indent <= state->fixed_indent)
+            {
+                state->fixed_indent_mode = false;
+            }
+        }
+
+        if (state->singular_element)
+        {
+            // End of singular element
+            output_func(')', context_putc);
+            state->column += 1;
+
+            state->singular_element = false;
+        }
+        else
+        {
+            // End of a parent element
+            output_func('\n', context_putc);
+            state->column = 0;
+
+            for (unsigned int j = 0; j < state->indent; ++j)
+            {
+                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+            }
+            state->column += state->fixed_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+
+            output_func(')', context_putc);
+            state->column += 1;
+        }
+
+        // Add a newline if it's the end of the document
+        if (state->indent <= 0)
+        {
+            output_func('\n', context_putc);
+            state->column = 0;
+        }
+
+        state->c_out_prev = ')';
+        return;
+    }
+
+    // Parse Characters
+    if (c != '\0')
     {
         // Handle other characters
+
+        // Pre character actions
         if (state->c_out_prev == ')')
         {
             // Indented newline for this character
             output_func('\n', context_putc);
+            state->column = 0;
+
             for (unsigned int j = 0; j < state->indent; ++j)
             {
-                output_func('\t', context_putc);
+                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
             }
+            state->column += state->fixed_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+
+            state->space_pending = false;
+        }
+        else if (!state->fixed_indent_mode && state->column >= PRETTIFY_SEXPR_CONSECUTIVE_TOKEN_WRAP_THRESHOLD)
+        {
+            // Indented newline for this character
+            output_func('\n', context_putc);
+            state->column = 0;
+
+            for (unsigned int j = 0; j < state->indent; ++j)
+            {
+                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+            }
+            state->column += state->fixed_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+
             state->space_pending = false;
         }
         else if (state->space_pending && state->c_out_prev != '(')
         {
-            // Add space before this character
+            // Space was pending
             output_func(' ', context_putc);
+            state->column += 1;
+
             state->space_pending = false;
         }
 
+        // Add to prefix scanning buffer if scanning for special list handling detection
         if (state->scanning_for_prefix)
         {
-            if (state->prefix_count_in_buffer < (PRETTIFY_SEXPRESSION_PREFIX_BUFFER_SIZE - 1))
+            if (state->prefix_count_in_buffer < (PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE - 1))
             {
                 state->prefix_buffer[state->prefix_count_in_buffer] = c;
                 state->prefix_count_in_buffer++;
             }
         }
 
+        // Add character to list
         output_func(c, context_putc);
+        state->column += 1;
+
         state->c_out_prev = c;
+        return;
     }
 }
 
