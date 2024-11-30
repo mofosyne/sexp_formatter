@@ -170,3 +170,6 @@ sexp_formatter
 *.o
 
 sexp_prettify_cli
+sexp_prettify_cpp_cli
+sexp_prettify_kicad_cli
+

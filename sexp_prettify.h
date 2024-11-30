@@ -24,12 +24,12 @@ struct PrettifySExprState
     int consecutive_token_wrap_threshold; ///< Tokens exceeding this wrap threshold will be shifted to the next line. If 0 then this wrapping feature is disabled
 
     // Settings: Compact Lists (This deals with lists with lots and lots of sublists and making it visually more compact)
-    char **compact_list_prefixes;
+    const char **compact_list_prefixes;
     int compact_list_prefixes_entries_count;
     int compact_list_column_limit; ///< Lists exceeding this wrap threshold will be shifted to the next line. If 0 then this wrapping feature for compact list is disabled
 
     // Settings: Shortforms (This deals with lists that is small enough and should be)
-    char **shortform_prefixes;
+    const char **shortform_prefixes;
     int shortform_prefixes_entries_count;
 
     // Settings: Indent
@@ -64,8 +64,8 @@ struct PrettifySExprState
 typedef void (*PrettifySExprPutcFunc)(char c, void *context);
 
 bool sexp_prettify_init(struct PrettifySExprState *state, char indent_char, int indent_size, int consecutive_token_wrap_threshold);
-bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count, int column_limit);
-bool sexp_prettify_shortform_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count);
-void sexp_prettify(struct PrettifySExprState *state, char c, PrettifySExprPutcFunc output_func, void *output_func_context);
+bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count, int column_limit);
+bool sexp_prettify_shortform_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count);
+void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExprPutcFunc output_func, void *output_func_context);
 
 #endif

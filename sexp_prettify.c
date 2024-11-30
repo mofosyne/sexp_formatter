@@ -28,7 +28,7 @@ bool sexp_prettify_init(struct PrettifySExprState *state, char indent_char, int 
     return true;
 }
 
-bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count, int column_limit)
+bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count, int column_limit)
 {
     if (prefixes_entries_count <= 0)
     {
@@ -50,7 +50,7 @@ bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, char *pref
     return true;
 }
 
-bool sexp_prettify_shortform_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count)
+bool sexp_prettify_shortform_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count)
 {
     if (prefixes_entries_count <= 0)
     {
@@ -99,7 +99,7 @@ bool sexp_prettify_shortform_set(struct PrettifySExprState *state, char *prefixe
  *     )
  * )
  */
-void sexp_prettify(struct PrettifySExprState *state, char c, PrettifySExprPutcFunc output_func, void *output_func_context)
+void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExprPutcFunc output_func, void *output_func_context)
 {
     // Parse quoted string
     if (state->in_quote || c == '"')

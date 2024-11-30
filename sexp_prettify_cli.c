@@ -53,11 +53,11 @@ int main(int argc, char **argv)
 
     int wrap_threshold = PRETTIFY_SEXPR_KICAD_DEFAULT_CONSECUTIVE_TOKEN_WRAP_THRESHOLD;
 
-    char **compact_list_prefixes = NULL;
+    const char **compact_list_prefixes = NULL;
     int compact_list_prefixes_entries_count = 0;
     int compact_list_prefixes_wrap_threshold = PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT;
 
-    char **shortform_prefixes = NULL;
+    const char **shortform_prefixes = NULL;
     int shortform_prefixes_entries_count = 0;
 
     while (optind < argc)
@@ -154,33 +154,27 @@ int main(int argc, char **argv)
         }
     }
 
-    if (argc <= 1)
+    // Get fixed arguments
+    const char *src_path = NULL;
+    const char *dst_path = NULL;
+
+    if (optind < argc)
+    {
+        src_path = argv[optind++];
+    }
+
+    if (optind < argc)
+    {
+        dst_path = argv[optind++];
+    }
+
+    if (!src_path)
     {
         usage(prog_name, true);
         return EXIT_SUCCESS;
     }
 
-    const char *src_path = NULL;
-    const char *dst_path = NULL;
-
-    int fixed_pos = 0;
-    while (optind < argc)
-    {
-        char *fixed_arg = argv[optind++];
-        switch (fixed_pos)
-        {
-            case 0:
-                src_path = fixed_arg;
-                break;
-            case 1:
-                dst_path = fixed_arg;
-                break;
-            default:
-                break;
-        }
-        fixed_pos++;
-    }
-
+    // Dryrun Output
     if (dryrun)
     {
         printf("src = %s\n", src_path ? src_path : "stdin");
