@@ -378,6 +378,11 @@ void putc_handler(char c, void *context_putc) { fputc(c, (FILE *)context_putc); 
 // Main function
 int main(int argc, char **argv)
 {
+
+    // Dev Note: By default kicad has compact list enabled and shortform style disabled
+    bool compact_list_enabled = true;
+    bool shortform_enabled = false;
+
     const char *prog_name = argv[0];
 
     if (argc == 1 || (argc == 2 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)))
@@ -428,11 +433,17 @@ int main(int argc, char **argv)
     char src_char;
     struct PrettifySExprState state = {0};
 
-    state.compact_list_prefixes = (char**) compact_list_prefixes;
-    state.compact_list_prefixes_entries_count = compact_list_prefixes_entries_count;
+    if (compact_list_enabled)
+    {
+        state.compact_list_prefixes = (char**) compact_list_prefixes;
+        state.compact_list_prefixes_entries_count = compact_list_prefixes_entries_count;
+    }
 
-    //state.shortform_prefixes = (char**) shortform_prefixes;
-    //state.shortform_prefixes_entries_count = shortform_prefixes_entries_count;
+    if (shortform_enabled)
+    {
+        state.shortform_prefixes = (char**) shortform_prefixes;
+        state.shortform_prefixes_entries_count = shortform_prefixes_entries_count;
+    }
 
     while ((src_char = fgetc(src_file)) != EOF)
     {
