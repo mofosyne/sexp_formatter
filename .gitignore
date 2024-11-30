@@ -166,3 +166,7 @@ kiutils
 .vscode/
 
 sexp_formatter
+
+*.o
+
+sexp_prettify_cli

@@ -1,79 +1,75 @@
-/// usr/bin/env ccache gcc -Wall -Wextra -Werror -O3 -std=gnu17 "$0" -o /tmp/sexp_formatter -lm && /tmp/sexp_formatter "$@"; exit
-
 // KiCADv8 Style Prettify S-Expression Formatter (sexp formatter)
 // By Brian Khuu, 2024
 // This script reformats KiCad-like S-expressions to match a specific formatting style.
 // Note: This script modifies formatting only; it does not perform linting or validation.
 
 #include <ctype.h>
-#include <fcntl.h>
 #include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
-/*****************************************************************************/
+#include "sexp_prettify.h"
 
-// This is to account for files where a list may contain long list of sub lists that we would prefer
-// to be presented as a single line until we reach a column limit
-// (e.g. In kicad there is xy lists that takes up lots and lots of lines within pts list if not condensed)
-#define PRETTIFY_SEXPR_FIXED_INDENT_COLUMN_LIMIT 99
-
-// If a list has tokens inside that exceeds this wrap threshold then we would prefer to shift it to the next line
-#define PRETTIFY_SEXPR_CONSECUTIVE_TOKEN_WRAP_THRESHOLD 72
-
-// Indentation character used
-#define PRETTIFY_SEXPR_INDENT_CHAR '\t'
-#define PRETTIFY_SEXPR_INDENT_SIZE 1
-
-// The size of this should be larger than the largest prefixes in compact_list_prefixes
-#define PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE 256
-
-// Lookup table of lists that require special handling as fixed indent lists
-const char *compact_list_prefixes[] = {"pts"};
-const int compact_list_prefixes_entries_count = sizeof(compact_list_prefixes) / sizeof(compact_list_prefixes[0]);
-
-// Lookup table of lists whose internal content should be a one liner
-const char *shortform_prefixes[] = {"font", "stroke", "fill", "offset", "rotate", "scale"};
-const int shortform_prefixes_entries_count = sizeof(shortform_prefixes) / sizeof(shortform_prefixes[0]);
-
-// Prettify S-Expr State
-struct PrettifySExprState
+bool sexp_prettify_init(struct PrettifySExprState *state, char indent_char, int indent_size, int consecutive_token_wrap_threshold)
 {
-    // Settings
-    char **compact_list_prefixes;
-    int compact_list_prefixes_entries_count;
-    char **shortform_prefixes;
-    int shortform_prefixes_entries_count;
+    if (indent_char == '\0')
+    {
+        return false;
+    }
 
-    // Parsing Position Tracking
-    unsigned int indent;
-    unsigned int column;
-    char c_out_prev;
+    if (indent_size <= 0)
+    {
+        return false;
+    }
 
-    // Parsing state
-    bool in_quote;
-    bool escape_next_char;
-    bool singular_element;
-    bool space_pending;
+    state->indent_char = indent_char;
+    state->indent_size = indent_size;
+    state->consecutive_token_wrap_threshold = consecutive_token_wrap_threshold;
 
-    // Prefix scanner to check if a list should be specially handled
-    bool scanning_for_prefix;
-    int prefix_count_in_buffer;
-    char prefix_buffer[PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE];
+    return true;
+}
 
-    // Fixed indent feature to place multiple elements in the same line for compactness
-    bool compact_list_mode;
-    unsigned int compact_list_indent;
-    
-    // Fixed indent feature to place multiple elements in the same line for compactness
-    bool shortform_mode;
-    unsigned int shortform_indent;
-    
-};
+bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count, int column_limit)
+{
+    if (prefixes_entries_count <= 0)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < prefixes_entries_count; i++)
+    {
+        if (strlen(prefixes[i]) > PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE)
+        {
+            return false;
+        }
+    }
+
+    state->compact_list_prefixes = prefixes;
+    state->compact_list_prefixes_entries_count = prefixes_entries_count;
+    state->compact_list_column_limit = column_limit;
+
+    return true;
+}
+
+bool sexp_prettify_shortform_set(struct PrettifySExprState *state, char *prefixes[], int prefixes_entries_count)
+{
+    if (prefixes_entries_count <= 0)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < prefixes_entries_count; i++)
+    {
+        if (strlen(prefixes[i]) > PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE)
+        {
+            return false;
+        }
+    }
+
+    state->shortform_prefixes = prefixes;
+    state->shortform_prefixes_entries_count = prefixes_entries_count;
+
+    return true;
+}
 
 /*
  * Formatting rules (Based on KiCAD S-Expression Style Guide):
@@ -103,7 +99,7 @@ struct PrettifySExprState
  *     )
  * )
  */
-void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func)(char, void *), void *context_putc)
+void sexp_prettify(struct PrettifySExprState *state, char c, PrettifySExprPutcFunc output_func, void *output_func_context)
 {
     // Parse quoted string
     if (state->in_quote || c == '"')
@@ -112,7 +108,7 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         if (state->space_pending)
         {
             // Add space before this quoted string
-            output_func(' ', context_putc);
+            output_func(' ', output_func_context);
             state->column += 1;
             state->space_pending = false;
         }
@@ -133,7 +129,7 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
             state->in_quote = !state->in_quote;
         }
 
-        output_func(c, context_putc);
+        output_func(c, output_func_context);
         state->column += 1;
         state->c_out_prev = c;
         return;
@@ -192,10 +188,10 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         if (state->compact_list_mode)
         {
             // In fixed indent, visually compact mode
-            if (state->column < PRETTIFY_SEXPR_FIXED_INDENT_COLUMN_LIMIT && state->c_out_prev == ')')
+            if (state->column < state->compact_list_column_limit && state->c_out_prev == ')' || state->compact_list_column_limit == 0)
             {
-                // Is a consecutive list and still within column limit
-                output_func(' ', context_putc);
+                // Is a consecutive list and still within column limit (or column limit disabled)
+                output_func(' ', output_func_context);
                 state->column += 1;
                 state->space_pending = false;
             }
@@ -204,20 +200,20 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
                 // List is either beyond column limit or not after another list
                 // Move this list to the next line
 
-                output_func('\n', context_putc);
+                output_func('\n', output_func_context);
                 state->column = 0;
 
                 for (unsigned int j = 0; j < state->compact_list_indent; ++j)
                 {
-                    output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                    output_func(state->indent_char, output_func_context);
                 }
-                state->column += state->compact_list_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+                state->column += state->compact_list_indent * state->indent_size;
             }
         }
         else if (state->shortform_mode)
         {
             // In one liner mode
-            output_func(' ', context_putc);
+            output_func(' ', output_func_context);
             state->column += 1;
             state->space_pending = false;
         }
@@ -229,21 +225,21 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
 
             if (state->indent > 0)
             {
-                output_func('\n', context_putc);
+                output_func('\n', output_func_context);
                 state->column = 0;
 
                 for (unsigned int j = 0; j < state->indent; ++j)
                 {
-                    output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                    output_func(state->indent_char, output_func_context);
                 }
-                state->column += state->compact_list_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+                state->column += state->compact_list_indent * state->indent_size;
             }
         }
 
         state->singular_element = true;
         state->indent++;
 
-        output_func('(', context_putc);
+        output_func('(', output_func_context);
         state->column += 1;
 
         state->c_out_prev = '(';
@@ -284,23 +280,23 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         else if (!curr_shortform_mode)
         {
             // End of a parent element
-            output_func('\n', context_putc);
+            output_func('\n', output_func_context);
             state->column = 0;
 
             for (unsigned int j = 0; j < state->indent; ++j)
             {
-                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                output_func(state->indent_char, output_func_context);
             }
-            state->column += state->compact_list_indent * PRETTIFY_SEXPR_INDENT_SIZE;
+            state->column += state->compact_list_indent * state->indent_size;
         }
 
-        output_func(')', context_putc);
+        output_func(')', output_func_context);
         state->column += 1;
 
         if (state->indent <= 0)
         {
             // Cap Root Element
-            output_func('\n', context_putc);
+            output_func('\n', output_func_context);
             state->column = 0;
         }
 
@@ -318,35 +314,35 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         {
             // Is Bare token after a list that should be on next line
             // Dev Note: In KiCAD this may indicate a flag bug
-            output_func('\n', context_putc);
+            output_func('\n', output_func_context);
             state->column = 0;
 
             for (unsigned int j = 0; j < state->indent; ++j)
             {
-                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                output_func(state->indent_char, output_func_context);
             }
-            state->column += state->indent * PRETTIFY_SEXPR_INDENT_SIZE;
+            state->column += state->indent * state->indent_size;
 
             state->space_pending = false;
         }
-        else if (!state->shortform_mode && !state->compact_list_mode && state->column >= PRETTIFY_SEXPR_CONSECUTIVE_TOKEN_WRAP_THRESHOLD)
+        else if (!state->shortform_mode && !state->compact_list_mode && state->consecutive_token_wrap_threshold != 0 && state->column >= state->consecutive_token_wrap_threshold)
         {
-            // Token is above wrap threshold. Move token to next line
-            output_func('\n', context_putc);
+            // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+            output_func('\n', output_func_context);
             state->column = 0;
 
             for (unsigned int j = 0; j < state->indent; ++j)
             {
-                output_func(PRETTIFY_SEXPR_INDENT_CHAR, context_putc);
+                output_func(state->indent_char, output_func_context);
             }
-            state->column += state->indent * PRETTIFY_SEXPR_INDENT_SIZE;
+            state->column += state->indent * state->indent_size;
 
             state->space_pending = false;
         }
         else if (state->space_pending && state->c_out_prev != '(')
         {
             // Space was pending
-            output_func(' ', context_putc);
+            output_func(' ', output_func_context);
             state->column += 1;
 
             state->space_pending = false;
@@ -363,99 +359,10 @@ void prettify_sexpr(struct PrettifySExprState *state, char c, void (*output_func
         }
 
         // Add character to list
-        output_func(c, context_putc);
+        output_func(c, output_func_context);
         state->column += 1;
 
         state->c_out_prev = c;
         return;
     }
-}
-
-/*****************************************************************************/
-
-void putc_handler(char c, void *context_putc) { fputc(c, (FILE *)context_putc); }
-
-// Main function
-int main(int argc, char **argv)
-{
-
-    // Dev Note: By default kicad has compact list enabled and shortform style disabled
-    bool compact_list_enabled = true;
-    bool shortform_enabled = false;
-
-    const char *prog_name = argv[0];
-
-    if (argc == 1 || (argc == 2 && (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)))
-    {
-        printf("S-Expression Formatter (Brian Khuu 2024)\n");
-        printf("\n");
-        printf("Usage:\n");
-        printf("  %s -     -      Standard Input To Standard Output\n", prog_name);
-        printf("  %s -     [dst]  Standard Input To File Output\n", prog_name);
-        printf("  %s [src] -      File Input To Standard Output\n", prog_name);
-        printf("  %s [src]        File Input To Standard Output\n", prog_name);
-        printf("  %s [src] [dst]  File Input To File Output\n", prog_name);
-        printf("\n");
-        printf("Options:\n");
-        printf("  -h --help       Show Help Message\n");
-        return EXIT_SUCCESS;
-    }
-
-    const char *src_path = argc >= 2 ? argv[1] : NULL;
-    const char *dst_path = argc >= 3 ? argv[2] : NULL;
-
-    // Get File Descriptor
-    FILE *src_file = stdin;
-    if (src_path && strcmp(src_path, "-") != 0)
-    {
-        src_file = fopen(src_path, "r");
-        if (!src_file)
-        {
-            perror("Error opening source file");
-            return EXIT_FAILURE;
-        }
-    }
-
-    // Open the destination file else default to standard output
-    FILE *dst_file = stdout;
-    if (dst_path && strcmp(dst_path, "-") != 0)
-    {
-        dst_file = fopen(dst_path, "wb");
-        if (!dst_file)
-        {
-            perror("Error opening destination file");
-            fclose(src_file);
-            return EXIT_FAILURE;
-        }
-    }
-
-    // Prettify the content
-    char src_char;
-    struct PrettifySExprState state = {0};
-
-    if (compact_list_enabled)
-    {
-        state.compact_list_prefixes = (char**) compact_list_prefixes;
-        state.compact_list_prefixes_entries_count = compact_list_prefixes_entries_count;
-    }
-
-    if (shortform_enabled)
-    {
-        state.shortform_prefixes = (char**) shortform_prefixes;
-        state.shortform_prefixes_entries_count = shortform_prefixes_entries_count;
-    }
-
-    while ((src_char = fgetc(src_file)) != EOF)
-    {
-        prettify_sexpr(&state, src_char, &putc_handler, dst_file);
-    }
-
-    // Wrapup and Cleanup
-    fclose(src_file);
-    if (dst_file != stdout)
-    {
-        fclose(dst_file);
-    }
-
-    return EXIT_SUCCESS;
 }

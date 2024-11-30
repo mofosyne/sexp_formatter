@@ -57,3 +57,10 @@ Example:
 Running `formatter_test.sh` will run `sexp_formatter.py` against `CM4IOv5_example` which contains both the original file from raspberry pi from an old version of KiCAD as well as the file that KiCADv8 outputs when the original file is saved again and upgraded to the new KiCADv8 format. These files are passed though the formatter to the corresponding `./formatted/` folder for easier comparison.
 
 This let's you spot changes between the pre KiCADv8 release, e.g. That there is some clear difference where `hide` was converted to `(hide yes)` in the new file format version... which was what tripped up kiutils as shown in the minimal folder. You can run `just meld-minimal` to check the difference if you got meld installed (You will need <https://just.systems/man/en/> installed to use `just` however)
+
+
+## C example
+
+```bash
+./sexp_prettify_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale ./minimal/Normal.kicad_sch ./minimal/formatted_via_c/Normal.kicad_sch
+```
