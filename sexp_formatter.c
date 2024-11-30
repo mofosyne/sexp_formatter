@@ -17,9 +17,6 @@
 
 /*****************************************************************************/
 
-// The size of this should be larger than the largest prefixes in compact_list_prefixes
-#define PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE 256
-
 // This is to account for files where a list may contain long list of sub lists that we would prefer
 // to be presented as a single line until we reach a column limit
 // (e.g. In kicad there is xy lists that takes up lots and lots of lines within pts list if not condensed)
@@ -31,6 +28,9 @@
 // Indentation character used
 #define PRETTIFY_SEXPR_INDENT_CHAR '\t'
 #define PRETTIFY_SEXPR_INDENT_SIZE 1
+
+// The size of this should be larger than the largest prefixes in compact_list_prefixes
+#define PRETTIFY_SEXPR_PREFIX_BUFFER_SIZE 256
 
 // Lookup table of lists that require special handling as fixed indent lists
 const char *compact_list_prefixes[] = {"pts"};
