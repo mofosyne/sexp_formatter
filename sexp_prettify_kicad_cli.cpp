@@ -191,7 +191,7 @@ int main(int argc, char **argv)
 
     // Read input into a string
     std::string aSource((std::istreambuf_iterator<char>(*src_stream)), std::istreambuf_iterator<char>());
-    
+
     // Process the input
     Prettify(aSource, compactsave);
 
