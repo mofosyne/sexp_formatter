@@ -18,30 +18,28 @@ extern "C"
 }
 
 // Dev Note: This is intended to replace Prettify() in kicad/kicad/common/io/kicad/kicad_io_utils.cpp
-void Prettify(std::string &aSource, bool aCompactSave)
+void Prettify( std::string& aSource, bool aCompactSave )
 {
+    PrettifySExprState state = {0};
+    std::vector<const char *> compact_list_ptrs;
+    std::vector<const char *> shortform_ptrs;
     std::string formatted;
     formatted.reserve(aSource.length());
 
-    PrettifySExprState state = {0};
-
     assert(sexp_prettify_init(&state, PRETTIFY_SEXPR_KICAD_DEFAULT_INDENT_CHAR, PRETTIFY_SEXPR_KICAD_DEFAULT_INDENT_SIZE, PRETTIFY_SEXPR_KICAD_DEFAULT_CONSECUTIVE_TOKEN_WRAP_THRESHOLD));
 
-    std::vector<const char *> compact_list_ptrs;
     compact_list_ptrs.push_back("pts");
-
-    std::vector<const char *> shortform_ptrs;
-    shortform_ptrs.push_back("ptr");
-    shortform_ptrs.push_back("font");
-    shortform_ptrs.push_back("stroke");
-    shortform_ptrs.push_back("fill");
-    shortform_ptrs.push_back("offset");
-    shortform_ptrs.push_back("rotate");
-    shortform_ptrs.push_back("scale");
-
     assert(sexp_prettify_compact_list_set(&state, compact_list_ptrs.data(), compact_list_ptrs.size(), PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT));
+
     if (aCompactSave)
     {
+        shortform_ptrs.push_back("ptr");
+        shortform_ptrs.push_back("font");
+        shortform_ptrs.push_back("stroke");
+        shortform_ptrs.push_back("fill");
+        shortform_ptrs.push_back("offset");
+        shortform_ptrs.push_back("rotate");
+        shortform_ptrs.push_back("scale");
         assert(sexp_prettify_shortform_set(&state, shortform_ptrs.data(), shortform_ptrs.size()));
     }
 
@@ -53,12 +51,9 @@ void Prettify(std::string &aSource, bool aCompactSave)
     };
 
     // Process the input
-    auto cursor = aSource.begin();
-    while (cursor != aSource.end())
+    for (char c : aSource)
     {
-        char c = *cursor;
         sexp_prettify(&state, c, putc_handler, &formatted);
-        cursor++;
     }
 
     aSource = std::move(formatted);
