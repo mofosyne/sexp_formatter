@@ -5,6 +5,10 @@
 
 #ifndef SEXP_PRETTIFY
 #define SEXP_PRETTIFY
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #include <stdbool.h>
 
@@ -68,4 +72,7 @@ bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, const char
 bool sexp_prettify_shortform_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count);
 void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExprPutcFunc output_func, void *output_func_context);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
