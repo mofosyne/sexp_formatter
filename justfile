@@ -32,6 +32,7 @@ dev-bringup-mofosyne:
 
 
 format:
+    # pip install clang-format
     clang-format -i *.cpp
     clang-format -i *.c
     clang-format -i *.h
