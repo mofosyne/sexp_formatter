@@ -19,10 +19,13 @@ void Prettify(std::string &aSource, bool aCompactSave)
 
     // Lists exceeding this wrap threshold will be shifted to the next line
     const int compactListColumnLimit = 99;
+    const std::vector<std::string> compact_list_prefixes = {"pts"};
 
     // Tokens exceeding this wrap threshold will be shifted to the next line
     const int consecutiveTokenWrapThreshold = 72;
+    const std::vector<std::string> shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"};
 
+    // Create and reserve formatted string
     std::string formatted;
     formatted.reserve(aSource.length());
 
@@ -48,9 +51,6 @@ void Prettify(std::string &aSource, bool aCompactSave)
     // Fixed listDepth feature to place multiple elements in the same line for compactness
     bool shortformMode = false;
     unsigned int shortformIndent = 0;
-
-    std::vector<std::string> compact_list_prefixes = {"pts"};
-    std::vector<std::string> shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"};
 
     for (const char c : aSource)
     {
@@ -90,7 +90,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
         }
 
         // Parse space and newlines
-        if (isspace(c) || c == '\r' || c == '\n')
+        if (std::isspace(c) || c == '\r' || c == '\n')
         {
             // Handle spaces and newlines
             spacePending = true;
@@ -263,7 +263,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
 
                 spacePending = false;
             }
-            else if (isspace(previousNonSpaceOutput) && !shortformMode && !compactListMode && column >= consecutiveTokenWrapThreshold)
+            else if (std::isspace(previousNonSpaceOutput) && !shortformMode && !compactListMode && column >= consecutiveTokenWrapThreshold)
             {
                 // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
                 formatted.push_back('\n');

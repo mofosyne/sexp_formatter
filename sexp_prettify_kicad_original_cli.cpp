@@ -10,114 +10,119 @@
 #include <string>
 #include <unistd.h>
 
-void Prettify( std::string& aSource, bool aCompactSave )
+void Prettify(std::string &aSource, bool aCompactSave)
 {
     // Configuration
     const char quoteChar = '"';
     const char indentChar = '\t';
-    const int  indentSize = 1;
+    const int indentSize = 1;
 
     // In order to visually compress PCB files, it is helpful to special-case long lists of (xy ...)
     // lists, which we allow to exist on a single line until we reach column 99.
-    const int  xySpecialCaseColumnLimit = 99;
+    const int xySpecialCaseColumnLimit = 99;
 
     // If whitespace occurs inside a list after this threshold, it will be converted into a newline
     // and the indentation will be increased.  This is mainly used for image and group objects,
     // which contain potentially long sets of string tokens within a single list.
-    const int  consecutiveTokenWrapThreshold = 72;
+    const int consecutiveTokenWrapThreshold = 72;
 
     std::string formatted;
-    formatted.reserve( aSource.length() );
+    formatted.reserve(aSource.length());
 
     auto cursor = aSource.begin();
     auto seek = cursor;
 
-    int  listDepth = 0;
+    int listDepth = 0;
     char lastNonWhitespace = 0;
     bool inQuote = false;
     bool hasInsertedSpace = false;
     bool inMultiLineList = false;
     bool inXY = false;
     bool inShortForm = false;
-    int  shortFormDepth = 0;
-    int  column = 0;
-    int  backslashCount = 0;    // Count of successive backslash read since any other char
+    int shortFormDepth = 0;
+    int column = 0;
+    int backslashCount = 0; // Count of successive backslash read since any other char
 
-    auto isWhitespace = []( const char aChar )
-            {
-                return ( aChar == ' ' || aChar == '\t' || aChar == '\n' || aChar == '\r' );
-            };
+    auto isWhitespace = [](const char aChar) { return (aChar == ' ' || aChar == '\t' || aChar == '\n' || aChar == '\r'); };
 
-    auto nextNonWhitespace =
-            [&]( std::string::iterator aIt )
-            {
-                seek = aIt;
-
-                while( seek != aSource.end() && isWhitespace( *seek ) )
-                    seek++;
-
-                if( seek == aSource.end() )
-                    return (char)0;
-
-                return *seek;
-            };
-
-    auto isXY =
-            [&]( std::string::iterator aIt )
-            {
-                seek = aIt;
-
-                if( ++seek == aSource.end() || *seek != 'x' )
-                    return false;
-
-                if( ++seek == aSource.end() || *seek != 'y' )
-                    return false;
-
-                if( ++seek == aSource.end() || *seek != ' ' )
-                    return false;
-
-                return true;
-            };
-
-    auto isShortForm =
-            [&]( std::string::iterator aIt )
-            {
-                seek = aIt;
-                std::string token;
-
-                while( ++seek != aSource.end() && isalpha( *seek ) )
-                    token += *seek;
-
-                return token == "font" || token == "stroke" || token == "fill"
-                        || token == "offset" || token == "rotate" || token == "scale";
-            };
-
-    while( cursor != aSource.end() )
+    auto nextNonWhitespace = [&](std::string::iterator aIt)
     {
-        char next = nextNonWhitespace( cursor );
+        seek = aIt;
 
-        if( isWhitespace( *cursor ) && !inQuote )
+        while (seek != aSource.end() && isWhitespace(*seek))
         {
-            if( !hasInsertedSpace           // Only permit one space between chars
+            seek++;
+        }
+
+        if (seek == aSource.end())
+        {
+            return (char)0;
+        }
+
+        return *seek;
+    };
+
+    auto isXY = [&](std::string::iterator aIt)
+    {
+        seek = aIt;
+
+        if (++seek == aSource.end() || *seek != 'x')
+        {
+            return false;
+        }
+
+        if (++seek == aSource.end() || *seek != 'y')
+        {
+            return false;
+        }
+
+        if (++seek == aSource.end() || *seek != ' ')
+        {
+            return false;
+        }
+
+        return true;
+    };
+
+    auto isShortForm = [&](std::string::iterator aIt)
+    {
+        seek = aIt;
+        std::string token;
+
+        while (++seek != aSource.end() && isalpha(*seek))
+        {
+            token += *seek;
+        }
+
+        return token == "font" || token == "stroke" || token == "fill" || token == "offset" || token == "rotate" || token == "scale";
+    };
+
+    while (cursor != aSource.end())
+    {
+        char next = nextNonWhitespace(cursor);
+
+        if (isWhitespace(*cursor) && !inQuote)
+        {
+            if (!hasInsertedSpace           // Only permit one space between chars
                 && listDepth > 0            // Do not permit spaces in outer list
                 && lastNonWhitespace != '(' // Remove extra space after start of list
                 && next != ')'              // Remove extra space before end of list
-                && next != '(' )            // Remove extra space before newline
+                && next != '(')             // Remove extra space before newline
             {
-                if( inXY || column < consecutiveTokenWrapThreshold )
+                if (inXY || column < consecutiveTokenWrapThreshold)
                 {
                     // Note that we only insert spaces here, no matter what kind of whitespace is
                     // in the input.  Newlines will be inserted as needed by the logic below.
-                    formatted.push_back( ' ' );
+                    formatted.push_back(' ');
                     column++;
                 }
-                else if( inShortForm )
+                else if (inShortForm)
                 {
-                    formatted.push_back( ' ' );
+                    formatted.push_back(' ');
                 }
                 else
                 {
-                    formatted.push_back( '\n' );
+                    formatted.push_back('\n');
                     formatted.append(listDepth * indentSize, indentChar);
                     column = listDepth * indentSize;
                     inMultiLineList = true;
@@ -130,38 +135,38 @@ void Prettify( std::string& aSource, bool aCompactSave )
         {
             hasInsertedSpace = false;
 
-            if( *cursor == '(' && !inQuote )
+            if (*cursor == '(' && !inQuote)
             {
-                bool currentIsXY = isXY( cursor );
-                bool currentIsShortForm = aCompactSave && isShortForm( cursor );
+                bool currentIsXY = isXY(cursor);
+                bool currentIsShortForm = aCompactSave && isShortForm(cursor);
 
-                if( formatted.empty() )
+                if (formatted.empty())
                 {
-                    formatted.push_back( '(' );
+                    formatted.push_back('(');
                     column++;
                 }
-                else if( inXY && currentIsXY && column < xySpecialCaseColumnLimit )
+                else if (inXY && currentIsXY && column < xySpecialCaseColumnLimit)
                 {
                     // List-of-points special case
                     formatted += " (";
                     column += 2;
                 }
-                else if( inShortForm )
+                else if (inShortForm)
                 {
                     formatted += " (";
                     column += 2;
                 }
                 else
                 {
-                    formatted.push_back( '\n' );
+                    formatted.push_back('\n');
                     formatted.append(listDepth * indentSize, indentChar);
-                    formatted.push_back( '(' );
+                    formatted.push_back('(');
                     column = listDepth * indentSize + 1;
                 }
 
                 inXY = currentIsXY;
 
-                if( currentIsShortForm )
+                if (currentIsShortForm)
                 {
                     inShortForm = true;
                     shortFormDepth = listDepth;
@@ -169,31 +174,33 @@ void Prettify( std::string& aSource, bool aCompactSave )
 
                 listDepth++;
             }
-            else if( *cursor == ')' && !inQuote )
+            else if (*cursor == ')' && !inQuote)
             {
-                if( listDepth > 0 )
-                    listDepth--;
-
-                if( inShortForm )
+                if (listDepth > 0)
                 {
-                    formatted.push_back( ')' );
+                    listDepth--;
+                }
+
+                if (inShortForm)
+                {
+                    formatted.push_back(')');
                     column++;
                 }
-                else if( lastNonWhitespace == ')' || inMultiLineList )
+                else if (lastNonWhitespace == ')' || inMultiLineList)
                 {
-                    formatted.push_back( '\n' );
+                    formatted.push_back('\n');
                     formatted.append(listDepth * indentSize, indentChar);
-                    formatted.push_back( ')' );
+                    formatted.push_back(')');
                     column = listDepth * indentSize + 1;
                     inMultiLineList = false;
                 }
                 else
                 {
-                    formatted.push_back( ')' );
+                    formatted.push_back(')');
                     column++;
                 }
 
-                if( shortFormDepth == listDepth )
+                if (shortFormDepth == listDepth)
                 {
                     inShortForm = false;
                     shortFormDepth = 0;
@@ -204,15 +211,21 @@ void Prettify( std::string& aSource, bool aCompactSave )
                 // The output formatter escapes double-quotes (like \")
                 // But a corner case is a sequence like \\"
                 // therefore a '\' is attached to a '"' if a odd number of '\' is detected
-                if( *cursor == '\\' )
+                if (*cursor == '\\')
+                {
                     backslashCount++;
-                else if( *cursor == quoteChar && ( backslashCount & 1 ) == 0 )
+                }
+                else if (*cursor == quoteChar && (backslashCount & 1) == 0)
+                {
                     inQuote = !inQuote;
+                }
 
-                if( *cursor != '\\' )
+                if (*cursor != '\\')
+                {
                     backslashCount = 0;
+                }
 
-                formatted.push_back( *cursor );
+                formatted.push_back(*cursor);
                 column++;
             }
 
@@ -225,7 +238,7 @@ void Prettify( std::string& aSource, bool aCompactSave )
     // newline required at end of line / file for POSIX compliance. Keeps git diffs clean.
     formatted += '\n';
 
-    aSource = std::move( formatted );
+    aSource = std::move(formatted);
 }
 
 // Display usage instructions
