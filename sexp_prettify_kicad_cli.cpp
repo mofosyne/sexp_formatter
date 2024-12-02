@@ -3,57 +3,299 @@
 // This script reformats KiCad-like S-expressions to match a specific formatting style.
 // Note: This script modifies formatting only; it does not perform linting or validation.
 
-#include <cassert>
 #include <cstring>
 #include <fstream>
 #include <iostream>
 #include <memory>
-#include <string>
 #include <unistd.h>
 #include <vector>
 
-extern "C"
+void Prettify(std::string &aSource, bool aCompactSave)
 {
-#include "sexp_prettify.h"
-}
+    // Configuration
+    const char quoteChar = '"';
+    const char indentChar = '\t';
+    const int indentSize = 1;
 
-// Dev Note: This is intended to replace Prettify() in kicad/kicad/common/io/kicad/kicad_io_utils.cpp
-void Prettify( std::string& aSource, bool aCompactSave )
-{
-    PrettifySExprState state = {0};
-    std::vector<const char *> compact_list_ptrs;
-    std::vector<const char *> shortform_ptrs;
+    // Lists exceeding this wrap threshold will be shifted to the next line
+    const int compactListColumnLimit = 99;
+
+    // Tokens exceeding this wrap threshold will be shifted to the next line
+    const int consecutiveTokenWrapThreshold = 72;
+
     std::string formatted;
     formatted.reserve(aSource.length());
 
-    assert(sexp_prettify_init(&state, PRETTIFY_SEXPR_KICAD_DEFAULT_INDENT_CHAR, PRETTIFY_SEXPR_KICAD_DEFAULT_INDENT_SIZE, PRETTIFY_SEXPR_KICAD_DEFAULT_CONSECUTIVE_TOKEN_WRAP_THRESHOLD));
+    // Parsing Position Tracking
+    unsigned int listDepth = 0;
+    unsigned int column = 0;
+    char previousNonSpaceOutput = '\0';
 
-    compact_list_ptrs.push_back("pts");
-    assert(sexp_prettify_compact_list_set(&state, compact_list_ptrs.data(), compact_list_ptrs.size(), PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT));
+    // Parsing state
+    bool inQuote = false;
+    bool escapeNextChar = false;
+    bool singularElement = false;
+    bool spacePending = false;
 
-    if (aCompactSave)
+    // Prefix scanner to check if a list should be specially handled
+    bool scanningForPrefix = false;
+    std::string prefixToken = "";
+
+    // Fixed listDepth feature to place multiple elements in the same line for compactness
+    bool compactListMode = false;
+    unsigned int compactListIndent = 0;
+
+    // Fixed listDepth feature to place multiple elements in the same line for compactness
+    bool shortformMode = false;
+    unsigned int shortformIndent = 0;
+
+    std::vector<std::string> compact_list_prefixes = {"pts"};
+    std::vector<std::string> shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"};
+
+    for (const char c : aSource)
     {
-        shortform_ptrs.push_back("ptr");
-        shortform_ptrs.push_back("font");
-        shortform_ptrs.push_back("stroke");
-        shortform_ptrs.push_back("fill");
-        shortform_ptrs.push_back("offset");
-        shortform_ptrs.push_back("rotate");
-        shortform_ptrs.push_back("scale");
-        assert(sexp_prettify_shortform_set(&state, shortform_ptrs.data(), shortform_ptrs.size()));
-    }
+        // Parse quoted string
 
-    // Define the lambda closer to usage
-    auto putc_handler = [](char ch, void *context_putc)
-    {
-        auto &out_stream = *static_cast<std::string *>(context_putc);
-        out_stream.push_back(ch);
-    };
+        if (c == quoteChar || inQuote)
+        {
+            // Handle quoted strings
+            if (spacePending)
+            {
+                // Add space before this quoted string
+                formatted.push_back(' ');
+                column += 1;
+                spacePending = false;
+            }
 
-    // Process the input
-    for (char c : aSource)
-    {
-        sexp_prettify(&state, c, putc_handler, &formatted);
+            if (escapeNextChar)
+            {
+                // Escaped Char
+                escapeNextChar = false;
+            }
+            else if (c == '\\')
+            {
+                // Escape Next Char
+                escapeNextChar = true;
+            }
+            else if (c == quoteChar)
+            {
+                // End of quoted string mode
+                inQuote = !inQuote;
+            }
+
+            formatted.push_back(c);
+            column += 1;
+            previousNonSpaceOutput = c;
+            continue;
+        }
+
+        // Parse space and newlines
+        if (isspace(c) || c == '\r' || c == '\n')
+        {
+            // Handle spaces and newlines
+            spacePending = true;
+
+            if (scanningForPrefix)
+            {
+                // Check if we got a match against an expected prefix for fixed listDepth mode
+                for (auto expectedToken : compact_list_prefixes)
+                {
+                    if (prefixToken == expectedToken)
+                    {
+                        compactListMode = true;
+                        compactListIndent = listDepth;
+                        break;
+                    }
+                }
+
+                // Check if we got a match against an expected prefix for fixed listDepth mode
+                if (aCompactSave)
+                {
+                    for (auto expectedToken : shortform_prefixes)
+                    {
+                        if (prefixToken == expectedToken)
+                        {
+                            shortformMode = true;
+                            shortformIndent = listDepth;
+                            break;
+                        }
+                    }
+                }
+
+                scanningForPrefix = false;
+            }
+            continue;
+        }
+
+        // Parse Opening parentheses
+        if (c == '(')
+        {
+            // Handle opening parentheses
+            spacePending = false;
+
+            // Pre Opening parentheses Actions
+            if (compactListMode)
+            {
+                // In fixed listDepth, visually compact mode
+                if (column < compactListColumnLimit && previousNonSpaceOutput == ')' || compactListColumnLimit == 0)
+                {
+                    // Is a consecutive list and still within column limit (or column limit disabled)
+                    formatted.push_back(' ');
+                    column += 1;
+                    spacePending = false;
+                }
+                else
+                {
+                    // List is either beyond column limit or not after another list
+                    // Move this list to the next line
+
+                    formatted.push_back('\n');
+                    column = 0;
+
+                    formatted.append(compactListIndent * indentSize, indentChar);
+                    column += compactListIndent * indentSize;
+                }
+            }
+            else if (shortformMode)
+            {
+                // In one liner mode
+                formatted.push_back(' ');
+                column += 1;
+                spacePending = false;
+            }
+            else
+            {
+                // Start scanning for prefix for special list handling
+                scanningForPrefix = true;
+                prefixToken = "";
+
+                // Print next line depth
+                if (listDepth > 0)
+                {
+                    formatted.push_back('\n');
+                    column = 0;
+
+                    formatted.append(listDepth * indentSize, indentChar);
+                    column += listDepth * indentSize;
+                }
+            }
+
+            singularElement = true;
+            listDepth++;
+
+            formatted.push_back('(');
+            column += 1;
+
+            previousNonSpaceOutput = '(';
+            continue;
+        }
+
+        // Parse Closing Brace
+        if (c == ')')
+        {
+            const bool curr_shortform_mode = shortformMode;
+
+            // Handle closing parentheses
+            spacePending = false;
+            scanningForPrefix = false;
+
+            if (listDepth > 0)
+            {
+                listDepth--;
+            }
+
+            // Check if compact list mode has completed
+            if (compactListMode && listDepth < compactListIndent)
+            {
+                compactListMode = false;
+            }
+
+            // Check if we have finished with a shortform list
+            if (shortformMode && listDepth < shortformIndent)
+            {
+                shortformMode = false;
+            }
+
+            if (singularElement)
+            {
+                // End of singular element
+                singularElement = false;
+            }
+            else if (!curr_shortform_mode)
+            {
+                // End of a parent element
+                formatted.push_back('\n');
+                column = 0;
+
+                formatted.append(listDepth * indentSize, indentChar);
+                column += listDepth * indentSize;
+            }
+
+            formatted.push_back(')');
+            column += 1;
+
+            if (listDepth <= 0)
+            {
+                // Cap Root Element
+                formatted.push_back('\n');
+                column = 0;
+            }
+
+            previousNonSpaceOutput = ')';
+            continue;
+        }
+
+        // Parse Characters
+        if (c != '\0')
+        {
+            // Handle other characters
+
+            // Pre character actions
+            if (previousNonSpaceOutput == ')' && !shortformMode)
+            {
+                // Is Bare token after a list that should be on next line
+                // Dev Note: In KiCAD this may indicate a flag bug
+                formatted.push_back('\n');
+                column = 0;
+
+                formatted.append(listDepth * indentSize, indentChar);
+                column += listDepth * indentSize;
+
+                spacePending = false;
+            }
+            else if (isspace(previousNonSpaceOutput) && !shortformMode && !compactListMode && column >= consecutiveTokenWrapThreshold)
+            {
+                // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+                formatted.push_back('\n');
+                column = 0;
+
+                formatted.append(listDepth * indentSize, indentChar);
+                column += listDepth * indentSize;
+
+                spacePending = false;
+            }
+            else if (spacePending && previousNonSpaceOutput != '(')
+            {
+                // Space was pending
+                formatted.push_back(' ');
+                column += 1;
+
+                spacePending = false;
+            }
+
+            // Add to prefix scanning buffer if scanning for special list handling detection
+            if (scanningForPrefix)
+            {
+                prefixToken += c;
+            }
+
+            // Add character to list
+            formatted.push_back(c);
+            column += 1;
+
+            previousNonSpaceOutput = c;
+            continue;
+        }
     }
 
     aSource = std::move(formatted);
