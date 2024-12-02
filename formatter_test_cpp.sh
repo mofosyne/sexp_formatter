@@ -1,5 +1,5 @@
 #!/bin/bash
-make all
+make sexp_prettify_cpp_cli
 
 # Harmonized for easier comparison
 rm ./minimal/formatted_via_c/Normal.kicad_sch 2> /dev/null

@@ -203,7 +203,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
                 output_func('\n', output_func_context);
                 state->column = 0;
 
-                for (unsigned int j = 0; j < state->compact_list_indent; ++j)
+                for (unsigned int j = 0; j < (state->compact_list_indent * state->indent_size); ++j)
                 {
                     output_func(state->indent_char, output_func_context);
                 }
@@ -228,11 +228,11 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
                 output_func('\n', output_func_context);
                 state->column = 0;
 
-                for (unsigned int j = 0; j < state->indent; ++j)
+                for (unsigned int j = 0; j < (state->indent * state->indent_size); ++j)
                 {
                     output_func(state->indent_char, output_func_context);
                 }
-                state->column += state->compact_list_indent * state->indent_size;
+                state->column += state->indent * state->indent_size;
             }
         }
 
@@ -283,11 +283,11 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
             output_func('\n', output_func_context);
             state->column = 0;
 
-            for (unsigned int j = 0; j < state->indent; ++j)
+            for (unsigned int j = 0; j < (state->indent * state->indent_size); ++j)
             {
                 output_func(state->indent_char, output_func_context);
             }
-            state->column += state->compact_list_indent * state->indent_size;
+            state->column += state->indent * state->indent_size;
         }
 
         output_func(')', output_func_context);
@@ -317,7 +317,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
             output_func('\n', output_func_context);
             state->column = 0;
 
-            for (unsigned int j = 0; j < state->indent; ++j)
+            for (unsigned int j = 0; j < (state->indent * state->indent_size); ++j)
             {
                 output_func(state->indent_char, output_func_context);
             }
@@ -332,7 +332,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
             output_func('\n', output_func_context);
             state->column = 0;
 
-            for (unsigned int j = 0; j < state->indent; ++j)
+            for (unsigned int j = 0; j < (state->indent * state->indent_size); ++j)
             {
                 output_func(state->indent_char, output_func_context);
             }
