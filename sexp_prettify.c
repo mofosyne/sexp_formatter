@@ -135,8 +135,8 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
         return;
     }
 
-    // Parse space
-    if (isspace(c))
+    // Parse space and newlines
+    if (isspace(c) || c == '\r' || c == '\n')
     {
         // Handle spaces and newlines
         state->space_pending = true;
@@ -310,7 +310,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
         // Handle other characters
 
         // Pre character actions
-        if (!state->shortform_mode && state->c_out_prev == ')')
+        if (state->c_out_prev == ')' && !state->shortform_mode)
         {
             // Is Bare token after a list that should be on next line
             // Dev Note: In KiCAD this may indicate a flag bug
@@ -325,7 +325,8 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
 
             state->space_pending = false;
         }
-        else if (!state->shortform_mode && !state->compact_list_mode && state->consecutive_token_wrap_threshold != 0 && state->column >= state->consecutive_token_wrap_threshold)
+        else if (isspace(state->c_out_prev) && !state->shortform_mode && !state->compact_list_mode && state->consecutive_token_wrap_threshold != 0 &&
+                 state->column >= state->consecutive_token_wrap_threshold)
         {
             // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
             output_func('\n', output_func_context);
