@@ -6,7 +6,18 @@ init:
 
 # Run using sexp_formatter.py
 test:
-    ./test.sh
+    ./test_all.sh
+
+cpp_test:
+    ./test_standard_single.sh ./sexp_prettify_kicad_cli
+    ./test_standard_single.sh ./sexp_prettify_cpp_cli
+
+c_test:
+    ./test_standard_single.sh ./sexp_prettify_cli
+
+python_test:
+    ./test_standard_single.sh ./sexp_prettify_cli.py
+
 
 # Personal Kiutils Bringup
 dev-bringup-mofosyne:
