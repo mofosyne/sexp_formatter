@@ -136,7 +136,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
     }
 
     // Parse space and newlines
-    if (isspace(c) || c == '\r' || c == '\n')
+    if (isspace(c))
     {
         // Handle spaces and newlines
         state->space_pending = true;

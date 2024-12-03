@@ -269,13 +269,12 @@ void usage(const std::string &prog_name, bool full)
 int main(int argc, char **argv)
 {
     const std::string prog_name = argv[0];
-    bool dryrun = false;
     bool compactsave = false;
 
     // Parse options
     while (optind < argc)
     {
-        const int c = getopt(argc, argv, "hcd");
+        const int c = getopt(argc, argv, "hc");
         if (c == -1)
         {
             break;
@@ -291,11 +290,6 @@ int main(int argc, char **argv)
             case 'c':
             {
                 compactsave = true;
-                break;
-            }
-            case 'd':
-            {
-                dryrun = true;
                 break;
             }
             case '?':
@@ -328,14 +322,6 @@ int main(int argc, char **argv)
     if (!src_path)
     {
         usage(prog_name, true);
-        return EXIT_SUCCESS;
-    }
-
-    // Dryrun Output
-    if (dryrun)
-    {
-        std::cout << "src = " << (src_path ? src_path : "stdin") << "\n"
-                  << "dst = " << (dst_path ? dst_path : "stdout") << "\n";
         return EXIT_SUCCESS;
     }
 

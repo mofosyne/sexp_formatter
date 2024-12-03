@@ -340,7 +340,8 @@
 				)
 				(pin no_connect line
 					(at 2.54 -7.62 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "NC"
 						(effects
 							(font
@@ -394,7 +395,8 @@
 				)
 				(pin passive line
 					(at 0 -10.16 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "GND"
 						(effects
 							(font
@@ -414,7 +416,9 @@
 		)
 		(symbol "Connector_Generic_MountingPin:Conn_01x02_MountingPin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				hide
+			)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J"
@@ -695,7 +699,8 @@
 				)
 				(pin no_connect line
 					(at -5.08 0 0)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "NC"
 						(effects
 							(font
@@ -713,7 +718,8 @@
 				)
 				(pin passive line
 					(at 0 -10.16 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "GND"
 						(effects
 							(font

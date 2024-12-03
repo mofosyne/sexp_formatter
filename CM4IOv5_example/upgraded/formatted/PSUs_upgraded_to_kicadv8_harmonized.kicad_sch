@@ -435,7 +435,9 @@
 		(symbol "Connector:TestPoint"
 			(pin_numbers hide)
 			(pin_names
-				(offset 0.762) hide)
+				(offset 0.762)
+				hide
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1548,7 +1550,8 @@
 				)
 				(pin passive line
 					(at 2.54 -5.08 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "S"
 						(effects
 							(font
@@ -1566,7 +1569,8 @@
 				)
 				(pin passive line
 					(at 2.54 -5.08 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "S"
 						(effects
 							(font
@@ -1698,7 +1702,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					hide
 					(name "GND"
 						(effects
 							(font

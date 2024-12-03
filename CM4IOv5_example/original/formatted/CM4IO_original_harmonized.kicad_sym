@@ -28,7 +28,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf"
 			(id 3)
@@ -36,7 +38,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_keywords" "Single Gate Buff LVC CMOS Open Drain"
 			(id 4)
@@ -44,7 +48,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_description" "Single Buffer Gate w/ Open Drain, Low-Voltage CMOS"
 			(id 5)
@@ -52,7 +58,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_fp_filters" "SOT* SG-*"
 			(id 6)
@@ -60,7 +68,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "74LVC1G07_copy_0_1"
 			(polyline
@@ -205,7 +215,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP255x.pdf"
 			(id 3)
@@ -213,7 +225,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 4)
@@ -221,7 +235,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "AP2553W6-7DICT-ND"
 			(id 5)
@@ -229,7 +245,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "AP2553W6_0_0"
 			(pin power_in line
@@ -383,7 +401,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -391,7 +411,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "AP64351_0_1"
 			(rectangle
@@ -599,7 +621,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -607,7 +631,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_fp_filters" "BarrelJack*"
 			(id 4)
@@ -615,7 +641,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "Barrel_Jack_0_1"
 			(rectangle
@@ -792,7 +820,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -800,7 +830,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Hirose"
 			(id 4)
@@ -4526,7 +4558,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -4534,7 +4568,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "EMC2301_0_0"
 			(pin open_collector line
@@ -4724,7 +4760,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -4732,7 +4770,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "FSUSB42MX_0_0"
 			(pin power_in line
@@ -4958,7 +4998,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://en.wikipedia.org/wiki/HDMI"
 			(id 3)
@@ -4966,7 +5008,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_keywords" "hdmi conn"
 			(id 4)
@@ -4974,7 +5018,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_description" "HDMI 1.4+ type A connector"
 			(id 5)
@@ -4982,7 +5028,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_fp_filters" "HDMI*A*"
 			(id 6)
@@ -4990,7 +5038,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "HDMI_A_1.4_0_0"
 			(polyline
@@ -5131,8 +5181,8 @@
 			)
 			(polyline
 				(pts
-					(xy 0 12.7) (xy 0 -12.7) (xy 3.81 -12.7) (xy 5.08 -10.16) (xy 7.62 -8.89) (xy 7.62 8.89)
-					(xy 5.08 10.16) (xy 3.81 12.7) (xy 0 12.7)
+					(xy 0 12.7) (xy 0 -12.7) (xy 3.81 -12.7) (xy 5.08 -10.16) (xy 7.62 -8.89) (xy 7.62 8.89) (xy 5.08 10.16)
+					(xy 3.81 12.7) (xy 0 12.7)
 				)
 				(stroke
 					(width 0.635)
@@ -5534,7 +5584,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5542,7 +5594,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "MagJack-A70-112-331N126_0_1"
 			(polyline
@@ -7530,7 +7584,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -7538,7 +7594,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "PCIe-x1_0_0"
 			(pin passive line
@@ -8232,7 +8290,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -8240,7 +8300,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "RT9742SNGV_0_1"
 			(rectangle
@@ -8343,7 +8405,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/tpd2eusb30a.pdf"
 			(id 3)
@@ -8351,7 +8415,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_keywords" "ESD protection USB 3.0"
 			(id 4)
@@ -8359,7 +8425,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_description" "4-Channel ESD Protection for Super-Speed USB 3.0 Interface, USON-10"
 			(id 5)
@@ -8367,7 +8435,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "ki_fp_filters" "USON*2.5x1.0mm*P0.5mm*"
 			(id 6)
@@ -8375,7 +8445,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(symbol "TPD4EUSB30_0_0"
 			(rectangle
@@ -8910,7 +8982,8 @@
 			)
 			(pin passive line
 				(at -12.7 2.54 0)
-				(length 5.08) hide
+				(length 5.08)
+				hide
 				(name "~"
 					(effects
 						(font
@@ -9000,7 +9073,8 @@
 			)
 			(pin passive line
 				(at 12.7 -2.54 180)
-				(length 5.08) hide
+				(length 5.08)
+				hide
 				(name "~"
 					(effects
 						(font
@@ -9018,7 +9092,8 @@
 			)
 			(pin passive line
 				(at 12.7 2.54 180)
-				(length 5.08) hide
+				(length 5.08)
+				hide
 				(name "~"
 					(effects
 						(font
@@ -9036,7 +9111,8 @@
 			)
 			(pin passive line
 				(at 0 -12.7 90)
-				(length 5.08) hide
+				(length 5.08)
+				hide
 				(name "GND"
 					(effects
 						(font
@@ -9054,7 +9130,8 @@
 			)
 			(pin passive line
 				(at -12.7 -2.54 0)
-				(length 5.08) hide
+				(length 5.08)
+				hide
 				(name "~"
 					(effects
 						(font
@@ -9103,7 +9180,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Datasheet" "Conn USB Type A RCP 4/4 POS Solder RA Thru-Hole 8 Terminal 2 Port Tray"
 			(id 3)
@@ -9112,7 +9191,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -9121,7 +9202,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Field5" "2751688"
 			(id 5)
@@ -9130,7 +9213,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Field6" "None"
 			(id 6)
@@ -9139,7 +9224,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Field7" "Molex"
 			(id 7)
@@ -9148,7 +9235,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(property "Field8" "None"
 			(id 8)
@@ -9157,7 +9246,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom) hide)
+				(justify left bottom)
+				hide
+			)
 		)
 		(symbol "USB_67298-4090_0_0"
 			(arc

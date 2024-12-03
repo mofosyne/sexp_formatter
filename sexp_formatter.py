@@ -1,189 +1,208 @@
 #!/usr/bin/env python3
-# KiCADv8 Style Prettify S-Expression Formatter (sexp formatter)
-# By Brian Khuu, 2024
-# This script reformats KiCad-like S-expressions to match a specific formatting style.
-# Note: This script modifies formatting only; it does not perform linting or validation.
-# Context: Compact element settings are added to support KiCAD-specific handling for readability, e.g., PCB_PLUGIN::formatPolyPts.
-
 import argparse
-from pathlib import Path
-from os import path
+import sys
 
-def prettify_sexpr(sexpr_str, compact_element_settings=[]):
+def prettify(source, compact_save):
     """
-    Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting.
+    Reformats KiCad-like S-expressions to match a specific formatting style.
 
     Args:
-        sexpr_str (str): The input S-expression string to be formatted.
-        compact_element_settings (list of dict): A list of dictionaries containing element-specific settings.
-            Each dictionary should contain:
-                - "prefix" (str): The prefix of elements that should be handled specially.
-                - "elements per line" (int): The number of elements per line in compact mode (optional).
-
+        source (str): The source S-expression string.
+        compact_save (bool): If True, enables compact mode formatting.
+    
     Returns:
-        str: The prettified S-expression string.
-
-    Example:
-        # Input S-expression string
-        sexpr = "(module (fp_text \"example\"))"
-
-        # Settings for compact element handling
-        compact_settings = [{"prefix": "pts", "elements per line": 4}]
-
-        # Prettify the S-expression
-        formatted_sexpr = prettify_sexpr(sexpr, compact_settings)
-        print(formatted_sexpr)
+        str: The formatted S-expression.
     """
+    # Configuration
+    quote_char = '"'
+    indent_char = '\t'
+    indent_size = 1
 
-    indent = 0
-    result = []
+    compact_list_column_limit = 99
+    compact_list_prefixes = {"pts"}
 
+    consecutive_token_wrap_threshold = 72
+    shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"}
+
+    # State tracking
+    formatted = []
+    list_depth = 0
+    column = 0
+    previous_non_space_output = ''
     in_quote = False
     escape_next_char = False
     singular_element = False
+    space_pending = False
+    scanning_for_prefix = False
+    prefix_token = ''
+    compact_list_mode = False
+    compact_list_indent = 0
+    shortform_mode = False
+    shortform_indent = 0
 
-    in_prefix_scan = False
-    prefix_keyword_buffer = ""
-    prefix_stack = []
+    for c in source:
 
-    element_count_stack = [0]
+        # Parse quoted strings
+        if c == quote_char or in_quote:
+            if space_pending:
+                formatted.append(' ')
+                column += 1
+                space_pending = False
 
-    # Iterate through the s-expression and apply formatting
-    for char in sexpr_str:
-
-        if char == '"' or in_quote:
-            # Handle quoted strings, preserving their internal formatting
-            result.append(char)
             if escape_next_char:
                 escape_next_char = False
-            elif char == '\\':
+            elif c == '\\':
                 escape_next_char = True
-            elif char == '"':
+            elif c == quote_char:
                 in_quote = not in_quote
 
-        elif char == '(':
-            # Check for compact element handling
-            in_compact_mode = False
-            elements_per_line = 0
+            formatted.append(c)
+            column += 1
+            previous_non_space_output = c
+            continue
 
-            if compact_element_settings:
-                parent_prefix = prefix_stack[-1] if (len(prefix_stack) > 0) else None
-                for setting in compact_element_settings:
-                    if setting.get("prefix") in prefix_stack:
-                        in_compact_mode = True
-                    if setting.get("prefix") == parent_prefix:
-                        elements_per_line = setting.get("elements per line", 0)
+        # Parse spaces and newlines
+        if c.isspace():
+            space_pending = True
 
-            if in_compact_mode:
-                if elements_per_line > 0:
-                    parent_element_count = element_count_stack[-1]
-                    if parent_element_count != 0 and ((parent_element_count % elements_per_line) == 0):
-                        result.append('\n' + '\t' * indent)
+            if scanning_for_prefix:
+                if prefix_token in compact_list_prefixes:
+                    compact_list_mode = True
+                    compact_list_indent = list_depth
+                elif compact_save and prefix_token in shortform_prefixes:
+                    shortform_mode = True
+                    shortform_indent = list_depth
 
-                result.append('(')
+                scanning_for_prefix = False
+            continue
 
+        # Parse opening parentheses
+        if c == '(':
+            space_pending = False
+            if compact_list_mode:
+                # In fixed listDepth, visually compact mode
+                if column < compact_list_column_limit and previous_non_space_output == ')' or compact_list_column_limit == 0:
+                    # Is a consecutive list and still within column limit (or column limit disabled)
+                    formatted.append(' ')
+                    column += 1
+                else:
+                    # List is either beyond column limit or not after another list move this list to the next line
+                    formatted.append('\n')
+                    formatted.append(indent_char * compact_list_indent * indent_size)
+                    column = compact_list_indent * indent_size
+            elif shortform_mode:
+                # In one liner mode
+                formatted.append(' ')
+                column += 1
             else:
-                # New line and add an opening parenthesis with the current indentation
-                result.append('\n' + '\t' * indent + '(')
+                # Start scanning for prefix for special list handling
+                scanning_for_prefix = True
+                prefix_token = ''
+                if list_depth > 0:
+                    # Print next line depth
+                    formatted.append('\n')
+                    formatted.append(indent_char * list_depth * indent_size)
+                    column = list_depth * indent_size
 
-            # Start Prefix Keyword Scanning
-            in_prefix_scan = True
-            prefix_keyword_buffer = ""
-
-            # Start tracking if element is singular
             singular_element = True
+            list_depth += 1
 
-            # Element Count Tracking
-            element_count_stack[-1] += 1
-            element_count_stack.append(0)
+            formatted.append('(')
+            column += 1
 
-            indent += 1
+            previous_non_space_output = '('
+            continue
 
-        elif char == ')':
-            # Handle closing elements
-            indent -= 1
-            element_count_stack.pop()
+        # Parse closing parentheses
+        if c == ')':
+            current_shortform_mode = shortform_mode
+            space_pending = False
+            scanning_for_prefix = False
+
+            if list_depth > 0:
+                list_depth -= 1
+
+            if compact_list_mode and list_depth < compact_list_indent:
+                compact_list_mode = False
+            if shortform_mode and list_depth < shortform_indent:
+                shortform_mode = False
 
             if singular_element:
-                result.append(')')
                 singular_element = False
-            else:
-                result.append('\n' + '\t' * indent + ')')
+            elif not current_shortform_mode:
+                formatted.append('\n')
+                formatted.append(indent_char * list_depth * indent_size)
+                column = list_depth * indent_size
 
-            if in_prefix_scan:
-                prefix_stack.append(prefix_keyword_buffer)
-                in_prefix_scan = False
+            formatted.append(')')
+            column += 1
 
-            prefix_stack.pop()
+            if list_depth <= 0:
+                formatted.append('\n')
+                column = 0
 
-        elif char.isspace():
-            # Handling spaces
-            if result and not result[-1].isspace() and result[-1] != '(':
-                result.append(' ')
+            previous_non_space_output = ')'
+            continue
 
-                if in_prefix_scan:
-                    # Capture Prefix Keyword
-                    prefix_stack.append(prefix_keyword_buffer)
+        # Parse characters
+        if c:
+            if previous_non_space_output == ')' and not shortform_mode:
+                # Is Bare token after a list that should be on next line
+                # Dev Note: In KiCAD this may indicate a flag bug
+                formatted.append('\n')
+                formatted.append(indent_char * list_depth * indent_size)
+                column = list_depth * indent_size
+                space_pending = False
+            elif previous_non_space_output.isspace() and not shortform_mode and not compact_list_mode and column >= consecutive_token_wrap_threshold:
+                # Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+                formatted.append('\n')
+                formatted.append(indent_char * list_depth * indent_size)
+                column = list_depth * indent_size
+                space_pending = False
+            elif space_pending and previous_non_space_output != '(':
+                formatted.append(' ')
+                column += 1
+                space_pending = False
 
-                    # Handle special compact elements
-                    if compact_element_settings:
-                            for setting in compact_element_settings:
-                                if setting.get("prefix") == prefix_keyword_buffer:
-                                    result.append('\n' + '\t' * indent)
-                                    break
+            # Add to prefix scanning buffer if scanning for special list handling detection
+            if scanning_for_prefix:
+                prefix_token += c
 
-                    in_prefix_scan = False
+            # Add character to list
+            formatted.append(c)
+            column += 1
+            previous_non_space_output = c
+            continue
 
-        else:
-            # Handle any other characters
-            result.append(char)
+    return ''.join(formatted)
 
-            # Capture Prefix Keyword
-            if in_prefix_scan:
-                prefix_keyword_buffer += char
 
-            # Dev Note: In my opinion, this shouldn't be here... but is here so that we can match KiCADv8's behavior when a ')' is following a non ')'
-            singular_element = True
+def main():
+    parser = argparse.ArgumentParser(
+        description="KiCad S-Expression Formatter"
+    )
+    parser.add_argument("src", help="Source file path ('-' for stdin)")
+    parser.add_argument("dst", nargs="?", default="-", help="Destination file path ('-' for stdout)")
+    parser.add_argument("-c", action="store_true", help="Use compact mode")
+    args = parser.parse_args()
 
-    # Join results list and strip out any spaces in the beginning and end of the document
-    formatted_sexp = ''.join(result).strip()
+    # Read input
+    if args.src == "-":
+        source = sys.stdin.read()
+    else:
+        with open(args.src, 'r', encoding='utf-8') as f:
+            source = f.read()
 
-    # Strip out any extra space on the right hand side of each line
-    formatted_sexp = '\n'.join(line.rstrip() for line in formatted_sexp.split('\n')) + '\n'
+    # Process formatting
+    result = prettify(source, args.c)
 
-    # Formatting of s-expression completed
-    return formatted_sexp
+    # Write output
+    if args.dst == "-":
+        sys.stdout.write(result)
+    else:
+        with open(args.dst, 'w', encoding='utf-8') as f:
+            f.write(result)
 
-# Argument Parsing
-parser = argparse.ArgumentParser(description="Prettify S-expression files")
-parser.add_argument("src", type=Path, help="Source file path")
-parser.add_argument("--dst", type=Path, help="Destination file path")
-args = parser.parse_args()
 
-src_file = args.src.resolve()
-dst_file = args.dst.resolve() if args.dst else None
-
-# Open source file
-with open(src_file, "r") as file:
-    sexp_data = file.read()
-
-# Compact element settings for special handling
-compact_element_settings = []
-_, file_extension = path.splitext(src_file)
-match file_extension:
-    case ".kicad_sym":
-        compact_element_settings.append({"prefix":"pts", "elements per line": 6})
-    case ".kicad_sch":
-        compact_element_settings.append({"prefix":"pts", "elements per line": 6})
-    case ".kicad_pcb":
-        compact_element_settings.append({"prefix":"pts", "elements per line": 4})
-
-# Format the S-expression
-pretty_sexpr = prettify_sexpr(sexp_data, compact_element_settings)
-
-# Save or output the result
-if dst_file:
-    with open(dst_file, "w") as file:
-        file.write(pretty_sexpr)
-else:
-    print(pretty_sexpr)
+if __name__ == "__main__":
+    main()

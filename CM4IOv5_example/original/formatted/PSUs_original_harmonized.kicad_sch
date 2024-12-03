@@ -36,7 +36,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" ""
 				(id 3)
@@ -44,7 +46,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "AP64351_0_1"
 				(rectangle
@@ -252,7 +256,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" ""
 				(id 3)
@@ -260,7 +266,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "BarrelJack*"
 				(id 4)
@@ -268,7 +276,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "Barrel_Jack_0_1"
 				(rectangle
@@ -421,7 +431,9 @@
 		(symbol "Connector:TestPoint"
 			(pin_numbers hide)
 			(pin_names
-				(offset 0.762) hide)
+				(offset 0.762)
+				hide
+			)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "TP"
@@ -448,7 +460,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -456,7 +470,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "test point tp"
 				(id 4)
@@ -464,7 +480,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "test point"
 				(id 5)
@@ -472,7 +490,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "Pin* Test*"
 				(id 6)
@@ -480,7 +500,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "TestPoint_0_1"
 				(circle
@@ -545,7 +567,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -553,7 +577,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "connector"
 				(id 4)
@@ -561,7 +587,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
 				(id 5)
@@ -569,7 +597,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "Connector*:*_1x??_*"
 				(id 6)
@@ -577,7 +607,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "Conn_01x04_1_1"
 				(rectangle
@@ -747,7 +779,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -755,7 +789,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "cap capacitor"
 				(id 4)
@@ -763,7 +799,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Unpolarized capacitor"
 				(id 5)
@@ -771,7 +809,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "C_*"
 				(id 6)
@@ -779,7 +819,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "C_0_1"
 				(polyline
@@ -881,7 +923,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -889,7 +933,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "cap capacitor"
 				(id 4)
@@ -897,7 +943,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Polarized capacitor"
 				(id 5)
@@ -905,7 +953,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "CP_*"
 				(id 6)
@@ -913,7 +963,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "CP_0_1"
 				(rectangle
@@ -1037,7 +1089,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -1045,7 +1099,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "R res resistor"
 				(id 4)
@@ -1053,7 +1109,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Resistor"
 				(id 5)
@@ -1061,7 +1119,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "R_*"
 				(id 6)
@@ -1069,7 +1129,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "R_0_1"
 				(rectangle
@@ -1153,7 +1215,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf"
 				(id 3)
@@ -1161,7 +1225,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "zener diode"
 				(id 4)
@@ -1169,7 +1235,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "300mW Zener Diode, SOT-23"
 				(id 5)
@@ -1177,7 +1245,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "D*SOT?23*ANK*"
 				(id 6)
@@ -1185,7 +1255,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "BZX84Cxx_0_1"
 				(polyline
@@ -1296,8 +1368,12 @@
 				(at 5.08 -1.905 0)
 				(effects
 					(font
-						(size 1.27 1.27) italic)
-					(justify left) hide)
+						(size 1.27 1.27)
+						italic
+					)
+					(justify left)
+					hide
+				)
 			)
 			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/DMP3013SFV.pdf"
 				(id 3)
@@ -1306,7 +1382,9 @@
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left) hide)
+					(justify left)
+					hide
+				)
 			)
 			(property "ki_keywords" "P-Channel MOSFET"
 				(id 4)
@@ -1314,7 +1392,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "-12A Id, -30V Vds, P-Channel Power MOSFET, 9.5mOhm Ron, 33.7nC Qg (typ), PowerDI3333-8"
 				(id 5)
@@ -1322,7 +1402,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_fp_filters" "Diodes*PowerDI3333*"
 				(id 6)
@@ -1330,7 +1412,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "DMP3013SFV_0_1"
 				(polyline
@@ -1534,7 +1618,8 @@
 				)
 				(pin passive line
 					(at 2.54 -5.08 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "S"
 						(effects
 							(font
@@ -1552,7 +1637,8 @@
 				)
 				(pin passive line
 					(at 2.54 -5.08 90)
-					(length 2.54) hide
+					(length 2.54)
+					hide
 					(name "S"
 						(effects
 							(font
@@ -1619,7 +1705,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Value" "GND"
 				(id 1)
@@ -1636,7 +1724,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" ""
 				(id 3)
@@ -1644,7 +1734,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "power-flag"
 				(id 4)
@@ -1652,7 +1744,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Power symbol creates a global label with name \"GND\" , ground"
 				(id 5)
@@ -1660,7 +1754,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "GND_0_1"
 				(polyline
@@ -1680,7 +1776,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					hide
 					(name "GND"
 						(effects
 							(font
@@ -1729,7 +1826,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "Datasheet" "~"
 				(id 3)
@@ -1737,7 +1836,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_keywords" "simulation"
 				(id 4)
@@ -1745,7 +1846,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(property "ki_description" "Inductor symbol for simulation only"
 				(id 5)
@@ -1753,7 +1856,9 @@
 				(effects
 					(font
 						(size 1.27 1.27)
-					) hide)
+					)
+					hide
+				)
 			)
 			(symbol "INDUCTOR_0_1"
 				(arc
@@ -3354,7 +3459,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -3366,7 +3473,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -3374,7 +3483,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid aa1d3239-81d4-4212-8a56-e966a88e3268)
@@ -3393,7 +3504,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -3405,7 +3518,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -3413,7 +3528,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 1ee3dc48-8cba-4d55-baee-99d61bca8a95)
@@ -3452,7 +3569,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR71A106KA73-01.pdf"
 			(id 3)
@@ -3460,7 +3579,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-14381-1-ND"
 			(id 4)
@@ -3468,7 +3589,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -3476,7 +3599,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BR71A106KA73L"
 			(id 6)
@@ -3484,7 +3609,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -3492,7 +3619,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% 10V Ceramic Capacitor X7R 0805 (2012 Metric)"
 			(id 8)
@@ -3500,7 +3629,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "111893011"
 			(id 9)
@@ -3508,7 +3639,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid faac20b9-b485-48a5-b3cc-a28f27addd22)
@@ -3550,7 +3683,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR71A106KA73-01.pdf"
 			(id 3)
@@ -3558,7 +3693,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-14381-1-ND"
 			(id 4)
@@ -3566,7 +3703,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -3574,7 +3713,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BR71A106KA73L"
 			(id 6)
@@ -3582,7 +3723,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -3590,7 +3733,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% 10V Ceramic Capacitor X7R 0805 (2012 Metric)"
 			(id 8)
@@ -3598,7 +3743,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "111893011"
 			(id 9)
@@ -3606,7 +3753,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 296e8eb3-22ac-4c85-9e99-1eac29f38629)
@@ -3648,7 +3797,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR71A106KA73-01.pdf"
 			(id 3)
@@ -3656,7 +3807,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-14381-1-ND"
 			(id 4)
@@ -3664,7 +3817,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -3672,7 +3827,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BR71A106KA73L"
 			(id 6)
@@ -3680,7 +3837,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -3688,7 +3847,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% 10V Ceramic Capacitor X7R 0805 (2012 Metric)"
 			(id 8)
@@ -3696,7 +3857,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "111893011"
 			(id 9)
@@ -3704,7 +3867,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid fb039884-3e73-4397-80ae-d0e816d49104)
@@ -3746,7 +3911,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM21BR71A106KA73-01.pdf"
 			(id 3)
@@ -3754,7 +3921,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-14381-1-ND"
 			(id 4)
@@ -3762,7 +3931,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -3770,7 +3941,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BR71A106KA73L"
 			(id 6)
@@ -3778,7 +3951,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -3786,7 +3961,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% 10V Ceramic Capacitor X7R 0805 (2012 Metric)"
 			(id 8)
@@ -3794,7 +3971,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "111893011"
 			(id 9)
@@ -3802,7 +3981,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 069233a4-10e9-4ab0-93ae-dd50bb113bf6)
@@ -3844,7 +4025,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://psearch.en.murata.com/capacitor/product/GRM155R62A104KE14%23.pdf"
 			(id 3)
@@ -3852,7 +4035,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -3860,7 +4045,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2611907"
 			(id 5)
@@ -3868,7 +4055,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM155R62A104KE14D"
 			(id 6)
@@ -3876,7 +4065,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -3884,7 +4075,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	0.1uF 10% 100V Ceramic Capacitor X5R 0402 (1005 Metric)"
 			(id 8)
@@ -3892,7 +4085,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 495b9f3e-72d4-4443-8d1b-2b95612acb36)
@@ -3914,7 +4109,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -3926,7 +4123,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -3934,7 +4133,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid b7676e80-9730-4696-8871-001d34b8b393)
@@ -3961,7 +4162,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.te.com/usa-en/product-171826-4.html"
 			(id 3)
@@ -3969,7 +4172,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -3977,7 +4182,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "	1056115"
 			(id 5)
@@ -3985,7 +4192,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "AMP171826-4"
 			(id 6)
@@ -3993,7 +4202,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "AMP-TE"
 			(id 7)
@@ -4001,7 +4212,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Wire-To-Board Connector, Right Angle, 2.54 mm, 4 Contacts, Header, AMP EI Series, Through Hole"
 			(id 8)
@@ -4009,7 +4222,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 40f359aa-e8bc-4d4c-ab4e-c4039d94c199)
@@ -4037,7 +4252,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -4049,7 +4266,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -4057,7 +4276,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 336d36fa-a7d0-4e31-b97e-7e2f57518017)
@@ -4084,7 +4305,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.toby.co.uk/uploads/publications/842.pdf"
 			(id 3)
@@ -4092,7 +4315,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Toby"
 			(id 4)
@@ -4100,7 +4325,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "DC-001-A-2.1mm-R"
 			(id 5)
@@ -4108,7 +4335,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "DC Power Connectors PCB 2.1MM"
 			(id 6)
@@ -4116,7 +4345,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "DC-001-A-2.1mm-R"
 			(id 7)
@@ -4124,7 +4355,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Valcon"
 			(id 8)
@@ -4132,7 +4365,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid dc293504-8b38-48c4-933a-87973ac3dddb)
@@ -4177,7 +4412,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf"
 			(id 3)
@@ -4185,7 +4422,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 4)
@@ -4193,7 +4432,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "	MMBZ5242BLT3GOSCT-ND"
 			(id 5)
@@ -4201,7 +4442,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "MMBZ5242BLT3G"
 			(id 6)
@@ -4209,7 +4452,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Onsemi"
 			(id 7)
@@ -4217,7 +4462,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	Zener Diode 12V 225mW 5% Surface Mount SOT-23-3 (TO-236)"
 			(id 8)
@@ -4225,7 +4472,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 2eb5c7ae-ece1-4fed-b4e9-592cfba8365c)
@@ -4267,7 +4516,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/mcr-e.pdf"
 			(id 3)
@@ -4275,7 +4526,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4283,7 +4536,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "9239367"
 			(id 5)
@@ -4291,7 +4546,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Rohm"
 			(id 6)
@@ -4299,7 +4556,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "MCR01MZPF1202"
 			(id 7)
@@ -4307,7 +4566,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Resistor 12K M1005 1% 63mW"
 			(id 8)
@@ -4315,7 +4576,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 28402017-1373-4e9f-83bc-1dd8451e4b54)
@@ -4357,7 +4620,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C104KA88-01.pdf"
 			(id 3)
@@ -4365,7 +4630,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4373,7 +4640,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2611911"
 			(id 5)
@@ -4381,7 +4650,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RM EMK105 B7104KV-F"
 			(id 6)
@@ -4389,7 +4660,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "TAIYO YUDEN EUROPE GMBH"
 			(id 7)
@@ -4397,7 +4670,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	0.1uF 10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
 			(id 8)
@@ -4405,7 +4680,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "110091611"
 			(id 9)
@@ -4413,7 +4690,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 511ca6ca-1c86-41e8-b3f2-11a64d5df8db)
@@ -4435,7 +4714,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -4447,7 +4728,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -4455,7 +4738,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 901bc3da-57dd-44f8-994e-4f28bb5e3f30)
@@ -4494,7 +4779,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C104KA88-01.pdf"
 			(id 3)
@@ -4502,7 +4789,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4510,7 +4799,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2611911"
 			(id 5)
@@ -4518,7 +4809,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RM EMK105 B7104KV-F"
 			(id 6)
@@ -4526,7 +4819,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "TAIYO YUDEN EUROPE GMBH"
 			(id 7)
@@ -4534,7 +4829,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	0.1uF 10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
 			(id 8)
@@ -4542,7 +4839,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "110091611"
 			(id 9)
@@ -4550,7 +4849,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid ffcbff8e-ab26-41db-bf1a-b4c132bdb8a6)
@@ -4592,7 +4893,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/mcr-e.pdf"
 			(id 3)
@@ -4600,7 +4903,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4608,7 +4913,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "9238999"
 			(id 5)
@@ -4616,7 +4923,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Yageo"
 			(id 6)
@@ -4624,7 +4933,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RC0402FR-0710RL"
 			(id 7)
@@ -4632,7 +4943,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "URES00256"
 			(id 8)
@@ -4640,7 +4953,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Resistor 10R M1005 1% 63mW"
 			(id 9)
@@ -4648,7 +4963,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid dab29796-d6b3-4d2d-805f-0b5d2109d9de)
@@ -4690,7 +5007,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "http://www.farnell.com/datasheets/2048267.pdf?_ga=2.222777691.1738794919.1588350964-1787849031.1568210898&_gac=1.250356018.1588350964.EAIaIQobChMIgrHHs4yT6QIVxevtCh39TA_nEAAYASAAEgK8PfD_BwE"
 			(id 3)
@@ -4698,7 +5017,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4706,7 +5027,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2666374"
 			(id 5)
@@ -4714,7 +5037,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM1555C1H221JA01D"
 			(id 6)
@@ -4722,7 +5047,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -4730,7 +5057,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "220 pF, 50 V, 0402 [1005 Metric], ± 5%, C0G / NP0/CH, GCM Series"
 			(id 8)
@@ -4738,7 +5067,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 6def0e3c-7a9e-4825-984c-dcd13175ed64)
@@ -4780,7 +5111,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/mcr-e.pdf"
 			(id 3)
@@ -4788,7 +5121,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4796,7 +5131,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "9239367"
 			(id 5)
@@ -4804,7 +5141,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Rohm"
 			(id 6)
@@ -4812,7 +5151,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "MCR01MZPF1202"
 			(id 7)
@@ -4820,7 +5161,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Resistor 12K M1005 1% 63mW"
 			(id 8)
@@ -4828,7 +5171,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid e7165906-145f-4c8c-8c9a-48e9112ef2d2)
@@ -4858,7 +5203,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.bourns.com/docs/Product-Datasheets/SRN6045TA.pdf"
 			(id 3)
@@ -4866,7 +5213,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -4874,7 +5223,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2616889"
 			(id 5)
@@ -4882,7 +5233,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "SRN6045TA-3R3Y"
 			(id 6)
@@ -4890,7 +5243,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Bourns"
 			(id 7)
@@ -4898,7 +5253,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "3.3µH Semi-Shielded Wirewound Inductor 7.8A 21mOhm Nonstandard"
 			(id 8)
@@ -4906,7 +5263,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 15f78139-6d94-44b2-bfa9-7b1fafdf24a2)
@@ -4948,7 +5307,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "http://www.farnell.com/datasheets/2734135.pdf?_ga=2.259347658.1738794919.1588350964-1787849031.1568210898&_gac=1.15394434.1588350964.EAIaIQobChMIgrHHs4yT6QIVxevtCh39TA_nEAAYASAAEgK8PfD_BwE"
 			(id 3)
@@ -4956,7 +5317,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 4)
@@ -4964,7 +5327,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-16429-1-ND"
 			(id 5)
@@ -4972,7 +5337,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GCM155R71H122KA37D"
 			(id 6)
@@ -4980,7 +5347,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -4988,7 +5357,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "1200pF 10% 10V Ceramic Capacitor X5R 0402 (1005 Metric)"
 			(id 8)
@@ -4996,7 +5367,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 3edb16a2-55e0-491b-bd50-9c4fc4f45ac1)
@@ -5038,7 +5411,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5046,7 +5421,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" ""
 			(id 4)
@@ -5054,7 +5431,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" ""
 			(id 5)
@@ -5062,7 +5441,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" ""
 			(id 6)
@@ -5070,7 +5451,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" ""
 			(id 7)
@@ -5078,7 +5461,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" ""
 			(id 8)
@@ -5086,7 +5471,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 854c8829-725c-43a9-9fc5-c324d25b9b34)
@@ -5116,7 +5503,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP64501.pdf"
 			(id 3)
@@ -5124,7 +5513,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 4)
@@ -5132,7 +5523,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "31-AP64501SP-13CT-ND"
 			(id 5)
@@ -5140,7 +5533,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "AP64501SP-13"
 			(id 6)
@@ -5148,7 +5543,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Diodes"
 			(id 7)
@@ -5156,7 +5553,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Buck Switching Regulator IC Positive Adjustable 0.8V 1 Output 5A 8-SOIC (0.154\", 3.90mm Width) Exposed Pad"
 			(id 8)
@@ -5164,7 +5563,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 17231e44-85ac-4aa3-a964-cf2197ceeee6)
@@ -5227,7 +5628,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R71C104KA88-01.pdf"
 			(id 3)
@@ -5235,7 +5638,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -5243,7 +5648,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2611911"
 			(id 5)
@@ -5251,7 +5658,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RM EMK105 B7104KV-F"
 			(id 6)
@@ -5259,7 +5668,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "TAIYO YUDEN EUROPE GMBH"
 			(id 7)
@@ -5267,7 +5678,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	0.1uF 10% 16V Ceramic Capacitor X7R 0402 (1005 Metric)"
 			(id 8)
@@ -5275,7 +5688,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "110091611"
 			(id 9)
@@ -5283,7 +5698,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 2eae7d9d-0d7d-4755-80a4-ff458c263895)
@@ -5305,7 +5722,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -5317,7 +5736,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5325,7 +5746,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 68c6af70-3963-40f7-a571-68a1083177e1)
@@ -5364,7 +5787,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/mcr-e.pdf"
 			(id 3)
@@ -5372,7 +5797,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -5380,7 +5807,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "9239278"
 			(id 5)
@@ -5388,7 +5817,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RK73G1ETQTP2201D         "
 			(id 6)
@@ -5396,7 +5827,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "KOA EUROPE GMBH"
 			(id 7)
@@ -5404,7 +5837,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Resistor 2.2K M1005 1% 63mW"
 			(id 8)
@@ -5412,7 +5847,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" "120889581"
 			(id 9)
@@ -5420,7 +5857,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid cfed5c4e-149f-45c5-874a-d4efe242083a)
@@ -5462,7 +5901,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://fscdn.rohm.com/en/products/databook/datasheet/passive/resistor/chip_resistor/mcr-e.pdf"
 			(id 3)
@@ -5470,7 +5911,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -5478,7 +5921,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "2331485"
 			(id 5)
@@ -5486,7 +5931,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "KOA EUROPE GMBH"
 			(id 6)
@@ -5494,7 +5941,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "RK73H1ETTP2002F"
 			(id 7)
@@ -5502,7 +5951,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Resistor 20K M1005 1% 63mW"
 			(id 8)
@@ -5510,7 +5961,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 28c99006-db10-4e32-8623-230b8bc5f422)
@@ -5532,7 +5985,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -5544,7 +5999,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5552,7 +6009,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid a1829870-35f9-42a4-85e5-1fc46eb765ad)
@@ -5591,7 +6050,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5599,7 +6060,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "nf"
 			(id 4)
@@ -5607,7 +6070,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "nf"
 			(id 5)
@@ -5615,7 +6080,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "nf"
 			(id 6)
@@ -5623,7 +6090,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "nf"
 			(id 7)
@@ -5631,7 +6100,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 6fcc8cde-7812-4760-94c7-e0a6bb74b8cd)
@@ -5670,7 +6141,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5678,7 +6151,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "nf"
 			(id 4)
@@ -5686,7 +6161,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "nf"
 			(id 5)
@@ -5694,7 +6171,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "nf"
 			(id 6)
@@ -5702,7 +6181,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "nf"
 			(id 7)
@@ -5710,7 +6191,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid c99db9f3-3b5c-42fb-950a-bd5c7323cae5)
@@ -5729,7 +6212,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -5741,7 +6226,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5749,7 +6236,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 061a7cdc-b409-4101-babe-bad3b941f399)
@@ -5775,8 +6264,12 @@
 			(at 104.013 43.18 0)
 			(effects
 				(font
-					(size 1.27 1.27) italic)
-				(justify left) hide)
+					(size 1.27 1.27)
+					italic
+				)
+				(justify left)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/DMP3013SFV.pdf"
 			(id 3)
@@ -5785,7 +6278,9 @@
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left) hide)
+				(justify left)
+				hide
+			)
 		)
 		(property "Field4" "Farnell"
 			(id 4)
@@ -5793,7 +6288,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "3405192"
 			(id 5)
@@ -5801,7 +6298,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "DMP3013SFV-7"
 			(id 6)
@@ -5809,7 +6308,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Diodes"
 			(id 7)
@@ -5817,7 +6318,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "DMP3013SFV-7 -  Power MOSFET, P Channel, 30 V, 12 A, 0.008 ohm, PowerDI3333, Surface Mount"
 			(id 8)
@@ -5825,7 +6328,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid f2be02da-9018-4a96-8543-13b5296b0ced)
@@ -5856,7 +6361,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Value" "GND"
 			(id 1)
@@ -5868,7 +6375,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -5876,7 +6385,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid be98d2a2-7d36-4a73-94b3-c73f117673cd)
@@ -5915,7 +6426,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -5923,7 +6436,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -5931,7 +6446,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -5939,7 +6456,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -5947,7 +6466,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -5955,7 +6476,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -5963,7 +6486,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -5971,7 +6496,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 149c5d61-baf1-4212-9ad9-405f30b44c95)
@@ -6013,7 +6540,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6021,7 +6550,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6029,7 +6560,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6037,7 +6570,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6045,7 +6580,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6053,7 +6590,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6061,7 +6600,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6069,7 +6610,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 53dd890e-5aba-493f-87ec-8a34bea86d70)
@@ -6111,7 +6654,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6119,7 +6664,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6127,7 +6674,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6135,7 +6684,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6143,7 +6694,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6151,7 +6704,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6159,7 +6714,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6167,7 +6724,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid a5c104d3-89c9-4abc-a64e-c0025d27215c)
@@ -6209,7 +6768,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6217,7 +6778,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6225,7 +6788,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6233,7 +6798,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6241,7 +6808,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6249,7 +6818,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6257,7 +6828,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6265,7 +6838,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 626b5ec8-8450-48aa-9676-e66ed01335de)
@@ -6307,7 +6882,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6315,7 +6892,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6323,7 +6902,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6331,7 +6912,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6339,7 +6922,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6347,7 +6932,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6355,7 +6942,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6363,7 +6952,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 2e687927-3955-4336-8c63-93be156bb630)
@@ -6405,7 +6996,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6413,7 +7006,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6421,7 +7016,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6429,7 +7026,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6437,7 +7036,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6445,7 +7046,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6453,7 +7056,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6461,7 +7066,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid c91abc1a-9225-47cc-9d9c-5d96a0e6c5bb)
@@ -6503,7 +7110,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "https://www.murata.com/en-global/products/productdetail.aspx?partno=GRM21BC8YA106ME11%23"
 			(id 3)
@@ -6511,7 +7120,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "490-10505-1-ND"
 			(id 4)
@@ -6519,7 +7130,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Digikey"
 			(id 5)
@@ -6527,7 +7140,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "GRM21BC8YA106KE11L "
 			(id 6)
@@ -6535,7 +7150,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "Murata"
 			(id 7)
@@ -6543,7 +7160,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "	10uF 10% or 20% 35V Ceramic Capacitor X6S 0805 (2012 Metric)"
 			(id 8)
@@ -6551,7 +7170,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field8" ""
 			(id 9)
@@ -6559,7 +7180,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 3d25ea00-3597-4b84-9896-d06c9254cef7)
@@ -6601,7 +7224,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" "~"
 			(id 3)
@@ -6609,7 +7234,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "Mouser"
 			(id 4)
@@ -6617,7 +7244,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "667-EEF-CX0J101R"
 			(id 5)
@@ -6625,7 +7254,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Part Description" "Capacitor, SP-Cap, 100u, 6.3V, 15mR ESR"
 			(id 6)
@@ -6633,7 +7264,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 6551c37f-9afc-4b25-9b2a-c1739b8edf17)
@@ -6675,7 +7308,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Datasheet" ""
 			(id 3)
@@ -6683,7 +7318,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field4" "nf"
 			(id 4)
@@ -6691,7 +7328,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field5" "nf"
 			(id 5)
@@ -6699,7 +7338,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field6" "nf"
 			(id 6)
@@ -6707,7 +7348,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(property "Field7" "nf"
 			(id 7)
@@ -6715,7 +7358,9 @@
 			(effects
 				(font
 					(size 1.27 1.27)
-				) hide)
+				)
+				hide
+			)
 		)
 		(pin "1"
 			(uuid 4bcce46c-d9ae-4ab2-a9c8-5cc8f50b0e43)

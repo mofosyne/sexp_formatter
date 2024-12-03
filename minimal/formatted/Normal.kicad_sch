@@ -1,1438 +1,1425 @@
-
-(kicad_sch 
-	(version 20231120) 
-	(generator "eeschema") 
-	(generator_version "8.0") 
-	(uuid "1c53a83b-717f-489e-b71a-5adcf9f23cea") 
-	(paper "A4") 
-	(lib_symbols 
-		(symbol "Amplifier_Buffer:BUF602xDBV" 
-			(pin_names 
-				(offset 0.127) 
-			) 
-			(exclude_from_sim no) 
-			(in_bom yes) 
-			(on_board yes) 
-			(property "Reference" "U" 
-				(at 6.35 2.54 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-				) 
-			) 
-			(property "Value" "BUF602xDBV" 
-				(at 7.62 -2.54 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-				) 
-			) 
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" 
-				(at 0 -7.62 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/buf602.pdf" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Description" "High-Speed, 1000 MHz, Closed-Loop Buffer, SOT23-5" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_keywords" "buffer amplifier" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_fp_filters" "SOT?23*" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(symbol "BUF602xDBV_0_1" 
-				(polyline 
-					(pts 
-						(xy 5.08 0) 
-						(xy -5.08 5.08) 
-						(xy -5.08 -5.08) 
-						(xy 5.08 0) 
-					) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type background) 
-					) 
-				) 
-			) 
-			(symbol "BUF602xDBV_1_1" 
-				(pin output line 
-					(at 7.62 0 180) 
-					(length 2.54) 
-					(name "~" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin power_in line 
-					(at -2.54 -7.62 90) 
-					(length 3.81) 
-					(name "V-" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin output line 
-					(at 0 -7.62 90) 
-					(length 5.08) 
-					(name "VREF" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "3" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin input line 
-					(at -7.62 0 0) 
-					(length 2.54) 
-					(name "IN" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "4" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin power_in line 
-					(at -2.54 7.62 270) 
-					(length 3.81) 
-					(name "V+" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "5" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-			) 
-		) 
-		(symbol "Amplifier_Current:AD8218xCP" 
-			(exclude_from_sim no) 
-			(in_bom yes) 
-			(on_board yes) 
-			(property "Reference" "U" 
-				(at -7.62 10.795 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(justify right) 
-				) 
-			) 
-			(property "Value" "AD8218xCP" 
-				(at -7.62 8.89 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(justify right) 
-				) 
-			) 
-			(property "Footprint" "Package_CSP:LFCSP-8-1EP_3x2mm_P0.5mm_EP1.6x1.65mm" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8218.pdf" 
-				(at 16.51 -17.78 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Description" "80V Zero Drift, Bidirectional, Current Shunt Monitor, 20V/V gain, bandwidth 450kHz, Vcc=5V, LFCSP-8" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_keywords" "highside HS current sense amplifier linear buffered" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_fp_filters" "LFCSP*1EP*3x2mm*P0.5mm*" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(symbol "AD8218xCP_0_1" 
-				(rectangle 
-					(start -7.62 7.62) 
-					(end 7.62 -7.62) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type background) 
-					) 
-				) 
-			) 
-			(symbol "AD8218xCP_1_1" 
-				(pin input line 
-					(at -5.08 10.16 270) 
-					(length 2.54) 
-					(name "+IN" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at -10.16 -5.08 0) 
-					(length 2.54) 
-					(name "Vs" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin input line 
-					(at -10.16 0 0) 
-					(length 2.54) 
-					(name "ENB" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "3" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin power_in line 
-					(at 0 -10.16 90) 
-					(length 2.54) 
-					(name "GND" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "4" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin output line 
-					(at 10.16 0 180) 
-					(length 2.54) 
-					(name "OUT" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "5" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin no_connect line 
-					(at 2.54 -7.62 90) 
-					(length 2.54) hide 
-					(name "NC" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "6" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin input line 
-					(at -10.16 -2.54 0) 
-					(length 2.54) 
-					(name "REF" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "7" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin input line 
-					(at 5.08 10.16 270) 
-					(length 2.54) 
-					(name "-IN" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "8" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at 0 -10.16 90) 
-					(length 2.54) hide 
-					(name "GND" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "9" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-			) 
-		) 
-		(symbol "Connector_Generic_MountingPin:Conn_01x02_MountingPin" 
-			(pin_names 
-				(offset 1.016) hide
-			) 
-			(exclude_from_sim no) 
-			(in_bom yes) 
-			(on_board yes) 
-			(property "Reference" "J" 
-				(at 0 2.54 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-				) 
-			) 
-			(property "Value" "Conn_01x02_MountingPin" 
-				(at 1.27 -5.08 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(justify left) 
-				) 
-			) 
-			(property "Footprint" "" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Datasheet" "~" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Description" "Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_keywords" "connector" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_fp_filters" "Connector*:*_1x??-1MP*" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(symbol "Conn_01x02_MountingPin_1_1" 
-				(rectangle 
-					(start -1.27 -2.413) 
-					(end 0 -2.667) 
-					(stroke 
-						(width 0.1524) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(rectangle 
-					(start -1.27 0.127) 
-					(end 0 -0.127) 
-					(stroke 
-						(width 0.1524) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(rectangle 
-					(start -1.27 1.27) 
-					(end 1.27 -3.81) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type background) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy -1.016 -4.572) 
-						(xy 1.016 -4.572) 
-					) 
-					(stroke 
-						(width 0.1524) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(text "Mounting" 
-					(at 0 -4.191 0) 
-					(effects 
-						(font 
-							(size 0.381 0.381) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at -5.08 0 0) 
-					(length 3.81) 
-					(name "Pin_1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at -5.08 -2.54 0) 
-					(length 3.81) 
-					(name "Pin_2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at 0 -7.62 90) 
-					(length 3.048) 
-					(name "MountPin" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "MP" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-			) 
-		) 
-		(symbol "Memory_UniqueID:DS2401Z" 
-			(exclude_from_sim no) 
-			(in_bom yes) 
-			(on_board yes) 
-			(property "Reference" "U" 
-				(at -3.81 8.89 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-				) 
-			) 
-			(property "Value" "DS2401Z" 
-				(at 5.08 8.89 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-				) 
-			) 
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-223" 
-				(at 15.24 -8.89 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Datasheet" "http://pdfserv.maximintegrated.com/en/ds/DS2401.pdf" 
-				(at -3.81 6.35 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Description" "Silicon Serial Number, SOT-223" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_keywords" "OneWire 1-Wire 1Wire Maxim Dallas ID" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_fp_filters" "SOT?223*" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(symbol "DS2401Z_0_1" 
-				(rectangle 
-					(start 5.08 -7.62) 
-					(end -5.08 7.62) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type background) 
-					) 
-				) 
-			) 
-			(symbol "DS2401Z_1_1" 
-				(pin bidirectional line 
-					(at 7.62 0 180) 
-					(length 2.54) 
-					(name "DQ" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin power_in line 
-					(at 0 -10.16 90) 
-					(length 2.54) 
-					(name "GND" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin no_connect line 
-					(at -5.08 0 0) 
-					(length 2.54) hide 
-					(name "NC" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "3" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at 0 -10.16 90) 
-					(length 2.54) hide 
-					(name "GND" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "4" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-			) 
-		) 
-		(symbol "Reference_Current:LM234Z-3" 
-			(exclude_from_sim no) 
-			(in_bom yes) 
-			(on_board yes) 
-			(property "Reference" "U" 
-				(at 0.635 6.35 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(justify left) 
-				) 
-			) 
-			(property "Value" "LM234Z-3" 
-				(at 0.635 4.445 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(justify left) 
-				) 
-			) 
-			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline" 
-				(at 0.635 -4.445 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-						(italic yes) 
-					) 
-					(justify left) 
-					(hide yes) 
-				) 
-			) 
-			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm134.pdf" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-						(italic yes) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "Description" "1μA to 10mA 3-Terminal Adjustable Current Source, TO-92" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_keywords" "Adjustable Current Source 10mA" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(property "ki_fp_filters" "TO*92*Inline*" 
-				(at 0 0 0) 
-				(effects 
-					(font 
-						(size 1.27 1.27) 
-					) 
-					(hide yes) 
-				) 
-			) 
-			(symbol "LM234Z-3_0_1" 
-				(rectangle 
-					(start -2.54 3.175) 
-					(end 2.54 -3.175) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type background) 
-					) 
-				) 
-				(circle 
-					(center 0 -0.635) 
-					(radius 1.27) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy -1.143 -2.413) 
-						(xy -0.381 -2.413) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy -1.016 2.413) 
-						(xy -0.254 2.413) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy -0.635 2.794) 
-						(xy -0.635 2.032) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 0 -1.905) 
-						(xy 0 -5.08) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 0 1.397) 
-						(xy 0 -1.397) 
-					) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 0 5.08) 
-						(xy 0 1.905) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 2.54 0) 
-						(xy 1.27 0) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 0 -1.397) 
-						(xy -0.254 -0.889) 
-						(xy 0.254 -0.889) 
-						(xy 0 -1.397) 
-					) 
-					(stroke 
-						(width 0.254) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(polyline 
-					(pts 
-						(xy 1.27 0) 
-						(xy 2.159 0.254) 
-						(xy 2.159 -0.254) 
-						(xy 1.27 0) 
-					) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-				(circle 
-					(center 0 0.635) 
-					(radius 1.27) 
-					(stroke 
-						(width 0) 
-						(type default) 
-					) 
-					(fill 
-						(type none) 
-					) 
-				) 
-			) 
-			(symbol "LM234Z-3_1_1" 
-				(pin passive line 
-					(at 0 5.08 270) 
-					(length 2.54) 
-					(name "~" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "1" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at 5.08 0 180) 
-					(length 2.54) 
-					(name "~" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "2" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-				(pin passive line 
-					(at 0 -5.08 90) 
-					(length 2.54) 
-					(name "~" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-					(number "3" 
-						(effects 
-							(font 
-								(size 1.27 1.27) 
-							) 
-						) 
-					) 
-				) 
-			) 
-		) 
-	) 
-	(symbol 
-		(lib_id "Memory_UniqueID:DS2401Z") 
-		(at 208.28 142.24 0) 
-		(unit 1) 
-		(exclude_from_sim no) 
-		(in_bom yes) 
-		(on_board yes) 
-		(dnp no) 
-		(fields_autoplaced yes) 
-		(uuid "69855a0f-56fa-472b-b630-b899beae723f") 
-		(property "Reference" "U3" 
-			(at 208.28 129.54 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Value" "DS2401Z" 
-			(at 208.28 132.08 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-223" 
-			(at 223.52 151.13 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Datasheet" "http://pdfserv.maximintegrated.com/en/ds/DS2401.pdf" 
-			(at 204.47 135.89 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Description" "Silicon Serial Number, SOT-223" 
-			(at 208.28 142.24 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(pin "3" 
-			(uuid "97d75f03-218f-4681-9b81-727e962fa18e") 
-		) 
-		(pin "2" 
-			(uuid "c0bcc4eb-0244-4d3a-86da-89a03ddd0e5f") 
-		) 
-		(pin "4" 
-			(uuid "1ede5375-5ee8-4936-b050-6504fd8aea3f") 
-		) 
-		(pin "1" 
-			(uuid "00907677-0c21-4520-a46c-fc98a9a8b1eb") 
-		) 
-		(instances 
-			(project "" 
-				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976" 
-					(reference "U3") 
-					(unit 1) 
-				) 
-			) 
-		) 
-	) 
-	(symbol 
-		(lib_id "Amplifier_Buffer:BUF602xDBV") 
-		(at 71.12 69.85 0) 
-		(unit 1) 
-		(exclude_from_sim no) 
-		(in_bom yes) 
-		(on_board yes) 
-		(dnp no) 
-		(fields_autoplaced yes) 
-		(uuid "6a4a393d-b280-43a6-9960-40e8a2a0b3c7") 
-		(property "Reference" "U1" 
-			(at 83.82 63.5314 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Value" "BUF602xDBV" 
-			(at 83.82 66.0714 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" 
-			(at 71.12 77.47 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/buf602.pdf" 
-			(at 71.12 69.85 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Description" "High-Speed, 1000 MHz, Closed-Loop Buffer, SOT23-5" 
-			(at 71.12 69.85 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(pin "2" 
-			(uuid "a4995b6c-8e8d-4879-8174-1a84fd542669") 
-		) 
-		(pin "1" 
-			(uuid "3ecd9580-c039-4594-93e7-75689a16f8d4") 
-		) 
-		(pin "4" 
-			(uuid "6c1f6e7a-8ae1-40e5-807f-38bf221f16f8") 
-		) 
-		(pin "3" 
-			(uuid "03c745e6-ff8a-4f60-8ecd-d218ded5bd93") 
-		) 
-		(pin "5" 
-			(uuid "b926cc0d-2127-470e-ab80-50b4f125eb92") 
-		) 
-		(instances 
-			(project "" 
-				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976" 
-					(reference "U1") 
-					(unit 1) 
-				) 
-			) 
-		) 
-	) 
-	(symbol 
-		(lib_id "Amplifier_Current:AD8218xCP") 
-		(at 143.51 91.44 0) 
-		(unit 1) 
-		(exclude_from_sim no) 
-		(in_bom yes) 
-		(on_board yes) 
-		(dnp no) 
-		(fields_autoplaced yes) 
-		(uuid "ba34233a-e118-4b3f-aa44-16a211a6737a") 
-		(property "Reference" "U?" 
-			(at 157.48 85.1214 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Value" "AD8218xCP" 
-			(at 157.48 87.6614 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-			) 
-		) 
-		(property "Footprint" "Package_CSP:LFCSP-8-1EP_3x2mm_P0.5mm_EP1.6x1.65mm" 
-			(at 143.51 91.44 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8218.pdf" 
-			(at 160.02 109.22 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Description" "80V Zero Drift, Bidirectional, Current Shunt Monitor, 20V/V gain, bandwidth 450kHz, Vcc=5V, LFCSP-8" 
-			(at 143.51 91.44 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(pin "9" 
-			(uuid "3d1c1d0b-0e7a-4b3c-91ec-8ad33b2a2854") 
-		) 
-		(pin "7" 
-			(uuid "2fd8206b-9146-4715-9973-67e91a4b46b5") 
-		) 
-		(pin "6" 
-			(uuid "cbb09ae2-5db4-4d83-90e4-00bc2b480b6a") 
-		) 
-		(pin "2" 
-			(uuid "d69659a1-1491-42ad-9388-aacbd7092818") 
-		) 
-		(pin "5" 
-			(uuid "7108cebc-8a7c-4615-bfb3-46076d377e5a") 
-		) 
-		(pin "3" 
-			(uuid "1fa43462-cc9a-4a5c-a85d-93c75e277ec4") 
-		) 
-		(pin "4" 
-			(uuid "9b4b94dd-6e5f-4f36-8c24-f412bba606fb") 
-		) 
-		(pin "8" 
-			(uuid "a3409058-92ab-4b8d-af8e-c2d326f5ceb6") 
-		) 
-		(pin "1" 
-			(uuid "191445fb-ff1c-4d71-9e6e-a16cff947ca3") 
-		) 
-		(instances 
-			(project "kiutilsbugtest" 
-				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976" 
-					(reference "U?") 
-					(unit 1) 
-				) 
-			) 
-		) 
-	) 
-	(symbol 
-		(lib_id "Reference_Current:LM234Z-3") 
-		(at 78.74 135.89 0) 
-		(unit 1) 
-		(exclude_from_sim no) 
-		(in_bom yes) 
-		(on_board yes) 
-		(dnp no) 
-		(fields_autoplaced yes) 
-		(uuid "c1fadf5a-f951-43b2-a002-e5ef5a48a6e2") 
-		(property "Reference" "U4" 
-			(at 74.93 134.6199 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(justify right) 
-			) 
-		) 
-		(property "Value" "LM234Z-3" 
-			(at 74.93 137.1599 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(justify right) 
-			) 
-		) 
-		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline" 
-			(at 79.375 140.335 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-					(italic yes) 
-				) 
-				(justify left) 
-				(hide yes) 
-			) 
-		) 
-		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm134.pdf" 
-			(at 78.74 135.89 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-					(italic yes) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Description" "1μA to 10mA 3-Terminal Adjustable Current Source, TO-92" 
-			(at 78.74 135.89 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(pin "1" 
-			(uuid "fcf3ceba-5236-4e5d-8452-62925aa97be5") 
-		) 
-		(pin "2" 
-			(uuid "d6512fd2-2ffb-4d22-9550-bc427139982b") 
-		) 
-		(pin "3" 
-			(uuid "d216d773-90d9-47ac-91a8-1744a76dc38e") 
-		) 
-		(instances 
-			(project "" 
-				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976" 
-					(reference "U4") 
-					(unit 1) 
-				) 
-			) 
-		) 
-	) 
-	(symbol 
-		(lib_id "Connector_Generic_MountingPin:Conn_01x02_MountingPin") 
-		(at 217.17 60.96 0) 
-		(unit 1) 
-		(exclude_from_sim no) 
-		(in_bom yes) 
-		(on_board yes) 
-		(dnp no) 
-		(fields_autoplaced yes) 
-		(uuid "d2113350-cd7f-44c6-8cae-7086cd86d579") 
-		(property "Reference" "J1" 
-			(at 219.71 61.3155 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(justify left) 
-			) 
-		) 
-		(property "Value" "Conn_01x02_MountingPin" 
-			(at 219.71 63.8555 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(justify left) 
-			) 
-		) 
-		(property "Footprint" "" 
-			(at 217.17 60.96 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Datasheet" "~" 
-			(at 217.17 60.96 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(property "Description" "Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)" 
-			(at 217.17 60.96 0) 
-			(effects 
-				(font 
-					(size 1.27 1.27) 
-				) 
-				(hide yes) 
-			) 
-		) 
-		(pin "1" 
-			(uuid "f143a39c-8ef3-48ad-9d2d-944b36d63b91") 
-		) 
-		(pin "2" 
-			(uuid "5de30a7b-45cb-4b05-bb68-98efe177b88c") 
-		) 
-		(pin "MP" 
-			(uuid "b9758a67-3000-4a29-9c04-4b29b9e8e3c4") 
-		) 
-		(instances 
-			(project "" 
-				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976" 
-					(reference "J1") 
-					(unit 1) 
-				) 
-			) 
-		) 
-	) 
-) 
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "1c53a83b-717f-489e-b71a-5adcf9f23cea")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Amplifier_Buffer:BUF602xDBV"
+			(pin_names
+				(offset 0.127)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 6.35 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "BUF602xDBV"
+				(at 7.62 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/buf602.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "High-Speed, 1000 MHz, Closed-Loop Buffer, SOT23-5"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "buffer amplifier"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "BUF602xDBV_0_1"
+				(polyline
+					(pts
+						(xy 5.08 0) (xy -5.08 5.08) (xy -5.08 -5.08) (xy 5.08 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "BUF602xDBV_1_1"
+				(pin output line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 -7.62 90)
+					(length 3.81)
+					(name "V-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 0 -7.62 90)
+					(length 5.08)
+					(name "VREF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -2.54 7.62 270)
+					(length 3.81)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Amplifier_Current:AD8218xCP"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -7.62 10.795 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(property "Value" "AD8218xCP"
+				(at -7.62 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify right)
+				)
+			)
+			(property "Footprint" "Package_CSP:LFCSP-8-1EP_3x2mm_P0.5mm_EP1.6x1.65mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8218.pdf"
+				(at 16.51 -17.78 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "80V Zero Drift, Bidirectional, Current Shunt Monitor, 20V/V gain, bandwidth 450kHz, Vcc=5V, LFCSP-8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "highside HS current sense amplifier linear buffered"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "LFCSP*1EP*3x2mm*P0.5mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "AD8218xCP_0_1"
+				(rectangle
+					(start -7.62 7.62)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "AD8218xCP_1_1"
+				(pin input line
+					(at -5.08 10.16 270)
+					(length 2.54)
+					(name "+IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "Vs"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "ENB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 2.54 -7.62 90)
+					(length 2.54)
+					hide
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "REF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 5.08 10.16 270)
+					(length 2.54)
+					(name "-IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 90)
+					(length 2.54)
+					hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Connector_Generic_MountingPin:Conn_01x02_MountingPin"
+			(pin_names
+				(offset 1.016)
+				hide
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_MountingPin"
+				(at 1.27 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??-1MP*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_MountingPin_1_1"
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 -4.572) (xy 1.016 -4.572)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(text "Mounting"
+					(at 0 -4.191 0)
+					(effects
+						(font
+							(size 0.381 0.381)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -7.62 90)
+					(length 3.048)
+					(name "MountPin"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "MP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Memory_UniqueID:DS2401Z"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -3.81 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "DS2401Z"
+				(at 5.08 8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-223"
+				(at 15.24 -8.89 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://pdfserv.maximintegrated.com/en/ds/DS2401.pdf"
+				(at -3.81 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Silicon Serial Number, SOT-223"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "OneWire 1-Wire 1Wire Maxim Dallas ID"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "SOT?223*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "DS2401Z_0_1"
+				(rectangle
+					(start 5.08 -7.62)
+					(end -5.08 7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "DS2401Z_1_1"
+				(pin bidirectional line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "DQ"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at -5.08 0 0)
+					(length 2.54)
+					hide
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 90)
+					(length 2.54)
+					hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "Reference_Current:LM234Z-3"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 0.635 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "LM234Z-3"
+				(at 0.635 4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+				(at 0.635 -4.445 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm134.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "1μA to 10mA 3-Terminal Adjustable Current Source, TO-92"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "Adjustable Current Source 10mA"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO*92*Inline*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LM234Z-3_0_1"
+				(rectangle
+					(start -2.54 3.175)
+					(end 2.54 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(circle
+					(center 0 -0.635)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.143 -2.413) (xy -0.381 -2.413)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 2.413) (xy -0.254 2.413)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 2.794) (xy -0.635 2.032)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.905) (xy 0 -5.08)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.397) (xy 0 -1.397)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 5.08) (xy 0 1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.397) (xy -0.254 -0.889) (xy 0.254 -0.889) (xy 0 -1.397)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 2.159 0.254) (xy 2.159 -0.254) (xy 1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0.635)
+					(radius 1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LM234Z-3_1_1"
+				(pin passive line
+					(at 0 5.08 270)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -5.08 90)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Memory_UniqueID:DS2401Z")
+		(at 208.28 142.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "69855a0f-56fa-472b-b630-b899beae723f")
+		(property "Reference" "U3"
+			(at 208.28 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "DS2401Z"
+			(at 208.28 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223"
+			(at 223.52 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://pdfserv.maximintegrated.com/en/ds/DS2401.pdf"
+			(at 204.47 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Silicon Serial Number, SOT-223"
+			(at 208.28 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "97d75f03-218f-4681-9b81-727e962fa18e")
+		)
+		(pin "2"
+			(uuid "c0bcc4eb-0244-4d3a-86da-89a03ddd0e5f")
+		)
+		(pin "4"
+			(uuid "1ede5375-5ee8-4936-b050-6504fd8aea3f")
+		)
+		(pin "1"
+			(uuid "00907677-0c21-4520-a46c-fc98a9a8b1eb")
+		)
+		(instances
+			(project ""
+				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Buffer:BUF602xDBV")
+		(at 71.12 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6a4a393d-b280-43a6-9960-40e8a2a0b3c7")
+		(property "Reference" "U1"
+			(at 83.82 63.5314 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BUF602xDBV"
+			(at 83.82 66.0714 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+			(at 71.12 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/buf602.pdf"
+			(at 71.12 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "High-Speed, 1000 MHz, Closed-Loop Buffer, SOT23-5"
+			(at 71.12 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a4995b6c-8e8d-4879-8174-1a84fd542669")
+		)
+		(pin "1"
+			(uuid "3ecd9580-c039-4594-93e7-75689a16f8d4")
+		)
+		(pin "4"
+			(uuid "6c1f6e7a-8ae1-40e5-807f-38bf221f16f8")
+		)
+		(pin "3"
+			(uuid "03c745e6-ff8a-4f60-8ecd-d218ded5bd93")
+		)
+		(pin "5"
+			(uuid "b926cc0d-2127-470e-ab80-50b4f125eb92")
+		)
+		(instances
+			(project ""
+				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976"
+					(reference "U1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Amplifier_Current:AD8218xCP")
+		(at 143.51 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ba34233a-e118-4b3f-aa44-16a211a6737a")
+		(property "Reference" "U?"
+			(at 157.48 85.1214 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AD8218xCP"
+			(at 157.48 87.6614 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_CSP:LFCSP-8-1EP_3x2mm_P0.5mm_EP1.6x1.65mm"
+			(at 143.51 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8218.pdf"
+			(at 160.02 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "80V Zero Drift, Bidirectional, Current Shunt Monitor, 20V/V gain, bandwidth 450kHz, Vcc=5V, LFCSP-8"
+			(at 143.51 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "9"
+			(uuid "3d1c1d0b-0e7a-4b3c-91ec-8ad33b2a2854")
+		)
+		(pin "7"
+			(uuid "2fd8206b-9146-4715-9973-67e91a4b46b5")
+		)
+		(pin "6"
+			(uuid "cbb09ae2-5db4-4d83-90e4-00bc2b480b6a")
+		)
+		(pin "2"
+			(uuid "d69659a1-1491-42ad-9388-aacbd7092818")
+		)
+		(pin "5"
+			(uuid "7108cebc-8a7c-4615-bfb3-46076d377e5a")
+		)
+		(pin "3"
+			(uuid "1fa43462-cc9a-4a5c-a85d-93c75e277ec4")
+		)
+		(pin "4"
+			(uuid "9b4b94dd-6e5f-4f36-8c24-f412bba606fb")
+		)
+		(pin "8"
+			(uuid "a3409058-92ab-4b8d-af8e-c2d326f5ceb6")
+		)
+		(pin "1"
+			(uuid "191445fb-ff1c-4d71-9e6e-a16cff947ca3")
+		)
+		(instances
+			(project "kiutilsbugtest"
+				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976"
+					(reference "U?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Reference_Current:LM234Z-3")
+		(at 78.74 135.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c1fadf5a-f951-43b2-a002-e5ef5a48a6e2")
+		(property "Reference" "U4"
+			(at 74.93 134.6199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "LM234Z-3"
+			(at 74.93 137.1599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+			(at 79.375 140.335 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lm134.pdf"
+			(at 78.74 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1μA to 10mA 3-Terminal Adjustable Current Source, TO-92"
+			(at 78.74 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fcf3ceba-5236-4e5d-8452-62925aa97be5")
+		)
+		(pin "2"
+			(uuid "d6512fd2-2ffb-4d22-9550-bc427139982b")
+		)
+		(pin "3"
+			(uuid "d216d773-90d9-47ac-91a8-1744a76dc38e")
+		)
+		(instances
+			(project ""
+				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976"
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic_MountingPin:Conn_01x02_MountingPin")
+		(at 217.17 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d2113350-cd7f-44c6-8cae-7086cd86d579")
+		(property "Reference" "J1"
+			(at 219.71 61.3155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x02_MountingPin"
+			(at 219.71 63.8555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 217.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 217.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connectable mounting pin connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 217.17 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f143a39c-8ef3-48ad-9d2d-944b36d63b91")
+		)
+		(pin "2"
+			(uuid "5de30a7b-45cb-4b05-bb68-98efe177b88c")
+		)
+		(pin "MP"
+			(uuid "b9758a67-3000-4a29-9c04-4b29b9e8e3c4")
+		)
+		(instances
+			(project ""
+				(path "/85430ccb-d89c-4a47-b712-615fcae8d9b9/7d04b2aa-cb0f-42b0-9528-ee2753983976"
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
