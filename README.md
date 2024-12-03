@@ -1,4 +1,7 @@
 # sexp_formatter
+
+![CI/CD Status Badge](https://github.com/mofosyne/sexp_formatter/actions/workflows/ci.yml/badge.svg)
+
 Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting Via Python
 
 ```
