@@ -2,18 +2,11 @@ default:
     just -l
 
 init:
-    init.sh
+    make
 
 # Run using sexp_formatter.py
 test:
-    ./formatter_test.sh
-
-# Run using sexp_formatter_minimal.py
-test_simple:
-    ./formatter_test.sh
-
-meld-minimal:
-    meld ./minimal/formatted/Normal.kicad_sch ./minimal/formatted/Test.kicad_sch
+    ./test.sh
 
 # Personal Kiutils Bringup
 dev-bringup-mofosyne:
