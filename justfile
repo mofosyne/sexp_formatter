@@ -4,8 +4,11 @@ default:
 init:
     make
 
-# Run using sexp_formatter.py
-test:
+time:
+    make
+    ./time_test_all.sh
+
+check:
     make
     ./test_all.sh
 
@@ -24,7 +27,6 @@ c_test:
 python_test:
     make
     ./test_standard_single.sh ./sexp_prettify_cli.py
-
 
 # Personal Kiutils Bringup
 dev-bringup-mofosyne:

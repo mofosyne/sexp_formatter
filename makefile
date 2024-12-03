@@ -24,8 +24,8 @@ clean:
 	rm sexp_prettify_kicad_cli || true
 	rm sexp_prettify_kicad_original_cli || true
 
-.PHONY: test
-test: all
+.PHONY: check
+check: all
 	./test_all.sh
 
 .PHONY: time

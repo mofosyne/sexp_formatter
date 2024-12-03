@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up C, C++ and python environment
         run: |
@@ -25,9 +25,9 @@ jobs:
         run: |
           make
 
-      - name: Run make test
+      - name: Run make check
         run: |
-          make test
+          make check
 
       - name: Run time
         run: |
