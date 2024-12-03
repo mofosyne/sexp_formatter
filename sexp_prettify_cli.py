@@ -33,6 +33,7 @@ def prettify(source, compact_save):
     escape_next_char = False
     singular_element = False
     space_pending = False
+    wrapped_list = False
     scanning_for_prefix = False
     prefix_token = ''
     compact_list_mode = False
@@ -127,12 +128,22 @@ def prettify(source, compact_save):
             if shortform_mode and list_depth < shortform_indent:
                 shortform_mode = False
 
-            if singular_element:
-                singular_element = False
-            elif not current_shortform_mode:
+            if wrapped_list:
+                # This was a list with wrapped tokens so is already indented
                 formatted.append('\n')
                 formatted.append(indent_char * list_depth * indent_size)
                 column = list_depth * indent_size
+                if singular_element:
+                    singular_element = False
+                wrapped_list = False
+            else:
+                # Normal List
+                if singular_element:
+                    singular_element = False
+                elif not current_shortform_mode:
+                    formatted.append('\n')
+                    formatted.append(indent_char * list_depth * indent_size)
+                    column = list_depth * indent_size
 
             formatted.append(')')
             column += 1
@@ -145,7 +156,7 @@ def prettify(source, compact_save):
             continue
 
         # Parse characters
-        if c:
+        if c != '\0':
             if previous_non_space_output == ')' and not shortform_mode:
                 # Is Bare token after a list that should be on next line
                 # Dev Note: In KiCAD this may indicate a flag bug
@@ -153,8 +164,9 @@ def prettify(source, compact_save):
                 formatted.append(indent_char * list_depth * indent_size)
                 column = list_depth * indent_size
                 space_pending = False
-            elif previous_non_space_output.isspace() and not shortform_mode and not compact_list_mode and column >= consecutive_token_wrap_threshold:
+            elif space_pending and not shortform_mode and not compact_list_mode and column >= consecutive_token_wrap_threshold:
                 # Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+                wrapped_list = True
                 formatted.append('\n')
                 formatted.append(indent_char * list_depth * indent_size)
                 column = list_depth * indent_size

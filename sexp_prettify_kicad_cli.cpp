@@ -39,6 +39,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
     bool escapeNextChar = false;
     bool singularElement = false;
     bool spacePending = false;
+    bool wrappedList = false;
 
     // Prefix scanner to check if a list should be specially handled
     bool scanningForPrefix = false;
@@ -215,19 +216,40 @@ void Prettify(std::string &aSource, bool aCompactSave)
                 shortformMode = false;
             }
 
-            if (singularElement)
+            if (wrappedList)
             {
-                // End of singular element
-                singularElement = false;
-            }
-            else if (!curr_shortform_mode)
-            {
-                // End of a parent element
+                // This was a list with wrapped tokens so is already indented
                 formatted.push_back('\n');
                 column = 0;
 
                 formatted.append(listDepth * indentSize, indentChar);
                 column += listDepth * indentSize;
+
+                if (singularElement)
+                {
+                    // End of singular element
+                    singularElement = false;
+                }
+
+                wrappedList = false;
+            }
+            else 
+            {
+                // Normal List
+                if (singularElement)
+                {
+                    // End of singular element
+                    singularElement = false;
+                }
+                else if (!curr_shortform_mode)
+                {
+                    // End of a parent element
+                    formatted.push_back('\n');
+                    column = 0;
+
+                    formatted.append(listDepth * indentSize, indentChar);
+                    column += listDepth * indentSize;
+                }
             }
 
             formatted.push_back(')');
@@ -247,7 +269,6 @@ void Prettify(std::string &aSource, bool aCompactSave)
         // Parse Characters
         if (c != '\0')
         {
-            // Handle other characters
 
             // Pre character actions
             if (previousNonSpaceOutput == ')' && !shortformMode)
@@ -262,9 +283,11 @@ void Prettify(std::string &aSource, bool aCompactSave)
 
                 spacePending = false;
             }
-            else if (std::isspace(previousNonSpaceOutput) && !shortformMode && !compactListMode && column >= consecutiveTokenWrapThreshold)
+            else if (spacePending && !shortformMode && !compactListMode && column >= consecutiveTokenWrapThreshold)
             {
                 // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+                wrappedList = true;
+                
                 formatted.push_back('\n');
                 column = 0;
 

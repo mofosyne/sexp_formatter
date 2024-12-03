@@ -6,16 +6,23 @@ init:
 
 # Run using sexp_formatter.py
 test:
+    make
     ./test_all.sh
 
-cpp_test:
+kicad_test:
+    make
     ./test_standard_single.sh ./sexp_prettify_kicad_cli
+
+cpp_test:
+    make
     ./test_standard_single.sh ./sexp_prettify_cpp_cli
 
 c_test:
+    make
     ./test_standard_single.sh ./sexp_prettify_cli
 
 python_test:
+    make
     ./test_standard_single.sh ./sexp_prettify_cli.py
 
 

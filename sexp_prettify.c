@@ -272,14 +272,9 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
             state->shortform_mode = false;
         }
 
-        if (state->singular_element)
+        if (state->wrapped_list)
         {
-            // End of singular element
-            state->singular_element = false;
-        }
-        else if (!curr_shortform_mode)
-        {
-            // End of a parent element
+            // This was a list with wrapped tokens so is already indented
             output_func('\n', output_func_context);
             state->column = 0;
 
@@ -288,6 +283,35 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
                 output_func(state->indent_char, output_func_context);
             }
             state->column += state->indent * state->indent_size;
+
+            if (state->singular_element)
+            {
+                // End of singular element
+                state->singular_element = false;
+            }
+
+            state->wrapped_list = false;
+        }
+        else
+        {
+            // Normal List
+            if (state->singular_element)
+            {
+                // End of singular element
+                state->singular_element = false;
+            }
+            else if (!curr_shortform_mode)
+            {
+                // End of a parent element
+                output_func('\n', output_func_context);
+                state->column = 0;
+
+                for (unsigned int j = 0; j < (state->indent * state->indent_size); ++j)
+                {
+                    output_func(state->indent_char, output_func_context);
+                }
+                state->column += state->indent * state->indent_size;
+            }
         }
 
         output_func(')', output_func_context);
@@ -325,10 +349,12 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
 
             state->space_pending = false;
         }
-        else if (isspace(state->c_out_prev) && !state->shortform_mode && !state->compact_list_mode && state->consecutive_token_wrap_threshold != 0 &&
+        else if (state->space_pending && !state->shortform_mode && !state->compact_list_mode && state->consecutive_token_wrap_threshold != 0 &&
                  state->column >= state->consecutive_token_wrap_threshold)
         {
             // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
+            state->wrapped_list = true;
+
             output_func('\n', output_func_context);
             state->column = 0;
 

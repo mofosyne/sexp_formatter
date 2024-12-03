@@ -11,7 +11,7 @@ file_pairs=(
 executable=$1
 
 # Temporary directory in /tmp
-temp_dir="/tmp/kicad_formatter_test"
+temp_dir="kicad_formatter_test"
 mkdir -p "$temp_dir"
 
 # Test each file pair
@@ -20,11 +20,6 @@ if [[ ! -x "$executable" ]]; then
     echo "ERROR: Executable '$executable' not found or not executable!"
     exit 1
 fi
-
-echo ""
-echo "========================================================================"
-echo " Now Testing $executable "
-echo "========================================================================"
 
 all_passed=true
 for pair in "${file_pairs[@]}"; do
@@ -36,14 +31,18 @@ for pair in "${file_pairs[@]}"; do
     $executable "$file_pairs_path_dir$unformatted" "$temp_output"
 
     # Compare the output with the corresponding formatted file
-    if diff -q "$temp_output" "$file_pairs_path_dir$formatted" > /dev/null; then
-        echo "PASS: $executable - $unformatted matches $formatted"
+    if diff -q "$file_pairs_path_dir$formatted" "$temp_output" > /dev/null; then
+        : #echo "PASS: $executable - $unformatted matches $formatted"
     else
         echo ""
-        echo "FAIL: $executable - $unformatted does not match $formatted"
-        diff --color=always -u "$temp_output" "$file_pairs_path_dir$formatted" | head -n 10 # Show the first 20 lines of the diff
+        echo "========================================================================"
+        echo " FAILED ARGUMENT : $executable"
+        echo " PROCESSED INPUT : $unformatted"
+        echo " EXPECTED OUTPUT : $unformatted"
+        echo " DIFF SNIPPET:"
+        diff --color=always -u "$file_pairs_path_dir$formatted" "$temp_output" | head -n 10 # Show the first 20 lines of the diff
         all_passed=false
-        echo "FAIL: $executable - $unformatted does not match $formatted"
+        echo "========================================================================"
         echo ""
     fi
 done
@@ -53,9 +52,9 @@ rm -rf "$temp_dir"
 
 # Final result
 if $all_passed; then
-    echo "All tests passed!"
+    echo "All tests passed for $executable"
     exit 0
 else
-    echo "Some tests failed!"
+    echo "Some tests failed"
     exit 1
 fi

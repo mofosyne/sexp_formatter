@@ -50,6 +50,7 @@ struct PrettifySExprState
     bool escape_next_char;
     bool singular_element;
     bool space_pending;
+    bool wrapped_list;
 
     // Prefix scanner to check if a list should be specially handled
     bool scanning_for_prefix;
