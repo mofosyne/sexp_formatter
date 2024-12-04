@@ -8,10 +8,10 @@ Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting Via 
 ========================================================================
  Timing Test Report 
 ========================================================================
-Time taken for ./sexp_prettify_cli.py                   to run though test suites is .132 seconds
-Time taken for ./sexp_prettify_kicad_original_cli       to run though test suites is .016 seconds
-Time taken for ./sexp_prettify_kicad_cli                to run though test suites is .014 seconds
-Time taken for ./sexp_prettify_cpp_cli                  to run though test suites is .011 seconds
+Time taken for ./sexp_prettify_cli.py                   to run though test suites is .327 seconds
+Time taken for ./sexp_prettify_kicad_original_cli       to run though test suites is .014 seconds
+Time taken for ./sexp_prettify_kicad_cli                to run though test suites is .012 seconds
+Time taken for ./sexp_prettify_cpp_cli                  to run though test suites is .009 seconds
 Time taken for ./sexp_prettify_cli                      to run though test suites is .006 seconds
 ```
 
@@ -31,56 +31,9 @@ Time taken for ./sexp_prettify_cli                      to run though test suite
 
 ## Usage
 
-### sexp_prettify_cli (c)
-
-```
-S-Expression Formatter (Brian Khuu 2024)
-
-Usage:
-  ./sexp_prettify_cli [OPTION]... SRC [DST]
-  SRC                Source file path. If '-' then use standard stream input
-  DST                Destination file path. If omitted or '-' then use standard stream output
-
-Options:
-  -h                 Show Help Message
-  -w WRAP_THRESHOLD  Set Wrap Threshold. Must be postive value. (default 72)
-  -l COMPACT_LIST    Add To Compact List. Must be a string. 
-  -k COLUMN_LIMIT    Add To Compact List Column Limit. Must be positive value. (default 99)
-  -s SHORTFORM       Add To Shortform List. Must be a string.
-  -d                 Dryrun
-
-Example:
-  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
-    ./sexp_prettify_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
-```
-
-### sexp_prettify_cpp_cli (cpp)
-
-```
-S-Expression Formatter (Brian Khuu 2024)
-
-Usage:
-  ./sexp_prettify_cpp_cli [OPTION]... SRC [DST]
-  SRC                Source file path. If '-' then use standard stream input
-  DST                Destination file path. If omitted or '-' then use standard stream output
-
-Options:
-  -h                 Show Help Message
-  -w WRAP_THRESHOLD  Set Wrap Threshold. Must be positive value. (default 72)
-  -l COMPACT_LIST    Add To Compact List. Must be a string.
-  -k COLUMN_LIMIT    Set Compact List Column Limit. Must be positive value. (default 99)
-  -s SHORTFORM       Add To Shortform List. Must be a string.
-  -d                 Dryrun
-
-Example:
-  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
-    ./sexp_prettify_cpp_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
-```
-
 ### sexp_prettify_cli.py (python) (KiCad fixed styling)
-
 ```
-usage: sexp_prettify_cli.py [-h] [-c] src [dst]
+usage: sexp_prettify_cli.py [-h] [-c] [-p P] src [dst]
 
 KiCad S-Expression Formatter
 
@@ -91,6 +44,50 @@ positional arguments:
 options:
   -h, --help  show this help message and exit
   -c          Use compact mode
+  -p P        Predefined Style. (kicad, kicad-compact)
+```
+
+### sexp_prettify_cpp_cli (cpp)
+```
+S-Expression Formatter (Brian Khuu 2024)
+
+Usage:
+  ./sexp_prettify_cpp_cli [OPTION]... SOURCE [DESTINATION]
+  SOURCE                Source file path. If '-' then use standard stream input
+  DESTINATION           Destination file path. If omitted or '-' then use standard stream output
+
+Options:
+  -h                 Show Help Message
+  -w WRAP_THRESHOLD  Set Wrap Threshold. Must be positive value. (default 72)
+  -l COMPACT_LIST    Add To Compact List. Must be a string.
+  -k COLUMN_LIMIT    Set Compact List Column Limit. Must be positive value. (default 99)
+  -s SHORTFORM       Add To Shortform List. Must be a string.
+  -p PROFILE         Predefined Style. (kicad, kicad-compact)
+Example:
+  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
+    ./sexp_prettify_cpp_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
+```
+
+### sexp_prettify_cli (c)
+```
+S-Expression Formatter (Brian Khuu 2024)
+
+Usage:
+  ./sexp_prettify_cli [OPTION]... SOURCE [DESTINATION]
+  SOURCE             Source file path. If '-' then use standard stream input
+  DESTINATION        Destination file path. If omitted or '-' then use standard stream output
+
+Options:
+  -h                 Show Help Message
+  -w WRAP_THRESHOLD  Set Wrap Threshold. Must be postive value. (default 72)
+  -l COMPACT_LIST    Add To Compact List. Must be a string. 
+  -k COLUMN_LIMIT    Add To Compact List Column Limit. Must be positive value. (default 99)
+  -s SHORTFORM       Add To Shortform List. Must be a string.
+  -p PROFILE         Predefined Style. (kicad, kicad-compact)
+
+Example:
+  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
+    ./sexp_prettify_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
 ```
 
 ## History

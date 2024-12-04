@@ -39,9 +39,13 @@ void usage(const std::string &prog_name, bool full = false)
     }
 
     std::cout << "Usage:\n"
-              << "  " << prog_name << " [OPTION]... SRC [DST]\n"
-              << "  SRC                Source file path. If '-' then use standard stream input\n"
-              << "  DST                Destination file path. If omitted or '-' then use standard stream output\n\n";
+              << "  " << prog_name << " [OPTION]... SOURCE [DESTINATION]\n";
+    if (!full)
+    {
+        std::cout << "  " << prog_name << " -h          Show Full Help Message\n";
+    }
+    std::cout << "  SOURCE                Source file path. If '-' then use standard stream input\n"
+              << "  DESTINATION           Destination file path. If omitted or '-' then use standard stream output\n\n";
 
     if (full)
     {
@@ -51,6 +55,7 @@ void usage(const std::string &prog_name, bool full = false)
                   << "  -l COMPACT_LIST    Add To Compact List. Must be a string.\n"
                   << "  -k COLUMN_LIMIT    Set Compact List Column Limit. Must be positive value. (default " << PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT << ")\n"
                   << "  -s SHORTFORM       Add To Shortform List. Must be a string.\n"
+                  << "  -p PROFILE         Predefined Style. (kicad, kicad-compact)\n"
                   << "Example:\n"
                   << "  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.\n"
                   << "    " << prog_name << " -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -\n";
