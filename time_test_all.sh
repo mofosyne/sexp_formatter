@@ -16,7 +16,6 @@ echo "========================================================================"
 echo " Timing Test Report "
 echo "========================================================================"
 
-
 # Run each formatter executable on the unformatted file
 for executable in "${executables[@]}"; do
     # Make sure the executable exists and is executable

@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <vector>
 
-void Prettify(std::string &aSource, bool aCompactSave)
+void Prettify(std::string &aSource, bool aCompactSave = false)
 {
     // Configuration
     const char quoteChar = '"';
@@ -233,7 +233,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
 
                 wrappedList = false;
             }
-            else 
+            else
             {
                 // Normal List
                 if (singularElement)
@@ -287,7 +287,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
             {
                 // Token is above wrap threshold. Move token to next line (If token wrap threshold is zero then this feature is disabled)
                 wrappedList = true;
-                
+
                 formatted.push_back('\n');
                 column = 0;
 
@@ -332,16 +332,16 @@ void usage(const std::string &prog_name, bool full)
     }
 
     std::cout << "Usage:\n"
-              << "  " << prog_name << " [OPTION]... SRC [DST]\n"
-              << "  SRC                Source file path. If '-' then use standard stream input\n"
-              << "  DST                Destination file path. If omitted or '-' then use standard stream output\n\n";
+              << "  " << prog_name << " [OPTION]... SOURCE [DESTINATION]\n"
+              << "  SOURCE             Source file path. If '-' then use standard stream input\n"
+              << "  DESTINATION        Destination file path. If omitted or '-' then use standard stream output\n\n";
 
     if (full)
     {
         std::cout << "Options:\n"
                   << "  -h                 Show Help Message\n"
                   << "  -c                 Use Compact Mode.\n"
-                  << "  -d                 Dryrun\n\n"
+                  << "  -p PROFILE         Predefined Style. (kicad, kicad-compact)\n"
                   << "Example:\n"
                   << "  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.\n"
                   << "    " << prog_name << " - -\n";
@@ -356,7 +356,7 @@ int main(int argc, char **argv)
     // Parse options
     while (optind < argc)
     {
-        const int c = getopt(argc, argv, "hc");
+        const int c = getopt(argc, argv, "hcp:");
         if (c == -1)
         {
             break;
@@ -372,6 +372,14 @@ int main(int argc, char **argv)
             case 'c':
             {
                 compactsave = true;
+                break;
+            }
+            case 'p':
+            {
+                if (strcmp("kicad-compact", optarg) == 0)
+                {
+                    compactsave = true;
+                }
                 break;
             }
             case '?':

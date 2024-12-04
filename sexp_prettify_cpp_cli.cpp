@@ -17,8 +17,21 @@ extern "C"
 #include "sexp_prettify.h"
 }
 
+typedef enum styleProfile
+{
+    STYLE_PROFILE_NONE = 0,
+    STYLE_PROFILE_KICAD_STANDARD,
+    STYLE_PROFILE_KICAD_COMPACT,
+} styleProfile;
+
+const char *compact_list_prefixes_kicad[] = {"pts"};
+const int compact_list_prefixes_kicad_size = sizeof(compact_list_prefixes_kicad) / sizeof(compact_list_prefixes_kicad[0]);
+
+const char *shortform_prefixes_kicad[] = {"font", "stroke", "fill", "offset", "rotate", "scale"};
+const int shortform_prefixes_kicad_size = sizeof(shortform_prefixes_kicad) / sizeof(shortform_prefixes_kicad[0]);
+
 // Display usage instructions
-void usage(const std::string &prog_name, bool full)
+void usage(const std::string &prog_name, bool full = false)
 {
     if (full)
     {
@@ -38,7 +51,6 @@ void usage(const std::string &prog_name, bool full)
                   << "  -l COMPACT_LIST    Add To Compact List. Must be a string.\n"
                   << "  -k COLUMN_LIMIT    Set Compact List Column Limit. Must be positive value. (default " << PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT << ")\n"
                   << "  -s SHORTFORM       Add To Shortform List. Must be a string.\n"
-                  << "  -d                 Dryrun\n\n"
                   << "Example:\n"
                   << "  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.\n"
                   << "    " << prog_name << " -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -\n";
@@ -48,7 +60,6 @@ void usage(const std::string &prog_name, bool full)
 int main(int argc, char **argv)
 {
     const std::string prog_name = argv[0];
-    bool dryrun = false;
 
     int wrap_threshold = PRETTIFY_SEXPR_KICAD_DEFAULT_CONSECUTIVE_TOKEN_WRAP_THRESHOLD;
 
@@ -57,10 +68,12 @@ int main(int argc, char **argv)
 
     std::vector<std::string> shortform_prefixes;
 
+    styleProfile kicad_profile_active = STYLE_PROFILE_NONE;
+
     // Parse options
     while (optind < argc)
     {
-        const int c = getopt(argc, argv, "hl:s:w:k:d");
+        const int c = getopt(argc, argv, "hl:s:w:k:p:");
         if (c == -1)
         {
             break;
@@ -88,7 +101,7 @@ int main(int argc, char **argv)
                 wrap_threshold = std::stoi(optarg);
                 if (wrap_threshold <= 0)
                 {
-                    usage(prog_name, false);
+                    usage(prog_name);
                     return EXIT_FAILURE;
                 }
                 break;
@@ -98,24 +111,58 @@ int main(int argc, char **argv)
                 compact_list_prefixes_wrap_threshold = std::stoi(optarg);
                 if (compact_list_prefixes_wrap_threshold <= 0)
                 {
-                    usage(prog_name, false);
+                    usage(prog_name);
                     return EXIT_FAILURE;
                 }
                 break;
             }
-            case 'd':
+            case 'p':
             {
-                dryrun = true;
+                if (strcmp("kicad", optarg) == 0)
+                {
+                    kicad_profile_active = STYLE_PROFILE_KICAD_STANDARD;
+                }
+                else if (strcmp("kicad-compact", optarg) == 0)
+                {
+                    kicad_profile_active = STYLE_PROFILE_KICAD_COMPACT;
+                }
+
+                if (kicad_profile_active == STYLE_PROFILE_NONE)
+                {
+                    fprintf(stderr, "Must be either 'kicad' or 'kicad-compact'");
+                    usage(prog_name, false);
+                    return EXIT_FAILURE;
+                }
+
+                compact_list_prefixes.clear();
+                shortform_prefixes.clear();
+
+                if (kicad_profile_active == STYLE_PROFILE_KICAD_STANDARD || kicad_profile_active == STYLE_PROFILE_KICAD_COMPACT)
+                {
+                    for (int i = 0; i < compact_list_prefixes_kicad_size; i++)
+                    {
+                        compact_list_prefixes.emplace_back(compact_list_prefixes_kicad[i]);
+                    }
+                }
+
+                if (kicad_profile_active == STYLE_PROFILE_KICAD_COMPACT)
+                {
+                    for (int i = 0; i < shortform_prefixes_kicad_size; i++)
+                    {
+                        shortform_prefixes.emplace_back(shortform_prefixes_kicad[i]);
+                    }
+                }
+
                 break;
             }
             case '?':
             {
-                usage(prog_name, false);
+                usage(prog_name);
                 return EXIT_FAILURE;
             }
             default:
             {
-                usage(prog_name, false);
+                usage(prog_name);
                 return EXIT_FAILURE;
             }
         }
@@ -138,29 +185,6 @@ int main(int argc, char **argv)
     if (!src_path)
     {
         usage(prog_name, true);
-        return EXIT_SUCCESS;
-    }
-
-    // Dryrun Output
-    if (dryrun)
-    {
-        std::cout << "src = " << (src_path ? src_path : "stdin") << "\n"
-                  << "dst = " << (dst_path ? dst_path : "stdout") << "\n"
-                  << "wrap threshold: " << wrap_threshold << "\n"
-                  << "compact wrap threshold: " << compact_list_prefixes_wrap_threshold << "\n"
-                  << "compact list (" << compact_list_prefixes.size() << "):\n";
-
-        for (size_t i = 0; i < compact_list_prefixes.size(); ++i)
-        {
-            std::cout << " - " << i << " : " << compact_list_prefixes[i] << "\n";
-        }
-
-        std::cout << "shortform list (" << shortform_prefixes.size() << "):\n";
-
-        for (size_t i = 0; i < shortform_prefixes.size(); ++i)
-        {
-            std::cout << " - " << i << " : " << shortform_prefixes[i] << "\n";
-        }
         return EXIT_SUCCESS;
     }
 

@@ -43,9 +43,17 @@ dev-bringup-mofosyne:
     source ./.venv/bin/activate
     pip install -e kiutils
 
-
 format:
     # pip install clang-format
     clang-format -i *.cpp
     clang-format -i *.c
     clang-format -i *.h
+
+cicd:
+    make
+    make check
+    make time
+
+# Regenerate Test Cases
+regentest:
+    ./test_refresh_case.sh ./sexp_prettify_cpp_cli

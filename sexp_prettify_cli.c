@@ -13,6 +13,19 @@
 
 #include "sexp_prettify.h"
 
+typedef enum styleProfile
+{
+    STYLE_PROFILE_NONE = 0,
+    STYLE_PROFILE_KICAD_STANDARD,
+    STYLE_PROFILE_KICAD_COMPACT,
+} styleProfile;
+
+const char *compact_list_prefixes_kicad[] = {"pts"};
+const int compact_list_prefixes_kicad_size = sizeof(compact_list_prefixes_kicad) / sizeof(compact_list_prefixes_kicad[0]);
+
+const char *shortform_prefixes_kicad[] = {"font", "stroke", "fill", "offset", "rotate", "scale"};
+const int shortform_prefixes_kicad_size = sizeof(shortform_prefixes_kicad) / sizeof(shortform_prefixes_kicad[0]);
+
 void putc_handler(char c, void *context_putc) { fputc(c, (FILE *)context_putc); }
 
 void usage(const char *prog_name, bool full)
@@ -24,9 +37,13 @@ void usage(const char *prog_name, bool full)
     }
 
     printf("Usage:\n");
-    printf("  %s [OPTION]... SRC [DST]\n", prog_name);
-    printf("  SRC                Source file path. If '-' then use standard stream input\n");
-    printf("  DST                Destination file path. If omitted or '-' then use standard stream output\n");
+    printf("  %s [OPTION]... SOURCE [DESTINATION]\n", prog_name);
+    if (!full)
+    {
+        printf("  %s -h          Show Full Help Message\n", prog_name);
+    }
+    printf("  SOURCE             Source file path. If '-' then use standard stream input\n");
+    printf("  DESTINATION        Destination file path. If omitted or '-' then use standard stream output\n");
     printf("\n");
 
     if (full)
@@ -37,7 +54,7 @@ void usage(const char *prog_name, bool full)
         printf("  -l COMPACT_LIST    Add To Compact List. Must be a string. \n");
         printf("  -k COLUMN_LIMIT    Add To Compact List Column Limit. Must be positive value. (default %d)\n", PRETTIFY_SEXPR_KICAD_DEFAULT_COMPACT_LIST_COLUMN_LIMIT);
         printf("  -s SHORTFORM       Add To Shortform List. Must be a string.\n");
-        printf("  -d                 Dryrun\n");
+        printf("  -p PROFILE         Predefined Style. (kicad, kicad-compact)\n");
         printf("\n");
         printf("Example:\n");
         printf("  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.\n");
@@ -49,7 +66,6 @@ void usage(const char *prog_name, bool full)
 int main(int argc, char **argv)
 {
     const char *prog_name = argv[0];
-    bool dryrun = false;
 
     int wrap_threshold = PRETTIFY_SEXPR_KICAD_DEFAULT_CONSECUTIVE_TOKEN_WRAP_THRESHOLD;
 
@@ -60,9 +76,11 @@ int main(int argc, char **argv)
     const char **shortform_prefixes = NULL;
     int shortform_prefixes_entries_count = 0;
 
+    styleProfile kicad_profile_active = STYLE_PROFILE_NONE;
+
     while (optind < argc)
     {
-        const char c = getopt(argc, argv, "hl:s:d");
+        const char c = getopt(argc, argv, "hl:s:p:k:");
         if (c == -1)
         {
             break;
@@ -134,9 +152,60 @@ int main(int argc, char **argv)
                 break;
             }
 
-            case 'd':
+            case 'p':
             {
-                dryrun = true;
+                if (strcmp("kicad", optarg) == 0)
+                {
+                    kicad_profile_active = STYLE_PROFILE_KICAD_STANDARD;
+                }
+                else if (strcmp("kicad-compact", optarg) == 0)
+                {
+                    kicad_profile_active = STYLE_PROFILE_KICAD_COMPACT;
+                }
+
+                if (kicad_profile_active == STYLE_PROFILE_NONE)
+                {
+                    fprintf(stderr, "Must be either 'kicad' or 'kicad-compact'");
+                    usage(prog_name, false);
+                    return EXIT_FAILURE;
+                }
+
+                if (compact_list_prefixes_entries_count)
+                {
+                    free(compact_list_prefixes);
+                    compact_list_prefixes = NULL;
+                    compact_list_prefixes_entries_count = 0;
+                }
+
+                if (shortform_prefixes_entries_count)
+                {
+                    free(shortform_prefixes);
+                    shortform_prefixes = NULL;
+                    shortform_prefixes_entries_count = 0;
+                }
+
+                if (kicad_profile_active == STYLE_PROFILE_KICAD_STANDARD || kicad_profile_active == STYLE_PROFILE_KICAD_COMPACT)
+                {
+                    compact_list_prefixes = malloc(sizeof(compact_list_prefixes));
+                    for (int i = 0; i < compact_list_prefixes_kicad_size; i++)
+                    {
+                        compact_list_prefixes = realloc(compact_list_prefixes, sizeof(compact_list_prefixes) * (compact_list_prefixes_entries_count + 1));
+                        compact_list_prefixes[compact_list_prefixes_entries_count] = compact_list_prefixes_kicad[i];
+                        compact_list_prefixes_entries_count++;
+                    }
+                }
+
+                if (kicad_profile_active == STYLE_PROFILE_KICAD_COMPACT)
+                {
+                    shortform_prefixes = malloc(sizeof(shortform_prefixes));
+                    for (int i = 0; i < shortform_prefixes_kicad_size; i++)
+                    {
+                        shortform_prefixes = realloc(shortform_prefixes, sizeof(shortform_prefixes) * (shortform_prefixes_entries_count + 1));
+                        shortform_prefixes[shortform_prefixes_entries_count] = shortform_prefixes_kicad[i];
+                        shortform_prefixes_entries_count++;
+                    }
+                }
+
                 break;
             }
 
@@ -170,27 +239,8 @@ int main(int argc, char **argv)
 
     if (!src_path)
     {
+        fprintf(stderr, "Source Path Missing\n");
         usage(prog_name, true);
-        return EXIT_SUCCESS;
-    }
-
-    // Dryrun Output
-    if (dryrun)
-    {
-        printf("src = %s\n", src_path ? src_path : "stdin");
-        printf("dst = %s\n", dst_path ? dst_path : "stdout");
-        printf("wrap threshold: %d\n", wrap_threshold);
-        printf("compact wrap threshold: %d\n", compact_list_prefixes_wrap_threshold);
-        printf("compact list (%d):\n", compact_list_prefixes_entries_count);
-        for (int i = 0; i < compact_list_prefixes_entries_count; i++)
-        {
-            printf(" - %d : %s\n", i, compact_list_prefixes[i]);
-        }
-        printf("shortform list (%d):\n", shortform_prefixes_entries_count);
-        for (int i = 0; i < shortform_prefixes_entries_count; i++)
-        {
-            printf(" - %d : %s\n", i, shortform_prefixes[i]);
-        }
         return EXIT_SUCCESS;
     }
 

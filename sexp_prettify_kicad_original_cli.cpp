@@ -250,16 +250,16 @@ void usage(const std::string &prog_name, bool full)
     }
 
     std::cout << "Usage:\n"
-              << "  " << prog_name << " [OPTION]... SRC [DST]\n"
-              << "  SRC                Source file path. If '-' then use standard stream input\n"
-              << "  DST                Destination file path. If omitted or '-' then use standard stream output\n\n";
+              << "  " << prog_name << " [OPTION]... SOURCE [DESTINATION]\n"
+              << "  SOURCE             Source file path. If '-' then use standard stream input\n"
+              << "  DESTINATION        Destination file path. If omitted or '-' then use standard stream output\n\n";
 
     if (full)
     {
         std::cout << "Options:\n"
                   << "  -h                 Show Help Message\n"
                   << "  -c                 Use Compact Mode.\n"
-                  << "  -d                 Dryrun\n\n"
+                  << "  -p PROFILE         Predefined Style. (kicad, kicad-compact)\n"
                   << "Example:\n"
                   << "  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.\n"
                   << "    " << prog_name << " - -\n";

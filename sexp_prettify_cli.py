@@ -2,7 +2,14 @@
 import argparse
 import sys
 
-def prettify(source, compact_save):
+def prettify(source, 
+             compact_save = False, 
+             indent_char = '\t',
+             indent_size = 1,
+             consecutive_token_wrap_threshold = 72, 
+             compact_list_prefixes = {"pts"}, 
+             compact_list_column_limit = 99,
+             shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"}):
     """
     Reformats KiCad-like S-expressions to match a specific formatting style.
 
@@ -13,16 +20,6 @@ def prettify(source, compact_save):
     Returns:
         str: The formatted S-expression.
     """
-    # Configuration
-    quote_char = '"'
-    indent_char = '\t'
-    indent_size = 1
-
-    compact_list_column_limit = 99
-    compact_list_prefixes = {"pts"}
-
-    consecutive_token_wrap_threshold = 72
-    shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"}
 
     # State tracking
     formatted = []
@@ -44,7 +41,7 @@ def prettify(source, compact_save):
     for c in source:
 
         # Parse quoted strings
-        if c == quote_char or in_quote:
+        if c == '"' or in_quote:
             if space_pending:
                 formatted.append(' ')
                 column += 1
@@ -54,7 +51,7 @@ def prettify(source, compact_save):
                 escape_next_char = False
             elif c == '\\':
                 escape_next_char = True
-            elif c == quote_char:
+            elif c == '"':
                 in_quote = not in_quote
 
             formatted.append(c)
@@ -196,6 +193,7 @@ def main():
     parser.add_argument("src", help="Source file path ('-' for stdin)")
     parser.add_argument("dst", nargs="?", default="-", help="Destination file path ('-' for stdout)")
     parser.add_argument("-c", action="store_true", help="Use compact mode")
+    parser.add_argument("-p", help="Predefined Style. (kicad, kicad-compact)")
     args = parser.parse_args()
 
     # Read input
@@ -206,7 +204,7 @@ def main():
             source = f.read()
 
     # Process formatting
-    result = prettify(source, args.c)
+    result = prettify(source = source, compact_save = args.c or args.p == "kicad-compact")
 
     # Write output
     if args.dst == "-":
