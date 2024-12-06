@@ -4,7 +4,9 @@
 file_pairs_path_dir=./testcases/
 file_pairs=(
     "pts_list_test_symbol.kicad_sym pts_list_test_symbol_formatted.kicad_sym"
-    "ad620.kicad_sym ad620_formatted.kicad_pcb"
+    "ad620.kicad_sym ad620_formatted.kicad_sym"
+    "complex_hierarchy_schlib.kicad_sym complex_hierarchy_schlib_formatted.kicad_sym"
+    "flat_hierarchy_schlib.kicad_sym flat_hierarchy_schlib_formatted.kicad_sym"
     "group_and_image.kicad_pcb group_and_image_formatted.kicad_pcb"
     "Reverb_BTDR-1V.kicad_mod Reverb_BTDR-1V_formatted.kicad_mod"
     "Samtec_HLE-133-02-xx-DV-PE-LC_2x33_P2.54mm_Horizontal.kicad_mod Samtec_HLE-133-02-xx-DV-PE-LC_2x33_P2.54mm_Horizontal_formatted.kicad_mod"
