@@ -188,7 +188,7 @@ void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExpr
         if (state->compact_list_mode)
         {
             // In fixed indent, visually compact mode
-            if (state->column < state->compact_list_column_limit && state->c_out_prev == ')' || state->compact_list_column_limit == 0)
+            if ((state->column < state->compact_list_column_limit && state->c_out_prev == ')') || state->compact_list_column_limit == 0)
             {
                 // Is a consecutive list and still within column limit (or column limit disabled)
                 output_func(' ', output_func_context);

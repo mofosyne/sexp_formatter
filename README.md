@@ -2,73 +2,25 @@
 
 ![CI/CD Status Badge](https://github.com/mofosyne/sexp_formatter/actions/workflows/ci.yml/badge.svg)
 
-Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting Via Python
+Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting Via Python.
+This is both a cli program as well as a C/CPP/Python implementation library.
 
-```
-========================================================================
- Timing Test Report 
-========================================================================
-Time taken for ./sexp_prettify_cli.py                   to run though test suites is .395 seconds
-Time taken for ./sexp_prettify_kicad_original_cli       to run though test suites is .038 seconds
-Time taken for ./sexp_prettify_kicad_cli                to run though test suites is .031 seconds
-Time taken for ./sexp_prettify_cpp_cli                  to run though test suites is .023 seconds
-Time taken for ./sexp_prettify_cli                      to run though test suites is .013 seconds
-```
+```bash
+# Build sexp_prettify_cli 
+make
 
-## Developer
+# Install sexp_prettify_cli as sexp_prettify system wide
+make install
 
-* Run `make` to build all the c and cpp binaries shown above.
-* Run `make check` to test all the executable (except for sexp_prettify_kicad_original_cli, I am trying to replace)
-* Run `make time` to generate a timing test report
+# Remove sexp_prettify cli system wide
+make uninstall
 
-### About Files
-
-* sexp_prettify_cli.py             : This is a python implementation 
-* sexp_prettify_kicad_original_cli : This is a cpp original logic from the KiCAD repository as of 2024-12-03
-* sexp_prettify_kicad_cli          : This is the new cpp logic from the KiCAD repository being proposed for KiCAD
-* sexp_prettify_cpp_cli            : This is a cpp cli wrapper around the c function `sexp_prettify()` in `sexp_prettify.c/h`
-* sexp_prettify_cli                : This is a c cli wrapper around the c function `sexp_prettify()` in `sexp_prettify.c/h`
-
-## Usage
-
-### sexp_prettify_cli.py (python) (KiCad fixed styling)
-```
-usage: sexp_prettify_cli.py [-h] [-c] [-p P] src [dst]
-
-KiCad S-Expression Formatter
-
-positional arguments:
-  src         Source file path ('-' for stdin)
-  dst         Destination file path ('-' for stdout)
-
-options:
-  -h, --help  show this help message and exit
-  -c          Use compact mode
-  -p P        Predefined Style. (kicad, kicad-compact)
+# Run all CI/CD build and test (developer)
+make cicd
 ```
 
-### sexp_prettify_cpp_cli (cpp)
-```
-S-Expression Formatter (Brian Khuu 2024)
+Expected Help Message when running `sexp_prettify_cli`
 
-Usage:
-  ./sexp_prettify_cpp_cli [OPTION]... SOURCE [DESTINATION]
-  SOURCE                Source file path. If '-' then use standard stream input
-  DESTINATION           Destination file path. If omitted or '-' then use standard stream output
-
-Options:
-  -h                 Show Help Message
-  -w WRAP_THRESHOLD  Set Wrap Threshold. Must be positive value. (default 72)
-  -l COMPACT_LIST    Add To Compact List. Must be a string.
-  -k COLUMN_LIMIT    Set Compact List Column Limit. Must be positive value. (default 99)
-  -s SHORTFORM       Add To Shortform List. Must be a string.
-  -p PROFILE         Predefined Style. (kicad, kicad-compact)
-Example:
-  - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
-    ./sexp_prettify_cpp_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
-```
-
-### sexp_prettify_cli (c)
 ```
 S-Expression Formatter (Brian Khuu 2024)
 
@@ -89,6 +41,33 @@ Example:
   - Use standard input and standard output. Also use KiCAD's standard compact list and shortform setting.
     ./sexp_prettify_cli -l pts -s font -s stroke -s fill -s offset -s rotate -s scale - -
 ```
+
+When integrating into your project, copy over `sexp_prettify.c` and `sexp_prettify.h` and use these functions:
+
+```c
+// Initialization
+bool sexp_prettify_init(struct PrettifySExprState *state, char indent_char, int indent_size, int consecutive_token_wrap_threshold);
+// Set Settings
+bool sexp_prettify_compact_list_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count, int column_limit);
+bool sexp_prettify_shortform_set(struct PrettifySExprState *state, const char **prefixes, int prefixes_entries_count);
+// Process content and output content via PrettifySExprPutcFunc
+typedef void (*PrettifySExprPutcFunc)(char c, void *context);
+void sexp_prettify(struct PrettifySExprState *state, const char c, PrettifySExprPutcFunc output_func, void *output_func_context);
+```
+
+## Developer
+
+* Run `make` to build all the c and cpp binaries shown above.
+* Run `make check` to test all the executable (except for sexp_prettify_kicad_original_cli, I am trying to replace)
+* Run `make time` to generate a timing test report
+
+### About Files
+
+* sexp_prettify_cli.py             : This is a python implementation 
+* sexp_prettify_kicad_original_cli : This is a cpp original logic from the KiCAD repository as of 2024-12-03
+* sexp_prettify_kicad_cli          : This is the new cpp logic from the KiCAD repository being proposed for KiCAD
+* sexp_prettify_cpp_cli            : This is a cpp cli wrapper around the c function `sexp_prettify()` in `sexp_prettify.c/h`
+* sexp_prettify_cli                : This is a c cli wrapper around the c function `sexp_prettify()` in `sexp_prettify.c/h`
 
 ## History
 
