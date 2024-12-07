@@ -6,5 +6,6 @@
   "keywords": ["no heap", "malloc free", "formatter", "kicad", "sexp", "s-expressions", "no malloc"],
   "license": "GPL-3.0-or-later",
   "src": ["sexp_prettify.c", "sexp_prettify.h"],
-  "install": "make install"
+  "install": "make install",
+  "uninstall": "make uninstall"
 }
