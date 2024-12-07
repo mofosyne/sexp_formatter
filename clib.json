@@ -4,7 +4,7 @@
   "repo": "mofosyne/sexp_prettify",
   "description": "Prettifies S-expressions (Based On KiCAD formatting)",
   "keywords": ["no heap", "malloc free", "formatter", "kicad", "sexp", "s-expressions", "no malloc"],
-  "license": "GNUv3",
+  "license": "GPL-3.0-or-later",
   "src": ["sexp_prettify.c", "sexp_prettify.h"],
   "install": "make install"
 }
