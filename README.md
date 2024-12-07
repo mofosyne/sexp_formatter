@@ -8,11 +8,11 @@ Prettifies KiCad-like S-expressions according to a KiCADv8-style formatting Via 
 ========================================================================
  Timing Test Report 
 ========================================================================
-Time taken for ./sexp_prettify_cli.py                   to run though test suites is .327 seconds
-Time taken for ./sexp_prettify_kicad_original_cli       to run though test suites is .014 seconds
-Time taken for ./sexp_prettify_kicad_cli                to run though test suites is .012 seconds
-Time taken for ./sexp_prettify_cpp_cli                  to run though test suites is .009 seconds
-Time taken for ./sexp_prettify_cli                      to run though test suites is .006 seconds
+Time taken for ./sexp_prettify_cli.py                   to run though test suites is .395 seconds
+Time taken for ./sexp_prettify_kicad_original_cli       to run though test suites is .038 seconds
+Time taken for ./sexp_prettify_kicad_cli                to run though test suites is .031 seconds
+Time taken for ./sexp_prettify_cpp_cli                  to run though test suites is .023 seconds
+Time taken for ./sexp_prettify_cli                      to run though test suites is .013 seconds
 ```
 
 ## Developer
