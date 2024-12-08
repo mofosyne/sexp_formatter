@@ -47,3 +47,9 @@ check: all
 .PHONY: time
 time: all
 	./time_test_all.sh
+
+.PHONY: format
+format:
+	# pip install clang-format
+	clang-format -i *.c
+	clang-format -i *.h
