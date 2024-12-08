@@ -12,3 +12,5 @@ IndentCaseLabels: True
 ColumnLimit: 200
 
 IndentExternBlock: NoIndent
+
+BinPackArguments: false
