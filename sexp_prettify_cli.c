@@ -23,7 +23,7 @@ typedef enum styleProfile
 const char *compact_list_prefixes_kicad[] = {"pts"};
 const int compact_list_prefixes_kicad_size = sizeof(compact_list_prefixes_kicad) / sizeof(compact_list_prefixes_kicad[0]);
 
-const char *shortform_prefixes_kicad[] = {"font", "stroke", "fill", "offset", "rotate", "scale"};
+const char *shortform_prefixes_kicad[] = {"font", "stroke", "fill", "offset", "rotate", "scale", "teardrop"};
 const int shortform_prefixes_kicad_size = sizeof(shortform_prefixes_kicad) / sizeof(shortform_prefixes_kicad[0]);
 
 void putc_handler(char c, void *context_putc) { fputc(c, (FILE *)context_putc); }

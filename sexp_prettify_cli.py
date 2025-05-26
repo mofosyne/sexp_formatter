@@ -9,7 +9,7 @@ def prettify(source,
              consecutive_token_wrap_threshold = 72, 
              compact_list_prefixes = {"pts"}, 
              compact_list_column_limit = 99,
-             shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"}):
+             shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale", "teardrop"}):
     """
     Reformats KiCad-like S-expressions to match a specific formatting style.
 

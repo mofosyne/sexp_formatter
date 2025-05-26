@@ -23,7 +23,7 @@ void Prettify(std::string &aSource, bool aCompactSave = false)
 
     // Tokens exceeding this wrap threshold will be shifted to the next line
     const int consecutiveTokenWrapThreshold = 72;
-    const std::vector<std::string> shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale"};
+    const std::vector<std::string> shortform_prefixes = {"font", "stroke", "fill", "offset", "rotate", "scale", "teardrop"};
 
     // Create and reserve formatted string
     std::string formatted;

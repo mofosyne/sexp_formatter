@@ -94,7 +94,7 @@ void Prettify(std::string &aSource, bool aCompactSave)
             token += *seek;
         }
 
-        return token == "font" || token == "stroke" || token == "fill" || token == "offset" || token == "rotate" || token == "scale";
+        return token == "font" || token == "stroke" || token == "fill" || token == "offset" || token == "rotate" || token == "scale" || token == "teardrop";
     };
 
     while (cursor != aSource.end())
